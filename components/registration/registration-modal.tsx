@@ -7,9 +7,10 @@ import { useEffect } from "react"
 interface RegistrationModalProps {
   isOpen: boolean
   onClose: () => void
+  children: React.ReactNode
 }
 
-export default function RegistrationModal({ isOpen, onClose }: RegistrationModalProps) {
+export default function RegistrationModal({ isOpen, onClose, children }: RegistrationModalProps) {
   // Cerrar el modal con la tecla Escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -47,8 +48,7 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
         >
           <X className="h-6 w-6" />
         </Button>
-
-        {/* El modal está vacío con fondo blanco como solicitaste */}
+        {children}
       </div>
     </div>
   )
