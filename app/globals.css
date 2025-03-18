@@ -62,6 +62,12 @@ html.dark body {
   color: white;
 }
 
+/* Clase para manejar el scroll del modal */
+html.overflow-hidden {
+  overflow: hidden;
+  padding-right: 17px; /* Compensar el ancho de la barra de scroll */
+}
+
 /* Animaciones personalizadas */
 @keyframes float {
   0% {

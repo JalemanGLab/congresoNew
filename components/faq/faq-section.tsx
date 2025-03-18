@@ -2,11 +2,17 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import RegistrationModal from "../registration/registration-modal"
+import Faq from "../custom/faq/Faq"
+import useFaqSection from "./useFaq-section"
 
 export default function FaqSection() {
+  const {
+    isModalOpen,
+    setIsModalOpen
+  } = useFaqSection()
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	return (
@@ -51,6 +57,23 @@ export default function FaqSection() {
 				</div>
 			</div>
 
+      {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
+      <div  onClick={() => setIsModalOpen(false)} className={`fixed inset-0 z-50 w-full h-screen bg-black/50 flex items-center justify-center   ${isModalOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="bg-white rounded-lg w-[96vw] max-w-[1000px] min-h-96 max-h-[90vh] relative overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute top-0 right-0 p-4">
+            <button onClick={() => setIsModalOpen(false)}>
+              <X className="w-6 h-6 text-black" />
+            </button>
+          </div>
+          <div className="p-4">
+            <Faq />
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+  )
 			{/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
 			<RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 		</section>
