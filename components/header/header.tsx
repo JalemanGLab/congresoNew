@@ -1,17 +1,20 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useHeader } from "./useHeader";
 
 export default function Header() {
+  const { router } = useHeader();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#00FF66]/10 bg-[#001208]/95 backdrop-blur supports-[backdrop-filter]:bg-[#001208]/60">
       <div className="container flex h-20 items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="relative h-10 w-10 overflow-hidden">
-            <Image src="/solventum-logo.svg" alt="Solventum Logo" fill className="object-contain" />
+        <div className="flex items-center ">
+          <div className="relative h-12 w-12 overflow-hidden">
+            <Image src="/logo-letter.svg" alt="Solventum Logo" fill className="object-contain" />
           </div>
           <div className="flex flex-col">
             <span className="text-xl font-bold text-[#00FF66]">Solventum</span>
@@ -25,8 +28,7 @@ export default function Header() {
             { name: "Agenda", href: "#agenda" },
             { name: "Ponentes", href: "#ponentes" },
             { name: "Productos", href: "#productos" },
-            { name: "FAQ", href: "#preguntas" },
-            { name: "Contacto", href: "#contacto" },
+            { name: "FAQ", href: "#preguntas" }
           ].map((item) => (
             <Link
               key={item.name}
@@ -38,7 +40,10 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
+        <div
+          onClick={() => router.push("/login")}
+          className="flex items-center gap-4"
+        >
           <Button
             variant="outline"
             className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
@@ -56,6 +61,5 @@ export default function Header() {
         </Button>
       </div>
     </header>
-  )
+  );
 }
-

@@ -2,12 +2,17 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import RegistrationModal from "../registration/registration-modal"
+import Faq from "../custom/faq/Faq"
+import useFaqSection from "./useFaq-section"
 
 export default function FaqSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const {
+    isModalOpen,
+    setIsModalOpen
+  } = useFaqSection()
 
   return (
     <section id="preguntas" className="py-28 bg-[#002A1A] relative overflow-hidden">
@@ -41,7 +46,7 @@ export default function FaqSection() {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
             <Image
-              src="/placeholder.svg?height=600&width=800"
+              src="/images/fq.PNG?height=600&width=800"
               alt="Preguntas frecuentes"
               width={600}
               height={400}
@@ -52,8 +57,20 @@ export default function FaqSection() {
       </div>
 
       {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
-      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <div  onClick={() => setIsModalOpen(false)} className={`fixed inset-0 z-50 w-full h-screen bg-black/50 flex items-center justify-center   ${isModalOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="bg-white rounded-lg w-[96vw] max-w-[1000px] min-h-96 max-h-[90vh] relative overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute top-0 right-0 p-4">
+            <button onClick={() => setIsModalOpen(false)}>
+              <X className="w-6 h-6 text-black" />
+            </button>
+          </div>
+          <div className="p-4">
+            <Faq />
+          </div>
+        </div>
+      </div>
+
+
     </section>
   )
 }
-
