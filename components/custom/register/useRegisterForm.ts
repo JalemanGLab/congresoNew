@@ -9,9 +9,7 @@ const useRegisterForm = () => {
     const [personalData, setPersonalData] = useState<any>(null);
     const [infoFormulary, setInfoFormulary] = useState<any>(null);
 
-    useEffect(() => {
-        console.log('infoFormulary:', infoFormulary);
-    }, [infoFormulary]);
+ 
 
     const distributorsOptions = [
         { value: 'dental_83', label: 'Dental 83' },
@@ -134,12 +132,58 @@ const useRegisterForm = () => {
 
         const finalFormData = {
             assistant: {
-                ...infoFormulary?.step1,
-                ...infoFormulary?.step2
+                identification: Number(infoFormulary?.step1?.id),
+                first_name: infoFormulary?.step1?.first_name,
+                last_name: infoFormulary?.step1?.last_name,
+                phone: infoFormulary?.step1?.phone,
+                email: infoFormulary?.step1?.email,
+                main_procedure: infoFormulary?.step2?.main_procedure,
+                product_brand: infoFormulary?.step2?.brand,
+                weekly_procedure: infoFormulary?.step2?.cases_per_week,
+                contact: true,
+                distributor: infoFormulary?.step2?.distributor,
+                city: infoFormulary?.step1?.city
             },
-            [selectedPayment === 'card' ? 'card' : 'payment']: data
+            payment: {
+                type: selectedPayment?.toUpperCase(),
+                value: 500000, // Valor fijo del congreso
+                ...(selectedPayment === 'pse' && {
+                    pse: {
+                        bank: data.bank,
+                        type_person: "natural"
+                    }
+                })
+            }
         };
-        setInfoFormulary(finalFormData);
+
+        try {
+            const response = await fetch('https://c094-170-254-230-162.ngrok-free.app/assistants', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(finalFormData)
+            });
+    
+            if (!response.ok) {
+                throw new Error('Error en el registro');
+            }
+    
+            const responseData = await response.json();
+            console.log('Respuesta del servidor:', responseData);
+            toast.success('Registro completado correctamente');
+            
+            // Opcional: Resetear el formulario o redirigir
+            setStep(1);
+            setSelectedPayment(null);
+            setInfoFormulary(null);
+            
+        } catch (error) {
+            console.error('Error al enviar los datos:', error);
+            toast.error('Error al procesar el registro. Por favor, intente nuevamente');
+        }
+
+
         
         toast.success('Registro completado correctamente');
     };

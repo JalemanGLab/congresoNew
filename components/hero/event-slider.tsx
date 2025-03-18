@@ -11,7 +11,7 @@ import RegistrationModal from "../registration/registration-modal"
 const slides = [
 	{
 		id: 1,
-		image: "/images/banner-magno.png",
+		image: "/placeholder.svg?height=600&width=1200",
 		alt: "Congreso Magno 3.0",
 		title: "CONGRESO MAGNO 3.0",
 		subtitle: "El evento odontológico más importante del año",
@@ -124,26 +124,25 @@ export default function EventSlider() {
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-[#001208] via-[#001208]/70 to-transparent" />
 
-					{/* Contenido del slide (oculto en el index 0) */}
-					{index !== 0 && (
-						<div
-							className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${index === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-								}`}
-						>
-							<div className="text-center space-y-4 sm:space-y-6 md:space-y-8 px-4 max-w-5xl">
-								<div className="inline-block px-4 py-1.5 rounded-full bg-[#00FF66]/20 text-[#00FF66] font-medium text-sm mb-2 sm:mb-4">
-									15 DE JULIO, 2025
-								</div>
-								<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-wider leading-tight">
-									{slide.title}
-									<span className="block text-[#00FF66]">COLOMBIA 2025</span>
-								</h2>
-								<p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto">
-									{slide.subtitle}
-								</p>
+					{/* Contenido del slide */}
+					<div
+						className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${
+							index === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+						}`}
+					>
+						<div className="text-center space-y-4 sm:space-y-6 md:space-y-8 px-4 max-w-5xl">
+							<div className="inline-block px-4 py-1.5 rounded-full bg-[#00FF66]/20 text-[#00FF66] font-medium text-sm mb-2 sm:mb-4">
+								15 DE JULIO, 2025
 							</div>
+							<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-wider leading-tight">
+								{slide.title}
+								<span className="block text-[#00FF66]">COLOMBIA 2025</span>
+							</h2>
+							<p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto">
+								{slide.subtitle}
+							</p>
 						</div>
-					)}
+					</div>
 
 					<div className="absolute inset-0 flex items-end justify-center pb-10 sm:pb-16">
 						<div className="flex flex-col sm:flex-row gap-4 justify-center">
