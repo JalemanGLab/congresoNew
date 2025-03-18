@@ -157,7 +157,7 @@ const useRegisterForm = () => {
         };
 
         try {
-            const response = await fetch('https://gold-sheep-press.loca.lt/assistants', {
+            const response = await fetch('https://hip-shrimps-serve.loca.lt/assistants', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
