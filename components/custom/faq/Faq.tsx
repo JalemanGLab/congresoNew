@@ -31,13 +31,13 @@ const PageFaq = () => {
           <input
             type="text"
             placeholder="Busca tu pregunta aquí..."
-            className="w-full pl-12 pr-4 py-3 rounded-xl border border-neutral-200 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100 transition-all duration-200"
+            className="w-full pl-12 pr-4 py-3 rounded-xl bg-background outline-none border border-neutral-200 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100 transition-all duration-200"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <button 
-          className="py-3 px-6 sm:w-auto w-full sm:min-w-[120px] bg-neutral-800 cursor-pointer text-white rounded-xl hover:bg-neutral-700 transition-all duration-200 flex items-center justify-center" 
+          className="py-3 px-6 sm:w-auto w-full sm:min-w-[120px] bg-background cursor-pointer text-white rounded-xl hover:bg-neutral-700 transition-all duration-200 flex items-center justify-center" 
           onClick={() => setSearchQuery("")}
         >
           Limpiar
