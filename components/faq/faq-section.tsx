@@ -46,7 +46,7 @@ export default function FaqSection() {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
             <Image
-              src="/placeholder.svg?height=600&width=800"
+              src="/images/fq.PNG?height=600&width=800"
               alt="Preguntas frecuentes"
               width={600}
               height={400}
@@ -69,9 +69,8 @@ export default function FaqSection() {
           </div>
         </div>
       </div>
-      
-      
+
+
     </section>
   )
 }
-
