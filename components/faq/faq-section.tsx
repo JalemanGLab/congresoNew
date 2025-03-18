@@ -52,7 +52,15 @@ export default function FaqSection() {
       </div>
 
       {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
-      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl text-black font-bold">Preguntas Frecuentes</h2>
+          <p>
+            Aquí puedes encontrar las preguntas frecuentes sobre el Congreso Magno 3.0. Si tienes alguna otra pregunta,
+            no dudes en contactarnos.
+          </p>
+        </div>
+      </RegistrationModal>
     </section>
   )
 }
