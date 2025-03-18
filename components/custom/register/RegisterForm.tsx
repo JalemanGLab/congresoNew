@@ -115,8 +115,8 @@ const RegisterForm = () => {
                                     errors={errors}
                                     rules={{ 
                                         required: true,
-                                        minLength: 8,
-                                        maxLength: 10,
+                                        minLength: 4,
+                                        maxLength: 20,
                                         pattern: /^[0-9]+$/
                                     }}
                                  />
