@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { usePathname } from "next/navigation"
 import { QuestionMap } from "./DTOFaq"
 
 const useFaq = () => {
     const [searchQuery, setSearchQuery] = useState("")
     const [openItem, setOpenItem] = useState<string>("")
-    const location = useLocation()
+    const location = usePathname()
 
     // Mapa de preguntas a IDs de acordeón
     const questionToAccordionMap: QuestionMap = {
@@ -15,17 +15,17 @@ const useFaq = () => {
         "¿Cuándo inicia el congreso?": "fecha",
     }
 
-    useEffect(() => {
-        const hash = location.hash.replace('#', '')
-        if (hash) {
-            setOpenItem(hash)
-            // Scroll suave hasta el elemento
-            const element = document.getElementById(hash)
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            }
-        }
-    }, [location])
+    // useEffect(() => {
+    //     const hash = location.hash.replace('#', '')
+    //     if (hash) {
+    //         setOpenItem(hash)
+    //         // Scroll suave hasta el elemento
+    //         const element = document.getElementById(hash)
+    //         if (element) {
+    //             element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    //         }
+    //     }
+    // }, [location])
 
     const filterQuestions = (items: string[]) => {
         if (!searchQuery) return items

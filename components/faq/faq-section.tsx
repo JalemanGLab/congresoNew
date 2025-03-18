@@ -5,6 +5,7 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import RegistrationModal from "../registration/registration-modal"
+import Faq from "../custom/faq/Faq"
 
 export default function FaqSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -52,15 +53,12 @@ export default function FaqSection() {
       </div>
 
       {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
-      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div className="flex flex-col gap-4">
-          <h2 className="text-2xl text-black font-bold">Preguntas Frecuentes</h2>
-          <p>
-            Aquí puedes encontrar las preguntas frecuentes sobre el Congreso Magno 3.0. Si tienes alguna otra pregunta,
-            no dudes en contactarnos.
-          </p>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-lg w-[96vw] max-w-[1000px] h-96 relative" onClick={(e) => e.stopPropagation()}>
+          <Faq />
         </div>
-      </RegistrationModal>
+      </div>
+      
     </section>
   )
 }
