@@ -53,11 +53,7 @@ export default function FaqSection() {
       </div>
 
       {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg w-[96vw] max-w-[1000px] h-96 relative" onClick={(e) => e.stopPropagation()}>
-          <Faq />
-        </div>
-      </div>
+      
       
     </section>
   )
