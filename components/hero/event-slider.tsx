@@ -11,7 +11,7 @@ import RegistrationModal from "../registration/registration-modal"
 const slides = [
 	{
 		id: 1,
-		image: "/placeholder.svg?height=600&width=1200",
+		image: "/banner-magno.png",
 		alt: "Congreso Magno 3.0",
 		title: "CONGRESO MAGNO 3.0",
 		subtitle: "El evento odontológico más importante del año",
