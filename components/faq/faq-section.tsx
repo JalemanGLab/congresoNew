@@ -6,9 +6,15 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import RegistrationModal from "../registration/registration-modal"
 import Faq from "../custom/faq/Faq"
+import useFaqSection from "./useFaq-section"
 
 export default function FaqSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const {
+    isModalOpen,
+    toggleModal,
+    closeModalAction,
+    Render
+  } = useFaqSection()
 
   return (
     <section id="preguntas" className="py-28 bg-[#002A1A] relative overflow-hidden">
@@ -30,7 +36,7 @@ export default function FaqSection() {
               <Button
                 size="lg"
                 className="bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] group px-8"
-                onClick={() => setIsModalOpen(true)}
+                onClick={toggleModal}
               >
                 Ver Preguntas Frecuentes
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -53,11 +59,9 @@ export default function FaqSection() {
       </div>
 
       {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg w-[96vw] max-w-[1000px] h-96 relative" onClick={(e) => e.stopPropagation()}>
-          <Faq />
-        </div>
-      </div>
+      <Render>
+        <Faq />
+      </Render>
       
     </section>
   )

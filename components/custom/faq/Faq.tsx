@@ -20,7 +20,9 @@ const PageFaq = () => {
     <div className="w-full space-y-6">
     <div className="text-3xl font-bold flex items-center gap-2">
       <LuCircleHelp className="text-neutral-900 " />
-      Preguntas Frecuentes
+      <div className="text-black text-2xl font-bold">
+        Preguntas Frecuentes
+      </div>
     </div>
       {/* Barra de búsqueda */}
       <div className="w-full flex flex-col sm:flex-row justify-center gap-4">

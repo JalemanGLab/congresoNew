@@ -3,7 +3,7 @@ import { useState } from 'react';
 interface ModaliOptions {	[key: string]: any; 	}
 interface ModalSize 	{	[key: string]: string; 	}
 
-const UseModal = (options: ModaliOptions = {}) =>{
+const useModalHome = (options: ModaliOptions = {}) =>{
 	const [isOpen, setIsOpen] = useState(false);
 	let classModal = ''
 	const modalSizes: ModalSize = {
@@ -38,4 +38,4 @@ const UseModal = (options: ModaliOptions = {}) =>{
 
 };
 
-export default UseModal;
+export default useModalHome;
