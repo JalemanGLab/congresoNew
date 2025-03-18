@@ -157,7 +157,7 @@ const useRegisterForm = () => {
         };
 
         try {
-            const response = await fetch('https://c094-170-254-230-162.ngrok-free.app/assistants', {
+            const response = await fetch('https://gold-sheep-press.loca.lt/assistants', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
