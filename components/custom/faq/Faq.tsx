@@ -235,20 +235,6 @@ const PageFaq = () => {
           </div>
         </div>
       </div>
-
-      {/* CTA Final */}
-      <div className="mt-12 text-center bg-neutral-50 rounded-xl p-8 shadow-sm border border-neutral-100 hover:shadow-md transition-all duration-200">
-        <h3 className="text-2xl font-semibold text-neutral-800 mb-4">¿Tienes más preguntas?</h3>
-        <p className="text-neutral-600 mb-6 max-w-lg mx-auto">
-          Nuestro equipo está listo para ayudarte con cualquier duda adicional
-        </p>
-        <a
-          href="/contacts"
-          className="inline-flex items-center justify-center px-6 py-3 bg-neutral-800 text-white rounded-lg hover:bg-neutral-700 transform hover:scale-105 transition-all duration-200"
-        >
-          Contáctanos
-        </a>
-      </div>
     </div>
   )
 }

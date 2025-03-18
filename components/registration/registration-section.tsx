@@ -1,11 +1,47 @@
 "use client"
 import { Calendar, Clock, MapPin, Ticket } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import RegistrationModal from "./registration-modal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import RegisterForm from "../custom/register/RegisterForm"
 
 export default function RegistrationSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [scrollPosition, setScrollPosition] = useState(0)
+
+  // Mejorar el manejo del scroll
+  useEffect(() => {
+    if (isModalOpen) {
+      // Capturar la posición actual del scroll
+      const currentScrollPosition = window.scrollY
+      setScrollPosition(currentScrollPosition)
+      
+      // Fijar el body en su posición actual
+      document.body.style.top = `-${currentScrollPosition}px`
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Restaurar estilos
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflow = ''
+      
+      // Restaurar la posición del scroll
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'instant' // Asegura que no haya animación
+      })
+    }
+
+    return () => {
+      // Limpieza
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflow = ''
+    }
+  }, [isModalOpen])
 
   return (
     <section id="registro" className="py-28 bg-gradient-to-b from-[#001208] to-[#002A1A] relative overflow-hidden">
@@ -126,8 +162,28 @@ export default function RegistrationSection() {
         </div>
       </div>
 
-      {/* Modal de registro */}
-      <RegistrationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* Reemplazar el modal anterior con este nuevo */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setIsModalOpen(false)}
+          />
+          <div className="relative bg-white rounded-xl p-8 shadow-xl w-full max-w-4xl m-4 h-[90vh] overflow-y-auto
+            scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400 border border-gray-200">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <RegisterForm />
+          </div>
+        </div>
+      )}
     </section>
   )
 }
