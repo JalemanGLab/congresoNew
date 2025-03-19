@@ -1,24 +1,21 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { ArrowRight, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import RegistrationModal from "../registration/registration-modal"
-import Faq from "../../../custom/modals/faq/Faq"
-import useFaqSection from "./useFaq-section"
-
+import { useState } from "react";
+import Image from "next/image";
+import { ArrowRight, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import RegistrationModal from "../registration/registration-modal";
+import Faq from "../../../custom/modals/faq/Faq";
+import useFaqSection from "./useFaq-section";
 
 export default function FaqSection() {
-  const {
-    Render,
-    closeModalAction,
-    toggleModal
-
-  } = useFaqSection()
+  const { Render, closeModalAction, toggleModal, router } = useFaqSection();
 
   return (
-    <section id="preguntas" className="py-28 bg-[#002A1A] relative overflow-hidden">
+    <section
+      id="preguntas"
+      className="py-28 bg-[#002A1A] relative overflow-hidden"
+    >
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=800&width=1600')] bg-no-repeat bg-cover opacity-5"></div>
       </div>
@@ -30,14 +27,17 @@ export default function FaqSection() {
             </h2>
             <div className="h-1 w-24 bg-gradient-to-r from-[#00FF66]/50 to-[#00FF66]"></div>
             <p className="text-white/80 text-lg leading-relaxed">
-              ¿Tienes dudas sobre el Congreso Magno 3.0? Consulta nuestra sección de preguntas frecuentes donde
-              encontrarás toda la información que necesitas sobre inscripciones, agenda, ponentes y más.
+              ¿Tienes dudas sobre el Congreso Magno 3.0? Consulta nuestra
+              sección de preguntas frecuentes donde encontrarás toda la
+              información que necesitas sobre inscripciones, agenda, ponentes y
+              más.
             </p>
             <div className="pt-8">
               <Button
                 size="lg"
                 className="bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] group px-8"
-                onClick={toggleModal}
+                // onClick={toggleModal}
+                onClick={() => router.push("/preguntas")}
               >
                 Ver Preguntas Frecuentes
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -59,7 +59,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-
       <Render>
         <Faq />
       </Render>
@@ -77,8 +76,6 @@ export default function FaqSection() {
           </div>
         </div>
       </div> */}
-
-
     </section>
-  )
+  );
 }

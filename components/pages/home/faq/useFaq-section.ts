@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
 import Modal from "@/components/shared/modal/Modal"
+import { useRouter } from 'next/navigation';
 
 const useFaqSection = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const { Render,closeModalAction,toggleModal} = Modal()
-    
+    const router = useRouter();
 
     useEffect(() => {
         if (isModalOpen) {
@@ -23,7 +24,8 @@ const useFaqSection = () => {
         setIsModalOpen,
         Render,
         closeModalAction,
-        toggleModal
+        toggleModal,
+        router
     }
 }   
 

@@ -3,10 +3,13 @@ import { Calendar, Clock, MapPin, Ticket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import RegisterForm from "../../../custom/modals/register/RegisterForm"
+import { useRouter } from "next/navigation"
+
 
 export default function RegistrationSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const router = useRouter();
 
   // Mejorar el manejo del scroll
   useEffect(() => {
@@ -152,7 +155,8 @@ export default function RegistrationSection() {
                 </div>
                 <Button
                   className="w-full bg-[#00FF66] hover:bg-[#00DD55] text-[#001208]"
-                  onClick={() => setIsModalOpen(true)}
+                  // onClick={() => setIsModalOpen(true)}
+                  onClick={() => router.push("/register")}
                 >
                   Registrarme
                 </Button>
@@ -164,12 +168,12 @@ export default function RegistrationSection() {
 
       {/* Reemplazar el modal anterior con este nuevo */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed left-0 top-0 right-0 bottom-0  inset-0 z-50 flex items-center justify-center">
           <div 
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setIsModalOpen(false)}
           />
-          <div className="relative bg-white rounded-xl p-8 shadow-xl w-full max-w-4xl m-4 h-[90vh] overflow-y-auto
+          <div className="relative bg-white p-8 w-full h-screen shadow-xl  overflow-y-auto
             scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400 border border-gray-200">
             <button
               onClick={() => setIsModalOpen(false)}
