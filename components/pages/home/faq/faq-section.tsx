@@ -5,7 +5,7 @@ import Image from "next/image"
 import { ArrowRight, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import RegistrationModal from "../registration/registration-modal"
-import Faq from "../custom/faq/Faq"
+import Faq from "../../../custom/modals/faq/Faq"
 import useFaqSection from "./useFaq-section"
 
 export default function FaqSection() {

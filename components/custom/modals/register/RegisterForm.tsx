@@ -2,8 +2,8 @@
 import useRegisterForm from './useRegisterForm';
 import { HiOutlineUser, HiOutlineClipboardList, HiOutlineQuestionMarkCircle, HiOutlineCreditCard, HiOutlineMail, HiOutlinePhone, HiOutlineIdentification, HiOutlineLocationMarker, HiOutlineDocumentText, HiOutlineCalendar, HiOutlineLockClosed } from "react-icons/hi";
 import { MdNumbers } from "react-icons/md";
-import InputField from '../inputs/inputField/InputField';
-import SelectData from '../inputs/selectData/SelectData';
+import InputField from '../../../shared/inputField/InputField';
+import SelectData from '../../../shared/selectData/SelectData';
 import { Toaster } from 'sonner';
 
 const RegisterForm = () => {

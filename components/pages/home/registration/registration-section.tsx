@@ -2,7 +2,7 @@
 import { Calendar, Clock, MapPin, Ticket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
-import RegisterForm from "../custom/register/RegisterForm"
+import RegisterForm from "../../../custom/modals/register/RegisterForm"
 
 export default function RegistrationSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
