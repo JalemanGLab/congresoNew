@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
+import Modal from "@/components/shared/modal/Modal"
 
 const useFaqSection = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const { Render,closeModalAction,toggleModal} = Modal()
     
 
     useEffect(() => {
@@ -18,7 +20,10 @@ const useFaqSection = () => {
 
     return {
         isModalOpen,
-        setIsModalOpen
+        setIsModalOpen,
+        Render,
+        closeModalAction,
+        toggleModal
     }
 }   
 
