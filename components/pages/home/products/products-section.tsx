@@ -355,7 +355,7 @@ export default function ProductsSection() {
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=800&width=1600')] bg-no-repeat bg-cover opacity-5"></div>
       </div>
-      <div className="container relative z-10">
+      <div className="container relative ">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Productos Disponibles</h2>
           <div className="h-1 w-24 bg-gradient-to-r from-[#00FF66]/50 to-[#00FF66] mx-auto mb-6"></div>
@@ -377,12 +377,11 @@ export default function ProductsSection() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {visibleProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    {...product}
-                  />
+                  <div key={product.id} className="flex">
+                    <ProductCard {...product} />
+                  </div>
                 ))}
               </div>
 
@@ -391,7 +390,7 @@ export default function ProductsSection() {
                 <div className="text-center mt-12">
                   <Button
                     variant="outline"
-                    className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
+                    className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66] transition-colors duration-200"
                     onClick={() => setShowMore(true)}
                   >
                     Ver más ({remainingCount} productos)
@@ -403,7 +402,7 @@ export default function ProductsSection() {
                 <div className="text-center mt-12">
                   <Button
                     variant="outline"
-                    className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
+                    className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66] transition-colors duration-200"
                     onClick={() => setShowMore(false)}
                   >
                     Ver menos

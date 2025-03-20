@@ -64,21 +64,21 @@ export default function SpeakerModal({
 
   return (
     <div
-      className="fixed pt-4 md:pt-0 inset-0 bg-black/90 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose()
         }
       }}
     >
-      <div className="bg-[#001208] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#00FF66]/20 shadow-2xl relative">
+      <div className="bg-[#001208] pt-6 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#00FF66]/20 shadow-2xl relative">
         <Button
           variant="ghost"
           size="icon"
           className="absolute top-4 right-4 text-white hover:bg-[#00FF66]/10 z-10"
           onClick={onClose}
         >
-          <X className="h-6 w-6" />
+          <X className="h-10 w-10" />
         </Button>
 
         <div className="grid md:grid-cols-2 gap-8 p-8">
