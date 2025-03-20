@@ -1,0 +1,100 @@
+[
+	{
+	  "id": "product1",
+	  "name": "Z350XT Kit Introductorio",
+	  "image": "https://www.deenty.com/blog_subdomain/wp-content/uploads/2014/10/higiene-bano-objeto-dentistas_3294642.jpg",
+	  "description": "Kit completo con jeringas de todos los tonos esenciales",
+	  "category": "Z350XT"
+	},
+	{
+	  "id": "product2",
+	  "name": "Z350XT Jeringa Individual",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Jeringa individual de resina compuesta Z350XT para reposición",
+	  "category": "Z350XT"
+	},
+	{
+	  "id": "product3",
+	  "name": "Z350XT Flow",
+	  "image": "https://d100mj7v0l85u5.cloudfront.net/s3fs-public/ketac-molar-1g.jpg?height=200&width=200",
+	  "description": "Resina fluida con la misma tecnología de nanorelleno para áreas de difícil acceso",
+	  "category": "Z350XT"
+	},
+	{
+	  "id": "product4",
+	  "name": "Clarity Advance Kit Completo",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Kit completo de brackets cerámicos para tratamiento de arco completo",
+	  "category": "Clarity advance"
+	},
+	{
+	  "id": "product5",
+	  "name": "Clarity Advance Arcos Estéticos",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Arcos recubiertos estéticos para complementar el sistema Clarity Advance",
+	  "category": "Clarity advance"
+	},
+	{
+	  "id": "product6",
+	  "name": "Clarity Ultra Kit Autoligable",
+	  "image": "https://d100mj7v0l85u5.cloudfront.net/s3fs-public/ketac-molar-1g.jpg?height=200&width=200",
+	  "description": "Sistema completo de brackets cerámicos autoligables de última generación",
+	  "category": "Clarity ultra"
+	},
+	{
+	  "id": "product7",
+	  "name": "Clarity Ultra Herramientas",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Set de herramientas especializadas para el manejo del sistema Clarity Ultra",
+	  "category": "Clarity ultra"
+	},
+	{
+	  "id": "product8",
+	  "name": "SBU+ Kit Introductorio",
+	  "image": "https://dentalnader.com/wp-content/uploads/2020/12/CEPILLOS-DE-PROFILAXIS-%E2%80%93-PRODUCTO-PARA-ODONTOLOGIA-1.jpg?height=200&width=200",
+	  "description": "Kit completo con adhesivo Single Bond Universal Plus y cemento RelyX",
+	  "category": "SBU+ Relyx"
+	},
+	{
+	  "id": "product9",
+	  "name": "RelyX Universal Clicker",
+	  "image": "https://d100mj7v0l85u5.cloudfront.net/s3fs-public/ketac-molar-1g.jpg?height=200&width=200",
+	  "description": "Dispensador tipo clicker para cemento RelyX Universal con dosificación precisa",
+	  "category": "SBU+ Relyx"
+	},
+	{
+	  "id": "product10",
+	  "name": "Clinpro Clear Kit Preventivo",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Kit completo para prevención y remineralización de lesiones incipientes",
+	  "category": "Clinpro Clear"
+	},
+	{
+	  "id": "product11",
+	  "name": "Clinpro Clear Sellante",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Sellante de fosas y fisuras fotocurable con liberación de flúor",
+	  "category": "Clinpro Clear"
+	},
+	{
+	  "id": "product12",
+	  "name": "Easy Match Kit Digital",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Sistema digital para selección precisa de color en restauraciones estéticas",
+	  "category": "Easy Match"
+	},
+	{
+	  "id": "product13",
+	  "name": "Easy Match Guía Física",
+	  "image": "https://image.freepik.com/foto-gratis/modelo-ortodoncia-herramienta-dentista_60829-981.jpg?height=200&width=200",
+	  "description": "Guía física de colores fabricada con las resinas originales para comparación directa",
+	  "category": "Easy Match"
+	},
+	{
+	  "id": "product14",
+	  "name": "Easy Match App Pro",
+	  "image": "https://d100mj7v0l85u5.cloudfront.net/s3fs-public/ketac-molar-1g.jpg?height=200&width=200",
+	  "description": "Aplicación profesional para smartphones que permite selección de color mediante fotografía",
+	  "category": "Easy Match"
+	}
+    ]

@@ -12,9 +12,8 @@ interface ProductModalProps {
   image: string
   description: string
   category: string
-  features: string[]
-  specifications: string[]
-  brand: string
+  isOpen: boolean
+  onClose: () => void
 }
 
 export default function ProductModal({
@@ -23,46 +22,45 @@ export default function ProductModal({
   image,
   description,
   category,
-  features,
-  specifications,
-  brand,
+  isOpen,
+  onClose,
 }: ProductModalProps) {
-  // Asegurarse de que el modal se cierre cuando se presiona Escape
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        const modal = document.getElementById(id)
-        if (modal && !modal.classList.contains("hidden")) {
-          modal.classList.add("hidden")
-          document.body.style.overflow = "auto"
-        }
+        onClose()
       }
     }
 
-    window.addEventListener("keydown", handleEscape)
+    if (isOpen) {
+      window.addEventListener("keydown", handleEscape)
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+
     return () => window.removeEventListener("keydown", handleEscape)
-  }, [id])
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
 
   return (
-    <div
-      id={id}
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          document.getElementById(id)?.classList.add("hidden")
-          document.body.style.overflow = "auto"
-        }
-      }}
+	<div
+		id={id}
+		className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+		onClick={(e) => {
+		if (e.target === e.currentTarget) {
+			onClose()
+			}
+		}}
     >
       <div className="bg-[#001208] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-[#00FF66]/20 shadow-2xl relative">
         <Button
           variant="ghost"
           size="icon"
           className="absolute top-4 right-4 text-white hover:bg-[#00FF66]/10 z-10"
-          onClick={() => {
-            document.getElementById(id)?.classList.add("hidden")
-            document.body.style.overflow = "auto"
-          }}
+          onClick={onClose}
         >
           <X className="h-6 w-6" />
         </Button>
@@ -100,4 +98,3 @@ export default function ProductModal({
     </div>
   )
 }
-
