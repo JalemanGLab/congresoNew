@@ -6,50 +6,24 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, Filter, X } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import useProductFilter from "./useProduct-filters"
+
 
 interface ProductFiltersProps {
   categories: string[]
 }
 
 export default function ProductFilters({ categories }: ProductFiltersProps) {
-  const [selectedCategory, setSelectedCategory] = useState("Todas")
-  const [searchTerm, setSearchTerm] = useState("")
-
-  // Función para manejar el cambio de categoría
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category)
-    // Emitir evento personalizado para que el componente de productos pueda escucharlo
-    window.dispatchEvent(
-      new CustomEvent("filterChange", {
-        detail: { category: category === "Todas" ? null : category, searchTerm },
-      }),
-    )
-  }
-
-  // Función para manejar la búsqueda
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Emitir evento personalizado para que el componente de productos pueda escucharlo
-    window.dispatchEvent(
-      new CustomEvent("filterChange", {
-        detail: { category: selectedCategory === "Todas" ? null : selectedCategory, searchTerm },
-      }),
-    )
-  }
-
-  // Función para limpiar los filtros
-  const clearFilters = () => {
-    setSelectedCategory("Todas")
-    setSearchTerm("")
-    // Emitir evento personalizado para que el componente de productos pueda escucharlo
-    window.dispatchEvent(
-      new CustomEvent("filterChange", {
-        detail: { category: null, searchTerm: "" },
-      }),
-    )
-  }
-
-  const allCategories = ["Todas", ...categories]
+  
+  const {
+    allCategories,
+    selectedCategory,
+    handleSearch,
+    searchTerm,
+    setSearchTerm,
+    handleCategoryChange,
+    clearFilters
+  }= useProductFilter(categories)
 
   return (
     <div className="bg-[#001208]/80 backdrop-blur-sm rounded-2xl border border-[#00FF66]/20 shadow-xl p-8">
