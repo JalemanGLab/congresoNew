@@ -45,23 +45,23 @@ export default function FaqSection() {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
-            <Image
-              src="/images/fq.PNG?height=600&width=800"
-              alt="Preguntas frecuentes"
-              width={600}
-              height={400}
-              className="rounded-2xl object-cover shadow-2xl shadow-[#00FF66]/5 border border-[#00FF66]/10 relative z-10"
-            />
-          </div>
-        </div>
-      </div>
+					<div className="relative">
+						<div className="absolute -top-10 -left-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
+						<div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
+						<Image
+							src="/img/fq.PNG?height=600&width=800"
+							alt="Preguntas frecuentes"
+							width={600}
+							height={400}
+							className="rounded-2xl object-cover shadow-2xl shadow-[#00FF66]/5 border border-[#00FF66]/10 relative z-10"
+						/>
+					</div>
+				</div>
+			</div>
 
-      <Render>
-        <Faq />
-      </Render>
+			<Render>
+				<Faq />
+			</Render>
 
       {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
       <div
