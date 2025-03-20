@@ -15,6 +15,8 @@ interface SpeakerModalProps {
   schedule: string
   location: string
   achievements: string[]
+  isOpen: boolean
+  onClose: () => void
 }
 
 export default function SpeakerModal({
@@ -27,31 +29,45 @@ export default function SpeakerModal({
   schedule,
   location,
   achievements,
+  isOpen,
+  onClose,
 }: SpeakerModalProps) {
-  // Asegurarse de que el modal se cierre cuando se presiona Escape
+  // Manejar el scroll cuando el modal está abierto
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+    }
+  }, [isOpen])
+
+  // Manejar la tecla Escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        const modal = document.getElementById(id)
-        if (modal && !modal.classList.contains("hidden")) {
-          modal.classList.add("hidden")
-          document.body.style.overflow = "auto"
-        }
+      if (e.key === "Escape" && isOpen) {
+        onClose()
       }
     }
 
     window.addEventListener("keydown", handleEscape)
     return () => window.removeEventListener("keydown", handleEscape)
-  }, [id])
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
 
   return (
     <div
-      id={id}
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden"
+      className="fixed pt-4 md:pt-0 inset-0 bg-black/90 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          document.getElementById(id)?.classList.add("hidden")
-          document.body.style.overflow = "auto"
+          onClose()
         }
       }}
     >
@@ -60,10 +76,7 @@ export default function SpeakerModal({
           variant="ghost"
           size="icon"
           className="absolute top-4 right-4 text-white hover:bg-[#00FF66]/10 z-10"
-          onClick={() => {
-            document.getElementById(id)?.classList.add("hidden")
-            document.body.style.overflow = "auto"
-          }}
+          onClick={onClose}
         >
           <X className="h-6 w-6" />
         </Button>

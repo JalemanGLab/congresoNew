@@ -151,6 +151,7 @@ export default function SpeakersSection() {
 
   // Estado para controlar si se muestran todos los ponentes o solo algunos
   const [showAllSpeakers, setShowAllSpeakers] = useState(false)
+  const [selectedSpeakerId, setSelectedSpeakerId] = useState<string | null>(null)
 
   // Estado para almacenar los ponentes en orden aleatorio
   const [randomizedSpeakers, setRandomizedSpeakers] = useState(allSpeakers)
@@ -193,6 +194,7 @@ export default function SpeakersSection() {
               role={speaker.role}
               image={speaker.image}
               topic={speaker.topic}
+              onOpenModal={() => setSelectedSpeakerId(speaker.id)}
             />
           ))}
         </div>
@@ -230,6 +232,8 @@ export default function SpeakersSection() {
             schedule={speaker.schedule}
             location={speaker.location}
             achievements={speaker.achievements}
+            isOpen={selectedSpeakerId === speaker.id}
+            onClose={() => setSelectedSpeakerId(null)}
           />
         ))}
       </div>

@@ -15,6 +15,8 @@ interface ProductModalProps {
   features: string[]
   specifications: string[]
   brand: string
+  isOpen: boolean
+  onClose: () => void
 }
 
 export default function ProductModal({
@@ -26,31 +28,45 @@ export default function ProductModal({
   features,
   specifications,
   brand,
+  isOpen,
+  onClose,
 }: ProductModalProps) {
+  // Controlar el overflow del body cuando el modal está abierto
+  useEffect(() => {
+    const html = document.documentElement
+    if (isOpen) {
+      html.classList.add('overflow-hidden')
+      html.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`
+    } else {
+      html.classList.remove('overflow-hidden')
+      html.style.paddingRight = ''
+    }
+    return () => {
+      html.classList.remove('overflow-hidden')
+      html.style.paddingRight = ''
+    }
+  }, [isOpen])
+
   // Asegurarse de que el modal se cierre cuando se presiona Escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        const modal = document.getElementById(id)
-        if (modal && !modal.classList.contains("hidden")) {
-          modal.classList.add("hidden")
-          document.body.style.overflow = "auto"
-        }
+        onClose()
       }
     }
 
     window.addEventListener("keydown", handleEscape)
     return () => window.removeEventListener("keydown", handleEscape)
-  }, [id])
+  }, [onClose])
+
+  if (!isOpen) return null
 
   return (
     <div
-      id={id}
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden"
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          document.getElementById(id)?.classList.add("hidden")
-          document.body.style.overflow = "auto"
+          onClose()
         }
       }}
     >
@@ -59,10 +75,7 @@ export default function ProductModal({
           variant="ghost"
           size="icon"
           className="absolute top-4 right-4 text-white hover:bg-[#00FF66]/10 z-10"
-          onClick={() => {
-            document.getElementById(id)?.classList.add("hidden")
-            document.body.style.overflow = "auto"
-          }}
+          onClick={onClose}
         >
           <X className="h-6 w-6" />
         </Button>
@@ -93,6 +106,32 @@ export default function ProductModal({
             <div>
               <h3 className="text-xl font-medium text-white mb-3">Descripción</h3>
               <p className="text-white/80 leading-relaxed">{description}</p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-medium text-white mb-3">Características</h3>
+              <ul className="space-y-2">
+                {features.map((feature, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <div className="h-5 w-5 rounded-full bg-[#00FF66]/20 flex items-center justify-center mt-0.5">
+                      <div className="h-2 w-2 rounded-full bg-[#00FF66]"></div>
+                    </div>
+                    <span className="text-white/80">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex gap-4 mt-6">
+              <Button className="flex-1 bg-[#00FF66] hover:bg-[#00DD55] text-[#001208]">
+                Solicitar información
+              </Button>
+              <Button
+                variant="outline"
+                className="flex-1 border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
+              >
+                Ver demostración
+              </Button>
             </div>
           </div>
         </div>

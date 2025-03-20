@@ -1,17 +1,17 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, Filter, X } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
-// Categorías disponibles para filtrar
-const categories = ["Todas", "Z350XT", "Clarity advance", "Clarity ultra", "SBU+ Relyx", "Clinpro Clear", "Easy Match"]
+interface ProductFiltersProps {
+  categories: string[]
+}
 
-export default function ProductFilters() {
+export default function ProductFilters({ categories }: ProductFiltersProps) {
   const [selectedCategory, setSelectedCategory] = useState("Todas")
   const [searchTerm, setSearchTerm] = useState("")
 
@@ -49,6 +49,8 @@ export default function ProductFilters() {
     )
   }
 
+  const allCategories = ["Todas", ...categories]
+
   return (
     <div className="bg-[#001208]/80 backdrop-blur-sm rounded-2xl border border-[#00FF66]/20 shadow-xl p-8">
       <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
@@ -58,7 +60,7 @@ export default function ProductFilters() {
             <h3 className="text-white font-medium">Filtrar por categoría</h3>
           </div>
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+            {allCategories.map((category) => (
               <Badge
                 key={category}
                 variant={selectedCategory === category ? "default" : "outline"}
