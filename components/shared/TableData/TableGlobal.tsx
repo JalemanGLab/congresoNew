@@ -63,8 +63,8 @@ const TableGlobal = ({
                       </div>
                       <input
                         type="text"
-                        placeholder={`Buscar por ${filterOptions.find(opt => opt.id === activeFilter)?.label.toLowerCase()}`}
-                        className="w-full h-10 border border-l-0 border-gray-300 pl-10 pr-4 rounded-r-md outline-none text-sm"
+                        placeholder={`Buscar  por ${filterOptions.find(opt => opt.id === activeFilter)?.label.toLowerCase()}`}
+                        className="w-full h-10 bg-neutral-50 border border-l-0 border-gray-300 pl-10 pr-4 rounded-r-md outline-none text-sm"
                         value={filterValue}
                         onChange={(e) => handleFilterChange(e.target.value)}
                       />
@@ -73,7 +73,7 @@ const TableGlobal = ({
                     <div className="relative flex-1">
                       <input
                         type="date"
-                        className="w-full h-10 border border-l-0 border-gray-300 px-4 rounded-r-md outline-none text-sm appearance-none"
+                        className="w-full h-10 border bg-neutral-50 border-l-0 border-gray-300 px-4 rounded-r-md outline-none text-sm appearance-none"
                         value={filterValue}
                         onChange={(e) => handleFilterChange(e.target.value)}
                         max="2100-12-31"

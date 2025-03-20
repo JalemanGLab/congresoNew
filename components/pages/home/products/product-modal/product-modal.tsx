@@ -20,14 +20,9 @@ interface ProductModalProps {
 }
 
 export default function ProductModal({
-  id,
   name,
   image,
   description,
-  category,
-  features,
-  specifications,
-  brand,
   isOpen,
   onClose,
 }: ProductModalProps) {
@@ -95,9 +90,6 @@ export default function ProductModal({
 
           <div className="space-y-4 md:space-y-6">
             <div>
-              <Badge variant="outline" className="mb-2 md:mb-3 bg-[#00FF66]/10 text-[#00FF66] border-[#00FF66]/20 px-2 py-0.5 md:px-3 md:py-1 text-sm">
-                {category}
-              </Badge>
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">{name}</h2>
             </div>
 
@@ -108,31 +100,6 @@ export default function ProductModal({
               <p className="text-sm md:text-base text-white/80 leading-relaxed">{description}</p>
             </div>
 
-            <div>
-              <h3 className="text-lg md:text-xl font-medium text-white mb-2 md:mb-3">Características</h3>
-              <ul className="space-y-1.5 md:space-y-2">
-                {features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <div className="h-4 md:h-5 w-4 md:w-5 rounded-full bg-[#00FF66]/20 flex items-center justify-center mt-0.5">
-                      <div className="h-1.5 md:h-2 w-1.5 md:w-2 rounded-full bg-[#00FF66]"></div>
-                    </div>
-                    <span className="text-sm md:text-base text-white/80">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-col md:flex-row gap-3 md:gap-4 mt-4 md:mt-6">
-              <Button className="w-full md:flex-1 bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] text-sm md:text-base py-5 md:py-6">
-                Solicitar información
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full md:flex-1 border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66] text-sm md:text-base py-5 md:py-6"
-              >
-                Ver demostración
-              </Button>
-            </div>
           </div>
         </div>
       </div>

@@ -50,7 +50,7 @@ export default function ProductsSection() {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {visibleProducts.map((product) => (
-                  <div key={product.id} className="flex">
+                  <div key={product.id} className="flex justify-center">
                     <ProductCard {...product} />
                   </div>
                 ))}

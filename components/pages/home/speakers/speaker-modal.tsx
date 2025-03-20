@@ -6,29 +6,20 @@ import { Button } from "@/components/ui/button"
 import { useEffect } from "react"
 
 interface SpeakerModalProps {
-  id: string
   name: string
   role: string
   image: string
   topic: string
   bio: string
-  schedule: string
-  location: string
-  achievements: string[]
   isOpen: boolean
   onClose: () => void
 }
 
 export default function SpeakerModal({
-  id,
   name,
   role,
   image,
-  topic,
   bio,
-  schedule,
-  location,
-  achievements,
   isOpen,
   onClose,
 }: SpeakerModalProps) {

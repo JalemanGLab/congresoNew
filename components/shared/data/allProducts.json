@@ -1,0 +1,114 @@
+[
+  {
+    "id": "product1",
+    "name": "Z350XT Kit Introductorio",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Kit completo con jeringas de todos los tonos esenciales. La resina Z350XT ofrece una combinación única de estética, resistencia y manipulación para restauraciones anteriores y posteriores.",
+    "category": "Restauración",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product2",
+    "name": "Z350XT Jeringa Individual",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Jeringa individual de resina compuesta Z350XT para reposición. Ofrece alta resistencia al desgaste y excelente pulido para restauraciones duraderas y estéticas.",
+    "category": "Restauración",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product3",
+    "name": "Z350XT Flow",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Resina fluida con la misma tecnología de nanorelleno para áreas de difícil acceso. Ideal para pequeñas cavidades y como base en restauraciones profundas.",
+    "category": "Restauración",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product4",
+    "name": "Clarity Advance Kit Completo",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Kit completo de brackets cerámicos para tratamiento de arco completo. Diseñado para ofrecer estética y eficiencia en tratamientos ortodónticos.",
+    "category": "Ortodoncia",
+    "brand": "3M Unitek"
+  },
+  {
+    "id": "product5",
+    "name": "Clarity Advance Arcos Estéticos",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Arcos recubiertos estéticos para complementar el sistema Clarity Advance. Ofrecen una apariencia discreta sin comprometer la eficacia del tratamiento.",
+    "category": "Ortodoncia",
+    "brand": "3M Unitek"
+  },
+  {
+    "id": "product6",
+    "name": "Clarity Ultra Kit Autoligable",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Sistema completo de brackets cerámicos autoligables de última generación. Combina estética superior con la eficiencia de la tecnología autoligable.",
+    "category": "Ortodoncia",
+    "brand": "3M Unitek"
+  },
+  {
+    "id": "product7",
+    "name": "Clarity Ultra Herramientas",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Set de herramientas especializadas para el manejo del sistema Clarity Ultra. Diseñadas para facilitar la colocación y ajuste de brackets autoligables.",
+    "category": "Ortodoncia",
+    "brand": "3M Unitek"
+  },
+  {
+    "id": "product8",
+    "name": "SBU+ Kit Introductorio",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Kit completo con adhesivo Single Bond Universal Plus y cemento RelyX. Solución integral para procedimientos adhesivos y de cementación.",
+    "category": "Adhesivos",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product9",
+    "name": "RelyX Universal Clicker",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Dispensador tipo clicker para cemento RelyX Universal con dosificación precisa. Facilita la mezcla y aplicación del cemento para resultados consistentes.",
+    "category": "Cementos",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product10",
+    "name": "Clinpro Clear Kit Preventivo",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Kit completo para prevención y remineralización de lesiones incipientes. Incluye productos para un enfoque integral de la prevención.",
+    "category": "Prevención",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product11",
+    "name": "Clinpro Clear Sellante",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Sellante de fosas y fisuras fotocurable con liberación de flúor. Ofrece protección duradera contra caries en superficies oclusales.",
+    "category": "Prevención",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product12",
+    "name": "Easy Match Kit Digital",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Sistema digital para selección precisa de color en restauraciones estéticas. Combina tecnología espectrofotométrica con software de análisis avanzado.",
+    "category": "Estética",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product13",
+    "name": "Easy Match Guía Física",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Guía física de colores fabricada con las resinas originales para comparación directa. Permite una selección precisa de tonos en condiciones de iluminación real.",
+    "category": "Estética",
+    "brand": "3M ESPE"
+  },
+  {
+    "id": "product14",
+    "name": "Easy Match App Pro",
+    "image": "/placeholder.svg?height=400&width=400",
+    "description": "Aplicación profesional para smartphones que permite selección de color mediante fotografía. Utiliza inteligencia artificial para análisis preciso de color dental.",
+    "category": "Estética",
+    "brand": "3M ESPE"
+  }
+]

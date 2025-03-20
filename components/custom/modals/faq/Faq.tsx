@@ -3,9 +3,7 @@ import { Users, Zap, LifeBuoy, ThumbsUp, Search } from "lucide-react"
 import useFaq from "./useFaq"
 import { LuCircleHelp } from "react-icons/lu";
 
-
 const PageFaq = () => {
-
   const {
     searchQuery,
     setSearchQuery,
@@ -15,15 +13,26 @@ const PageFaq = () => {
     questionToAccordionMap
   } = useFaq()
 
+  const handleQuestionClick = (question: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = questionToAccordionMap[question];
+    setOpenItem(id);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
 
   return (
-    <div className="w-full space-y-6">
-    <div className="text-3xl font-bold flex items-center gap-2">
-      <LuCircleHelp className="text-neutral-900 " />
-      <div className="text-black text-2xl font-bold">
-        Preguntas Frecuentes
+    <div className="w-full space-y-6" onClick={(e) => e.stopPropagation()}>
+      <div className="text-3xl font-bold flex items-center gap-2">
+        <LuCircleHelp className="text-neutral-900" />
+        <div className="text-black text-3xl font-bold">
+          Preguntas Frecuentes
+        </div>
       </div>
-    </div>
+
       {/* Barra de búsqueda */}
       <div className="w-full flex flex-col sm:flex-row justify-center gap-4">
         <div className="relative flex-1">
@@ -31,14 +40,17 @@ const PageFaq = () => {
           <input
             type="text"
             placeholder="Busca tu pregunta aquí..."
-            className="w-full pl-12 pr-4 py-3 rounded-xl bg-background outline-none border border-neutral-200 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100 transition-all duration-200"
+            className="w-full pl-12 pr-4 py-3 rounded-xl text-neutral-700 bg-neutral-50 outline-none border border-neutral-200 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100 transition-all duration-200"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <button 
-          className="py-3 px-6 sm:w-auto w-full sm:min-w-[120px] bg-background cursor-pointer text-white rounded-xl hover:bg-neutral-700 transition-all duration-200 flex items-center justify-center" 
-          onClick={() => setSearchQuery("")}
+          className="py-3 px-6 sm:w-auto w-full sm:min-w-[120px] bg-neutral-50 cursor-pointer text-neutral-800 rounded-xl hover:bg-neutral-100 transition-all duration-200 flex items-center justify-center border border-neutral-200" 
+          onClick={(e) => {
+            e.stopPropagation();
+            setSearchQuery("");
+          }}
         >
           Limpiar
         </button>
@@ -59,14 +71,7 @@ const PageFaq = () => {
           ]).map((question) => (
             <button
               key={question}
-              onClick={() => {
-                const id = questionToAccordionMap[question];
-                setOpenItem(id);
-                const element = document.getElementById(id);
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-              }}
+              onClick={(e) => handleQuestionClick(question, e)}
               className="group p-4 bg-white rounded-xl border border-neutral-200 hover:border-neutral-400 hover:shadow-md transition-all duration-200 w-full text-left"
             >
               <div className="flex items-center text-neutral-800">

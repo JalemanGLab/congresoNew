@@ -37,8 +37,8 @@ export default function ProductCard({
   } = useProductCard()
 
   return (
-    <>
-      <Card className="bg-[#001208] border-[#00FF66]/10 overflow-hidden hover:border-[#00FF66]/30 transition-all group shadow-lg">
+    <> 
+      <Card className="bg-[#001208] min-w-[350px] max-w-[350px] border-[#00FF66]/10 overflow-hidden hover:border-[#00FF66]/30 transition-all group shadow-lg">
         <CardContent className="p-8 flex flex-col items-center text-center">
           <div className="h-28 w-28 relative mb-6 group-hover:scale-105 transition-transform">
             <Image src={image || "/placeholder.svg"} alt={name} fill className="object-contain" />
@@ -47,7 +47,6 @@ export default function ProductCard({
             {category}
           </Badge>
           <h3 className="text-xl font-bold text-white mb-3">{name}</h3>
-          <p className="text-white/70 mb-6">{description}</p>
 
           <Button
             variant="outline"
