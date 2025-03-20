@@ -9,7 +9,8 @@ import Faq from "../../../custom/modals/faq/Faq";
 import useFaqSection from "./useFaq-section";
 
 export default function FaqSection() {
-  const { Render, closeModalAction, toggleModal, router } = useFaqSection();
+  const { Render, closeModalAction, toggleModal, isModalOpen, setIsModalOpen } =
+    useFaqSection();
 
   return (
     <section
@@ -36,8 +37,7 @@ export default function FaqSection() {
               <Button
                 size="lg"
                 className="bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] group px-8"
-                // onClick={toggleModal}
-                onClick={() => router.push("/preguntas")}
+                onClick={toggleModal}
               >
                 Ver Preguntas Frecuentes
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -64,8 +64,16 @@ export default function FaqSection() {
       </Render>
 
       {/* Modal de preguntas frecuentes (usando el mismo componente que el de registro) */}
-      {/* <div  onClick={() => setIsModalOpen(false)} className={`fixed inset-0 z-50 w-full h-screen bg-black/50 flex items-center justify-center   ${isModalOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <div className="bg-white rounded-lg w-[96vw] max-w-[1000px] min-h-96 max-h-[90vh] relative overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+      <div
+        onClick={() => setIsModalOpen(false)}
+        className={`fixed inset-0 z-50 w-full h-screen bg-black/50 flex items-center justify-center   ${
+          isModalOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className="bg-white rounded-lg w-[96vw] max-w-[1000px] min-h-96 max-h-[90vh] relative overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="absolute top-0 right-0 p-4">
             <button onClick={() => setIsModalOpen(false)}>
               <X className="w-6 h-6 text-black" />
@@ -75,7 +83,7 @@ export default function FaqSection() {
             <Faq />
           </div>
         </div>
-      </div> */}
+      </div>
     </section>
   );
 }
