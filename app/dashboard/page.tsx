@@ -8,11 +8,11 @@ const PageDashboard = () => {
 	} = useDashboard();
 	return (
 		<div className="w-full flex flex-col gap-8 overflow-hidden">
-			<div className="flex flex-col   sm:flex-row gap-3">
+			{/* <div className="flex flex-col   sm:flex-row gap-3">
 				<div className="w-full h-40 rounded-lg bg-neutral-700 "></div>
 				<div className="w-full h-40 rounded-lg bg-neutral-700 "></div>
 				<div className="w-full h-40 rounded-lg bg-neutral-700 "></div>
-			</div>
+			</div> */}
 			<TableGlobal
 				columns={columns}
 				data={data}

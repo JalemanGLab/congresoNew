@@ -1,0 +1,66 @@
+[
+	{
+		"id": "speaker1",
+		"name": "Ana Martínez",
+		"role": "CEO de Innovatech",
+		"image": "https://img.freepik.com/foto-gratis/hermosa-joven-doctora-mirando-camara-oficina_1301-7807.jpg?height=400&width=400",
+		"topic": "Transformación Digital",
+		"bio": "Ana Martínez es una reconocida experta en transformación digital con más de 15 años de experiencia en el sector odontológico. Como CEO de Innovatech, ha liderado proyectos de digitalización en más de 200 clínicas dentales en toda Latinoamérica."
+	},
+	{
+		"id": "speaker2",
+		"name": "Carlos Rodríguez",
+		"role": "Director de Estrategia",
+		"image": "https://www.stelorder.com/wp-content/uploads/2021/09/portada-empresario-individual.jpg?height=400&width=400",
+		"topic": "Liderazgo Empresarial",
+		"bio": "Carlos Rodríguez es Director de Estrategia en una de las redes de clínicas dentales más importantes de Colombia. Su experiencia en gestión empresarial y liderazgo ha transformado la manera en que se administran las clínicas modernas."
+	},
+	{
+		"id": "speaker3",
+		"name": "Laura Gómez",
+		"role": "Experta en Marketing",
+		"image": "https://retos-directivos.eae.es/wp-content/uploads/2021/04/iStock-1211968241.jpg?height=400&width=400",
+		"topic": "Estrategias de Crecimiento",
+		"bio": "Laura Gómez es especialista en marketing digital para el sector odontológico. Ha desarrollado estrategias de crecimiento para más de 300 consultorios dentales, logrando aumentar su captación de pacientes en un promedio del 40%."
+	},
+	{
+		"id": "speaker4",
+		"name": "Javier Moreno",
+		"role": "Consultor Internacional",
+		"image": "https://educacionejecutivablog.wordpress.com/wp-content/uploads/2015/06/tec_monterrey_empresario_5.jpg?height=400&width=400",
+		"topic": "Tendencias Globales",
+		"bio": "Javier Moreno es un reconocido consultor internacional especializado en tendencias del sector odontológico. Ha visitado más de 30 países estudiando las últimas innovaciones y prácticas en odontología moderna."
+	},
+	{
+		"id": "speaker5",
+		"name": "María López",
+		"role": "Especialista en Implantología",
+		"image": "https://www.colgate.com/content/dam/cp-sites/oral-care/oral-care-center/global/article/woman-dentist-in-a-consultory.jpg?height=400&width=400",
+		"topic": "Implantes Dentales Avanzados",
+		"bio": "María López es una reconocida especialista en implantología con más de 12 años de experiencia. Ha realizado más de 3,000 procedimientos de implantes y es pionera en técnicas mínimamente invasivas."
+	},
+	{
+		"id": "speaker6",
+		"name": "Roberto Sánchez",
+		"role": "Director Clínico",
+		"image": "https://i2-implantologia.com/wp-content/uploads/2023/10/dr-pelayo-gil-abando.webp?height=400&width=400",
+		"topic": "Gestión de Clínicas Dentales",
+		"bio": "Roberto Sánchez es director clínico de una de las redes de clínicas más grandes de Latinoamérica. Su enfoque en la optimización de procesos ha revolucionado la forma de gestionar clínicas dentales modernas."
+	},
+	{
+		"id": "speaker7",
+		"name": "Elena Ramírez",
+		"role": "Ortodoncista",
+		"image": "https://www.perspectiva.gt/wp-content/uploads/19-empresari-1.jpg?height=400&width=400",
+		"topic": "Ortodoncia Digital",
+		"bio": "Elena Ramírez es especialista en ortodoncia digital y ha sido pionera en la implementación de tecnologías 3D para el diagnóstico y tratamiento ortodóntico. Su enfoque combina la precisión digital con la experiencia clínica."
+	},
+	{
+		"id": "speaker8",
+		"name": "Sofía Mendoza",
+		"role": "Endodoncista",
+		"image": "https://s3-sa-east-1.amazonaws.com/doctoralia.co/doctor/6c5fd3/6c5fd36b708abd17c8ea930c3a3a074a_large.jpg?height=400&width=400",
+		"topic": "Endodoncia Microscópica",
+		"bio": "Sofía Mendoza es referente en endodoncia microscópica, utilizando tecnología de última generación para tratamientos de conductos complejos. Su precisión y técnica han establecido nuevos estándares en la especialidad."
+	}
+]

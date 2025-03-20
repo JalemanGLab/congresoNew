@@ -11,9 +11,10 @@ interface SpeakerCardProps {
   role: string
   image: string
   topic: string
+  onOpenModal: () => void
 }
 
-export default function SpeakerCard({ id, name, role, image, topic }: SpeakerCardProps) {
+export default function SpeakerCard({ id, name, role, image, topic, onOpenModal }: SpeakerCardProps) {
   return (
     <Card className="bg-[#001208] border-[#00FF66]/10 overflow-hidden hover:border-[#00FF66]/30 transition-all group shadow-lg">
       <div className="relative h-72 w-full overflow-hidden">
@@ -34,13 +35,7 @@ export default function SpeakerCard({ id, name, role, image, topic }: SpeakerCar
           variant="outline"
           size="sm"
           className="w-full border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
-          onClick={() => {
-            const modal = document.getElementById(id)
-            if (modal) {
-              modal.classList.remove("hidden")
-              document.body.style.overflow = "hidden"
-            }
-          }}
+          onClick={onOpenModal}
         >
           <Eye className="mr-2 h-4 w-4" />
           Ver perfil completo

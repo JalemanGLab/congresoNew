@@ -10,7 +10,7 @@ export default function Header() {
   const { router } = useHeader();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#00FF66]/10 bg-[#001208]/95 backdrop-blur supports-[backdrop-filter]:bg-[#001208]/60">
+    <header className="sticky top-0 z-40 w-full border-b border-[#00FF66]/10 bg-[#001208]/95 backdrop-blur supports-[backdrop-filter]:bg-[#001208]/60">
       <div className="container flex h-20 items-center justify-between">
         <div className="flex items-center ">
           <div className="relative h-12 w-12 overflow-hidden">
@@ -51,14 +51,6 @@ export default function Header() {
             Iniciar Sesión
           </Button>
         </div>
-        <Button
-          variant="outline"
-          size="icon"
-          className="md:hidden border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
-        >
-          <ChevronRight className="h-4 w-4" />
-          <span className="sr-only">Menu</span>
-        </Button>
       </div>
     </header>
   );

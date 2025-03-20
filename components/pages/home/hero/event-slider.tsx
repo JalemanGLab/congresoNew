@@ -145,26 +145,6 @@ export default function EventSlider() {
 						</div>
 					)}
 
-					<div className="absolute inset-0 flex items-end justify-center pb-10 sm:pb-16">
-						<div className="flex flex-col sm:flex-row gap-4 justify-center">
-							<Button
-								size="lg"
-								className="bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] px-6 sm:px-8 group"
-								onClick={() => setIsModalOpen(true)}
-							>
-								Registrarse Ahora
-								<ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-							</Button>
-							<Button
-								size="lg"
-								variant="outline"
-								className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
-								onClick={scrollToEvent}
-							>
-								Ver programa
-							</Button>
-						</div>
-					</div>
 				</div>
 			))}
 
