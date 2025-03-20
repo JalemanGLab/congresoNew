@@ -155,8 +155,7 @@ export default function RegistrationSection() {
                 </div>
                 <Button
                   className="w-full bg-[#00FF66] hover:bg-[#00DD55] text-[#001208]"
-                  // onClick={() => setIsModalOpen(true)}
-                  onClick={() => router.push("/register")}
+                  onClick={() => setIsModalOpen(true)}
                 >
                   Registrarme
                 </Button>
