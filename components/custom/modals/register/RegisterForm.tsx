@@ -44,6 +44,7 @@ const RegisterForm = () => {
     brandOptions,
     banksOptions,
     documentTypeOptions,
+    isSubmitting
   } = useRegisterForm();
   return (
     <div className="w-full  bg-gray-100 flex flex-col">
@@ -186,8 +187,8 @@ const RegisterForm = () => {
                       errors={errors}
                       rules={{
                         required: true,
-                        minLength: 8,
-                        maxLength: 10,
+                        minLength: 6,
+                        maxLength: 20,
                         pattern: /^[0-9]+$/,
                       }}
                     />
@@ -239,7 +240,7 @@ const RegisterForm = () => {
                         type="submit"
                         className="w-full sm:w-[180px] md:w-[240px] md:font-semibold h-[50px] bg-[#333333] text-white rounded-lg flex items-center justify-center gap-2 hover:bg-[#444444] transition-colors text-sm font-medium cursor-pointer"
                       >
-                        Continuar a datos profesionales
+                        Continuar
                       </button>
                     </div>
                   </div>
@@ -310,7 +311,7 @@ const RegisterForm = () => {
                     <div className="w-full h-[40px] flex items-center px-4 mt-6 rounded border border-gray-300 bg-[#fafafa] gap-2">
                       <input
                         type="checkbox"
-                        {...register("authorization", { required: true })}
+                        {...register("authorization", {})}
                         className="mt-1 accent-[#333333]"
                       />
                       <label className="text-sm text-gray-600">
@@ -326,13 +327,13 @@ const RegisterForm = () => {
                       onClick={() => setStep(1)}
                       className="w-full sm:w-[180px] h-[50px] bg-white border border-[#333333] text-[#333333] rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors text-sm font-medium cursor-pointer"
                     >
-                      Volver a datos personales
+                      Volver
                     </button>
                     <button
                       type="submit"
                       className="w-full sm:w-[180px] md:w-[200px] md:font-semibold h-[50px] bg-[#333333] text-white rounded-lg flex items-center justify-center gap-2 hover:bg-[#444444] transition-colors text-sm font-medium cursor-pointer"
                     >
-                      Continuar a método de pago
+                      Continuar
                     </button>
                   </div>
                 </form>
@@ -482,13 +483,24 @@ const RegisterForm = () => {
                     onClick={() => setStep(2)}
                     className="w-full sm:w-[180px] md:w-[240px] md:font-semibold h-[50px] bg-white border border-[#333333] text-[#333333] rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors text-sm font-medium cursor-pointer"
                   >
-                    Volver a datos profesionales
+                    Volver 
                   </button>
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full sm:w-[180px] md:w-[240px] md:font-semibold h-[50px] bg-[#333333] text-white rounded-lg flex items-center justify-center gap-2 hover:bg-[#444444] transition-colors text-sm font-medium cursor-pointer"
                   >
-                    Completar registro
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Procesando...
+                      </>
+                    ) : (
+                      'Completar registro'
+                    )}
                   </button>
                 </div>
               </form>

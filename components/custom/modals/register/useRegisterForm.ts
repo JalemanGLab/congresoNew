@@ -8,6 +8,7 @@ const useRegisterForm = () => {
     const [paymentData, setPaymentData] = useState<any>(null);
     const [personalData, setPersonalData] = useState<any>(null);
     const [infoFormulary, setInfoFormulary] = useState<any>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         console.log('infoFormulary:', infoFormulary);
@@ -134,14 +135,50 @@ const useRegisterForm = () => {
 
         const finalFormData = {
             assistant: {
-                ...infoFormulary?.step1,
-                ...infoFormulary?.step2
+                identification: Number(infoFormulary?.step1?.id),
+                first_name: infoFormulary?.step1?.first_name,
+                last_name: infoFormulary?.step1?.last_name,
+                phone: infoFormulary?.step1?.phone,
+                email: infoFormulary?.step1?.email,
+                main_procedure: infoFormulary?.step2?.main_procedure,
+                product_brand: infoFormulary?.step2?.brand,
+                weekly_procedure: infoFormulary?.step2?.cases_per_week,
+                contact: true,
+                distributor: infoFormulary?.step2?.distributor,
+                city: infoFormulary?.step1?.city
             },
-            [selectedPayment === 'card' ? 'card' : 'payment']: data
+            payment: {
+                type: selectedPayment?.toUpperCase(),
+                value: 500000, // Valor fijo del congreso
+                ...(selectedPayment === 'pse' && {
+                    pse: {
+                        bank: data.bank,
+                        type_person: "natural"
+                    }
+                }),
+                ...(selectedPayment === 'card' && {
+                    card: {
+                        name: data.card_name,
+                        number: data.card_number,
+                        expiry_date: data.expiry_date,
+                        cvc: data.cvc
+                    }
+                })
+            }
         };
+        
         setInfoFormulary(finalFormData);
         
-        toast.success('Registro completado correctamente');
+        // Simular envío de datos
+        setIsSubmitting(true);
+        
+        // Simulación de tiempo de espera para el envío
+        setTimeout(() => {
+            console.log('Datos enviados:', finalFormData);
+            toast.success('Registro completado correctamente');
+            setIsSubmitting(false);
+            // Aquí podrías redirigir al usuario o mostrar una pantalla de éxito
+        }, 2000);
     };
 
     return {
@@ -165,7 +202,8 @@ const useRegisterForm = () => {
         brandOptions,
         banksOptions,
         documentTypeOptions,
-        watch
+        watch,
+        isSubmitting
     };
 };
 
