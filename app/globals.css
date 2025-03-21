@@ -58,7 +58,8 @@
 
 /* Estilos adicionales para el tema del congreso */
 html.dark body {
-  background-color: #001208;
+  /* background-color: #001208; */
+  background-color: #fff;
   color: white;
 }
 

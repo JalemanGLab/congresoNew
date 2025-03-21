@@ -1,16 +1,16 @@
 "use client"
 
-import Header from "@/components/header/header"
-import HeroSection from "@/components/hero/hero-section"
-import CountdownSection from "@/components/countdown/countdown-section"
-import RegistrationSection from "@/components/registration/registration-section"
-import EventSection from "@/components/event/event-section"
-import AgendaSection from "@/components/agenda/agenda-section"
-import SpeakersSection from "@/components/speakers/speakers-section"
-import ProductsSection from "@/components/products/products-section"
-import FaqSection from "@/components/faq/faq-section"
-import NewsletterSection from "@/components/newsletter/newsletter-section"
-import Footer from "@/components/footer/footer"
+import Header from "@/components/pages/home/header/header"
+import HeroSection from "@/components/pages/home/hero/hero-section"
+import CountdownSection from "@/components/pages/home/countdown/countdown-section"
+import RegistrationSection from "@/components/pages/home/registration/registration-section"
+import EventSection from "@/components/pages/home/event/event-section"
+import AgendaSection from "@/components/pages/home/agenda/agenda-section"
+import SpeakersSection from "@/components/pages/home/speakers/speakers-section"
+import ProductsSection from "@/components/pages/home/products/products-section"
+import FaqSection from "@/components/pages/home/faq/faq-section"
+import NewsletterSection from "@/components/pages/home/newsletter/newsletter-section"
+import Footer from "@/components/pages/home/footer/footer"
 
 export default function Home() {
   return (
