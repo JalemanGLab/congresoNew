@@ -11,7 +11,7 @@ import RegistrationModal from "../registration/registration-modal"
 const slides = [
 	{
 		id: 1,
-		image: "/img/banner-magno.png",
+		image: "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/sliders/banner-magno.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzbGlkZXJzL2Jhbm5lci1tYWduby5wbmciLCJpYXQiOjE3NDI1NjE5MzYsImV4cCI6MTc3NDA5NzkzNn0.Szvr9oWr4m9Mc0GNH26EToGNoYI05MPQKLLVTPBClXQ",
 		alt: "Congreso Magno 3.0",
 		title: "CONGRESO MAGNO 3.0",
 		subtitle: "El evento odontológico más importante del año",
@@ -124,47 +124,26 @@ export default function EventSlider() {
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-[#001208] via-[#001208]/70 to-transparent" />
 
-					{/* Contenido del slide (oculto en el index 0) */}
-					{index !== 0 && (
-						<div
-							className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${index === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-								}`}
-						>
-							<div className="text-center space-y-4 sm:space-y-6 md:space-y-8 px-4 max-w-5xl">
-								<div className="inline-block px-4 py-1.5 rounded-full bg-[#00FF66]/20 text-[#00FF66] font-medium text-sm mb-2 sm:mb-4">
-									15 DE JULIO, 2025
-								</div>
-								<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-wider leading-tight">
-									{slide.title}
-									<span className="block text-[#00FF66]">COLOMBIA 2025</span>
-								</h2>
-								<p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto">
-									{slide.subtitle}
-								</p>
+					{/* Contenido del slide */}
+					<div
+						className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${
+							index === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+						}`}
+					>
+						<div className="text-center space-y-4 sm:space-y-6 md:space-y-8 px-4 max-w-5xl">
+							<div className="inline-block px-4 py-1.5 rounded-full bg-[#00FF66]/20 text-[#00FF66] font-medium text-sm mb-2 sm:mb-4">
+								15 DE JULIO, 2025
 							</div>
-						</div>
-					)}
-
-					<div className="absolute inset-0 flex items-end justify-center pb-10 sm:pb-16">
-						<div className="flex flex-col sm:flex-row gap-4 justify-center">
-							<Button
-								size="lg"
-								className="bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] px-6 sm:px-8 group"
-								onClick={() => setIsModalOpen(true)}
-							>
-								Registrarse Ahora
-								<ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-							</Button>
-							<Button
-								size="lg"
-								variant="outline"
-								className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66]"
-								onClick={scrollToEvent}
-							>
-								Ver programa
-							</Button>
+							<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-wider leading-tight">
+								{slide.title}
+								<span className="block text-[#00FF66]">COLOMBIA 2025</span>
+							</h2>
+							<p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto">
+								{slide.subtitle}
+							</p>
 						</div>
 					</div>
+
 				</div>
 			))}
 
