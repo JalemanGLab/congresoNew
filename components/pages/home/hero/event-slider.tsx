@@ -11,7 +11,7 @@ import RegistrationModal from "../registration/registration-modal"
 const slides = [
 	{
 		id: 1,
-		image: "/img/banner-magno.png",
+		image: "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/sliders/banner-magno.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzbGlkZXJzL2Jhbm5lci1tYWduby5wbmciLCJpYXQiOjE3NDI1NjE5MzYsImV4cCI6MTc3NDA5NzkzNn0.Szvr9oWr4m9Mc0GNH26EToGNoYI05MPQKLLVTPBClXQ",
 		alt: "Congreso Magno 3.0",
 		title: "CONGRESO MAGNO 3.0",
 		subtitle: "El evento odontológico más importante del año",
