@@ -2,7 +2,7 @@
 import { Calendar, Clock, MapPin, Ticket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
-import RegisterForm from "../../../custom/modals/register/RegisterForm"
+import Register from "../../../custom/modals/register/Register"
 import { useRouter } from "next/navigation"
 
 
@@ -17,7 +17,7 @@ export default function RegistrationSection() {
       // Capturar la posición actual del scroll
       const currentScrollPosition = window.scrollY
       setScrollPosition(currentScrollPosition)
-      
+
       // Fijar el body en su posición actual
       document.body.style.top = `-${currentScrollPosition}px`
       document.body.style.position = 'fixed'
@@ -29,7 +29,7 @@ export default function RegistrationSection() {
       document.body.style.top = ''
       document.body.style.width = ''
       document.body.style.overflow = ''
-      
+
       // Restaurar la posición del scroll
       window.scrollTo({
         top: scrollPosition,
@@ -168,22 +168,21 @@ export default function RegistrationSection() {
       {/* Reemplazar el modal anterior con este nuevo */}
       {isModalOpen && (
         <div className="fixed left-0 top-0 right-0 bottom-0  inset-0 z-50 flex items-center justify-center">
-          <div 
+          <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setIsModalOpen(false)}
           />
-          <div className="relative bg-white p-8 w-full h-screen shadow-xl  overflow-y-auto
-            scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400 border border-gray-200">
+          <div className="relative flex justify-center items-center bg-gradient-to-br from-[#031a10] to-[#073723]  w-full h-screen shadow-xl  px-10 ">
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
+              className="absolute top-4 right-4 text-green-400 hover:text-green-600 transition-colors z-50 hover:bg-green-500/20  rounded-sm"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            
-            <RegisterForm />
+
+            <Register />
           </div>
         </div>
       )}
