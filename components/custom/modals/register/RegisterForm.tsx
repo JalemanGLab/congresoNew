@@ -160,18 +160,12 @@ const RegisterForm = () => {
                   <div className="w-full flex flex-col-reverse sm:flex-row justify-end gap-3">
                     <button
                       type="submit"
-                      className="w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg
-               flex items-center justify-center gap-2 text-white
-               border border-[#1E4D2B]
-               bg-gradient-to-r from-[#1E4D2B] to-[#3FA34D]
-               hover:from-[#3FA34D] hover:to-[#1E4D2B]
-               transition-all duration-300 text-sm font-medium cursor-pointer"
+                      className="w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-[#225d33]
+                        hover:bg-[#1b4829] transition-all duration-300 text-sm font-medium cursor-pointer"
                     >
                       Continuar
                     </button>
                   </div>
-
-
                 </div>
               </form>
             </div>
@@ -256,7 +250,8 @@ const RegisterForm = () => {
                   </button>
                   <button
                     type="submit"
-                    className="w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-gradient-to-r from-[#1E4D2B] to-[#3FA34D] hover:from-[#3FA34D] hover:to-[#1E4D2B] transition-all duration-300 text-sm font-medium cursor-pointer"
+                    className="w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-[#225d33]
+                        hover:bg-[#1b4829] transition-all duration-300 text-sm font-medium cursor-pointer"
                   >
                     Continuar
                   </button>
@@ -405,7 +400,8 @@ const RegisterForm = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-gradient-to-r from-[#1E4D2B] to-[#3FA34D] hover:from-[#3FA34D] hover:to-[#1E4D2B] transition-all duration-300 text-sm font-medium cursor-pointer
+                  className={`w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-[#225d33]
+                        hover:bg-[#1b4829] transition-all duration-300 text-sm font-medium cursor-pointer
                   ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   {isSubmitting ? (
