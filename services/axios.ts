@@ -27,10 +27,6 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response) {
-            // El servidor respondió con un código de error
-            // console.error(`Error del servidor - Status: ${error.response.status}`);
-            // console.error('Mensaje:', error.response.data.message);
-            // console.error('Detalles:', JSON.stringify(error.response.data, null, 2));
         } else if (error.request) {
             // La petición fue hecha pero no se recibió respuesta
             console.error('Error de red - No hubo respuesta del servidor');
@@ -42,6 +38,31 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+// Función para manejar errores común
+export const handleAxiosError = (error: unknown) => {
+    if (axios.isAxiosError(error)) {
+      // Error de red o servidor
+      if (error.response) {
+        return {
+          message: error.response.data.message || "Error en el servidor",
+          status: error.response.status,
+        };
+      } else if (error.request) {
+        // Error de conexión
+        return {
+          message: "No se pudo conectar con el servidor",
+          status: 0,
+        };
+      }
+    }
+    // Error general
+    return {
+      message: "Ocurrió un error inesperado",
+      status: 500,
+    };
+  };
+  
 
 export const registerQr = async (id: string) => {
     try {
