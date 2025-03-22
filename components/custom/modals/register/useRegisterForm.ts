@@ -9,7 +9,9 @@ const useRegisterForm = () => {
     null
   );
   const [paymentData, setPaymentData] = useState<any>(null);
-  const [statusFinish, setStatusFinish] = useState(false);
+  const [statusFinish, setStatusFinish] = useState<"success" | "error" | "not">(
+    "not"
+  );
   const [personalData, setPersonalData] = useState<any>(null);
   const [infoFormulary, setInfoFormulary] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -100,6 +102,7 @@ const useRegisterForm = () => {
     formState: { errors },
     trigger,
     watch,
+    setError,
   } = useForm({
     mode: "onChange",
   });
@@ -177,7 +180,9 @@ const useRegisterForm = () => {
 
     const finalFormData = {
       assistant: {
-        identification: Number(infoFormulary?.step1?.id),
+        identification: infoFormulary?.step1?.id
+          ? Number(infoFormulary.step1.id)
+          : undefined,
         first_name: infoFormulary?.step1?.first_name,
         last_name: infoFormulary?.step1?.last_name,
         phone: infoFormulary?.step1?.phone,
@@ -191,7 +196,7 @@ const useRegisterForm = () => {
       },
       payment: {
         type: selectedPayment?.toUpperCase(),
-        value: 500000, // Valor fijo del congreso
+        value: 500000,
         ...(selectedPayment === "pse" && {
           pse: {
             bank: data.bank,
@@ -210,30 +215,64 @@ const useRegisterForm = () => {
     };
 
     setInfoFormulary(finalFormData);
-
-    // Simular envío de datos
     setIsSubmitting(true);
 
-    // Simulación de tiempo de espera para el envío
     try {
       const response = await registerAssistant(finalFormData);
 
       if (response.status === true) {
-        setStatusFinish(true);
-
-        // Limpiamos todos los estados
-        setInfoFormulary(null);
-        setPersonalData(null);
-        setPaymentData(null);
-        setSelectedPayment(null);
+        setStatusFinish("success");
+        localStorage.removeItem("registerStep");
+        localStorage.removeItem("registerForm");
       } else {
-        setStatusFinish(false);
+        setStatusFinish("error");
+
+        // Marcar campos con error
+        if (response.message?.includes("assistant.identification")) {
+          setError("id", { type: "server", message: " " });
+        }
+        if (response.message?.includes("assistant.first_name")) {
+          setError("first_name", { type: "server", message: " " });
+        }
+        if (response.message?.includes("assistant.last_name")) {
+          setError("last_name", { type: "server", message: " " });
+        }
+        if (response.message?.includes("assistant.phone")) {
+          setError("phone", { type: "server", message: " " });
+        }
+        if (response.message?.includes("assistant.email")) {
+          setError("email", { type: "server", message: " " });
+        }
+        if (response.message?.includes("assistant.city")) {
+          setError("city", { type: "server", message: " " });
+        }
       }
     } catch (error: any) {
-      toast.error(error.message || "Error al registrar el asistente");
+      setStatusFinish("error");
+      
+      // Nuevos mensajes de error
+      if (error.message?.includes('número de teléfono ya está registrado')) {
+        setError('phone', { type: 'server' });
+      }
+      if (error.message?.includes('correo electrónico ya está registrado')) {
+        setError('email', { type: 'server' });
+      }
+      if (error.message?.includes('número de identificación ya está registrado')) {
+        setError('id', { type: 'server' });
+      }
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Añadir una nueva función para limpiar estados
+  const resetForm = () => {
+    setInfoFormulary(null);
+    setPersonalData(null);
+    setPaymentData(null);
+    setSelectedPayment(null);
+    setStatusFinish("not");
+    setStep(1);
   };
 
   return {
@@ -253,6 +292,7 @@ const useRegisterForm = () => {
     handleSubmit,
     handleSubmitPayment,
     statusFinish,
+    setStatusFinish,
     distributorsOptions,
     proceduresOptions,
     brandOptions,
@@ -260,6 +300,7 @@ const useRegisterForm = () => {
     documentTypeOptions,
     watch,
     isSubmitting,
+    resetForm,
   };
 };
 
