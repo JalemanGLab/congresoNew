@@ -42,13 +42,23 @@ const RegisterForm = () => {
     brandOptions,
     banksOptions,
     documentTypeOptions,
-    isSubmitting
+    isSubmitting,
+    statusFinish,
   } = useRegisterForm();
 
   const steps = [1, 2, 3];
 
   return (
     <div className="w-full bg-white flex flex-col rounded-r-lg p-4 sm:p-6">
+      {statusFinish && (
+        <div className="w-full bg-green-500 text-white p-4 rounded-lg">
+          <h2 className="text-lg font-bold">¡Registro completado!</h2>
+          <p className="text-sm">
+            Gracias por registrarte en nuestro programa.
+          </p>
+        </div>
+      )}
+
       <Toaster position="top-right" />
       <div className="w-full mx-auto flex flex-col justify-center items-center rounded-lg gap-3 sm:gap-4 md:gap-5">
         <div className="text-xl sm:text-2xl text-[#031a10] text-center font-bold">
@@ -58,10 +68,7 @@ const RegisterForm = () => {
         </div>
 
         <div className="w-full bg-white flex flex-col rounded-lg md:gap-4">
-          <ProgressSteps
-            currentStep={step}
-            steps={steps}
-          />
+          <ProgressSteps currentStep={step} steps={steps} />
 
           {/* PASO 1: INFORMACIÓN PERSONAL */}
           {step === 1 && (
@@ -79,7 +86,9 @@ const RegisterForm = () => {
                     inputType="text"
                     placeholder="Nombre"
                     label="Nombre"
-                    childrenIcon={<HiOutlineUser className="text-xl sm:text-2xl" />}
+                    childrenIcon={
+                      <HiOutlineUser className="text-xl sm:text-2xl" />
+                    }
                     register={register}
                     errors={errors}
                     rules={{ required: true }}
@@ -89,7 +98,9 @@ const RegisterForm = () => {
                     inputType="text"
                     placeholder="Apellido"
                     label="Apellido"
-                    childrenIcon={<HiOutlineUser className="text-xl sm:text-2xl" />}
+                    childrenIcon={
+                      <HiOutlineUser className="text-xl sm:text-2xl" />
+                    }
                     register={register}
                     errors={errors}
                     rules={{
@@ -103,12 +114,15 @@ const RegisterForm = () => {
                     inputType="email"
                     placeholder="correo@ejemplo.com"
                     label="Correo electrónico"
-                    childrenIcon={<HiOutlineMail className="text-xl sm:text-2xl" />}
+                    childrenIcon={
+                      <HiOutlineMail className="text-xl sm:text-2xl" />
+                    }
                     register={register}
                     errors={errors}
                     rules={{
                       required: true,
-                      pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                      pattern:
+                        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                     }}
                   />
                   <InputField
@@ -116,7 +130,9 @@ const RegisterForm = () => {
                     inputType="number"
                     placeholder="Número de cédula"
                     label="Cédula"
-                    childrenIcon={<HiOutlineIdentification className="text-xl sm:text-2xl" />}
+                    childrenIcon={
+                      <HiOutlineIdentification className="text-xl sm:text-2xl" />
+                    }
                     register={register}
                     errors={errors}
                     rules={{
@@ -131,7 +147,9 @@ const RegisterForm = () => {
                     inputType="tel"
                     placeholder="Número de teléfono"
                     label="Teléfono"
-                    childrenIcon={<HiOutlinePhone className="text-xl sm:text-2xl" />}
+                    childrenIcon={
+                      <HiOutlinePhone className="text-xl sm:text-2xl" />
+                    }
                     register={register}
                     errors={errors}
                     rules={{
@@ -146,7 +164,9 @@ const RegisterForm = () => {
                     inputType="text"
                     placeholder="Ciudad"
                     label="Ciudad"
-                    childrenIcon={<HiOutlineLocationMarker className="text-xl sm:text-2xl" />}
+                    childrenIcon={
+                      <HiOutlineLocationMarker className="text-xl sm:text-2xl" />
+                    }
                     register={register}
                     errors={errors}
                     rules={{
@@ -183,7 +203,7 @@ const RegisterForm = () => {
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <SelectData
-                    label="¿Dónde quieres redimir el bono?"
+                    label="Redimir bono en"
                     options={distributorsOptions}
                     name="distributor"
                     errors={errors}
@@ -191,7 +211,7 @@ const RegisterForm = () => {
                     control={control}
                   />
                   <SelectData
-                    label="¿Cual es el principal procedimiento clínico?"
+                    label="Procedimiento principal"
                     options={proceduresOptions}
                     name="main_procedure"
                     errors={errors}
@@ -199,7 +219,7 @@ const RegisterForm = () => {
                     control={control}
                   />
                   <SelectData
-                    label="¿Marca que más usa en su consulta?"
+                    label="Marca mas usada"
                     options={brandOptions}
                     name="brand"
                     errors={errors}
@@ -215,7 +235,9 @@ const RegisterForm = () => {
                       register={register}
                       errors={errors}
                       rules={{ required: true }}
-                      childrenIcon={<HiOutlineQuestionMarkCircle className=" text-xl sm:text-2xl" />}
+                      childrenIcon={
+                        <HiOutlineQuestionMarkCircle className="text-xl sm:text-2xl" />
+                      }
                     />
                   )}
                   <InputField
@@ -226,21 +248,24 @@ const RegisterForm = () => {
                     childrenIcon={<MdNumbers className="text-xl sm:text-2xl" />}
                     register={register}
                     errors={errors}
-                    rules={{ required: true, min: 0, max: 100 }}
+                    rules={{ maxLength: 3, required: true, min: 0, max: 100 }}
                   />
-                  <div className="w-full h-10 flex items-center jus px-4 rounded border border-green-600 bg-grays-100 gap-2">
+                </div>
+                <div className="flex items-center gap-2">
+                  <label className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
-                      {...register("authorization", {})}
-                      className="accent-[#00FF66]"
+                      {...register("authorization")}
+                      className="sr-only peer"
                     />
-                    <label className="text-xs text-gray-600">
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#225d33]"></div>
+                    <span className="ms-3 text-sm font-medium text-gray-600">
                       ¿Autorizas recibir información comercial?
-                    </label>
-                  </div>
+                    </span>
+                  </label>
                 </div>
 
-                <div className="w-full flex flex-col-reverse sm:flex-row justify-between gap-3 mt-6">
+                <div className="w-full flex flex-col-reverse sm:flex-row justify-between gap-3 mt-2">
                   <button
                     type="button"
                     onClick={() => setStep(1)}
@@ -256,7 +281,6 @@ const RegisterForm = () => {
                     Continuar
                   </button>
                 </div>
-
               </form>
             </div>
           )}
@@ -274,18 +298,28 @@ const RegisterForm = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div
                   className={`flex items-center justify-center p-4 sm:p-6 border-2 rounded-lg cursor-pointer transition-all
-                    ${selectedPayment === "card" ? "border-green-800" : "border-gray-200"}
+                    ${
+                      selectedPayment === "card"
+                        ? "border-green-800"
+                        : "border-gray-200"
+                    }
                   `}
                   onClick={() => setSelectedPayment("card")}
                 >
                   <div className="flex flex-col items-center">
                     <HiOutlineCreditCard className="text-3xl sm:text-4xl text-green-800" />
-                    <span className="mt-2 text-green-800">Targeta de Credito</span>
+                    <span className="mt-2 text-green-800">
+                      Targeta de Credito
+                    </span>
                   </div>
                 </div>
                 <div
                   className={`flex items-center justify-center p-4 sm:p-6 border-2 rounded-lg cursor-pointer transition-all
-                    ${selectedPayment === "pse" ? "border-green-800" : "border-gray-200"}
+                    ${
+                      selectedPayment === "pse"
+                        ? "border-green-800"
+                        : "border-gray-200"
+                    }
                   `}
                   onClick={() => setSelectedPayment("pse")}
                 >
@@ -304,7 +338,9 @@ const RegisterForm = () => {
                       inputType="text"
                       placeholder="Nombre en la tarjeta"
                       label="Nombre en la tarjeta"
-                      childrenIcon={<HiOutlineUser className="text-xl sm:text-2xl" />}
+                      childrenIcon={
+                        <HiOutlineUser className="text-xl sm:text-2xl" />
+                      }
                       register={registerPayment}
                       errors={paymentErrors}
                       rules={{ required: true }}
@@ -314,7 +350,9 @@ const RegisterForm = () => {
                       inputType="text"
                       placeholder="XXXX XXXX XXXX XXXX"
                       label="Número de tarjeta"
-                      childrenIcon={<HiOutlineCreditCard className="text-xl sm:text-2xl" />}
+                      childrenIcon={
+                        <HiOutlineCreditCard className="text-xl sm:text-2xl" />
+                      }
                       register={registerPayment}
                       errors={paymentErrors}
                       rules={{
@@ -328,7 +366,9 @@ const RegisterForm = () => {
                       inputType="text"
                       placeholder="MM/AA"
                       label="Fecha de expiración"
-                      childrenIcon={<HiOutlineCalendar className="text-xl sm:text-2xl" />}
+                      childrenIcon={
+                        <HiOutlineCalendar className="text-xl sm:text-2xl" />
+                      }
                       register={registerPayment}
                       errors={paymentErrors}
                       rules={{
@@ -341,7 +381,9 @@ const RegisterForm = () => {
                       inputType="text"
                       placeholder="CVC"
                       label="CVC"
-                      childrenIcon={<HiOutlineLockClosed className="text-xl sm:text-2xl" />}
+                      childrenIcon={
+                        <HiOutlineLockClosed className="text-xl sm:text-2xl" />
+                      }
                       register={registerPayment}
                       errors={paymentErrors}
                       rules={{
@@ -402,7 +444,7 @@ const RegisterForm = () => {
                   disabled={isSubmitting}
                   className={`w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-[#225d33]
                         hover:bg-[#1b4829] transition-all duration-300 text-sm font-medium cursor-pointer
-                  ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {isSubmitting ? (
                     <>
@@ -412,17 +454,27 @@ const RegisterForm = () => {
                         fill="none"
                         viewBox="0 0 24 24"
                       >
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Procesando...
                     </>
                   ) : (
-                    'Completar registro'
+                    "Completar registro"
                   )}
                 </button>
               </div>
-
             </form>
           )}
         </div>
