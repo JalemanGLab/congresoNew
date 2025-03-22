@@ -160,7 +160,6 @@ const usePage = () => {
            
            // Mostrar el contenido en un toast
            toast.success('QR Escaneado', {
-             description: `Contenido: ${decodedText}`,
              duration: 5000
            });
            
