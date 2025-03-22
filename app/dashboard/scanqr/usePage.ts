@@ -4,15 +4,17 @@ import { toast } from 'sonner'
 // Importamos el servicio que hemos creado
 import { registerQr } from '../../../services/axios';
 
+
 const usePage = () => {
    const [isScanning, setIsScanning] = useState(false);
    const [scanner, setScanner] = useState<Html5Qrcode | null>(null);
    const [isLoading, setIsLoading] = useState(false);
    const [scanResult, setScanResult] = useState<{
-     success: boolean;
+     isSuccess: boolean;
      message: string;
      description?: string;
      qrContent?: string;
+     data?: any[];
    } | null>(null);
    // Nuevo estado para guardar el contenido del QR
    const [qrData, setQrData] = useState<string>("");
@@ -34,7 +36,6 @@ const usePage = () => {
        // Verificación indirecta - no hay forma directa de consultar el estado
        return isActiveScannerRef.current;
      } catch (e) {
-       console.warn("Error al verificar estado del escáner:", e);
        return false;
      }
    };
@@ -48,15 +49,20 @@ const usePage = () => {
        if (isActiveScannerRef.current) {
          try {
            // Intentar pausar primero (ignora errores)
-           try { scanner.pause(); } catch (e) { /* ignore */ }
+           try { 
+             scanner.pause(true); 
+             await new Promise(resolve => setTimeout(resolve, 200));
+           } catch (e) { 
+             /* ignorar errores de pausa */ 
+           }
            
-           // Esperar un momento
-           await new Promise(resolve => setTimeout(resolve, 200));
-           
-           // Intentar detener
-           await scanner.stop();
+           // Intentar detener con manejo de errores mejorado
+           try {
+             await scanner.stop();
+           } catch (stopError) {
+             // No propagar este error
+           }
          } catch (e) {
-           console.warn("Error esperado al detener scanner:", e);
            // No propagar el error
          }
        }
@@ -64,15 +70,24 @@ const usePage = () => {
        // Marcar como inactivo independientemente del resultado
        isActiveScannerRef.current = false;
      } catch (e) {
-       console.error("Error crítico al detener scanner:", e);
+       // Asegurarnos de que el estado se actualice incluso en caso de error
+       isActiveScannerRef.current = false;
      }
    };
    
    // Efecto para limpiar errores al desmontar
    useEffect(() => {
      return () => {
+       // Función de limpieza cuando el componente se desmonta
        if (scanner) {
-         scanner.stop().catch(console.error);
+         try {
+           // Usar el método seguro para detener el escáner
+           safeStopScanner(scanner).catch(() => {
+             // No hacer nada con el error
+           });
+         } catch (e) {
+           // No hacer nada con el error
+         }
        }
      };
    }, [scanner]);
@@ -100,7 +115,6 @@ const usePage = () => {
            // Esperar un momento para asegurar que los recursos se liberen
            await new Promise(resolve => setTimeout(resolve, 300));
          } catch (e) {
-           console.log("Error al detener el escáner anterior:", e);
            // Continuar de todos modos
            isActiveScannerRef.current = false;
          }
@@ -111,7 +125,6 @@ const usePage = () => {
        if (readerElement) {
          readerElement.innerHTML = '';
        } else {
-         console.error("Elemento con ID 'reader' no encontrado");
          toast.error('Error de configuración', {
            description: 'No se encontró el elemento para el escáner QR',
            duration: 3000
@@ -139,9 +152,6 @@ const usePage = () => {
            disableFlip: true,
          },
          async (decodedText) => {
-           console.log("QR DETECTADO!");
-           console.log("Contenido:", decodedText);
-           
            // Marcar que el escáner ya no debería estar activo
            isActiveScannerRef.current = false;
            
@@ -161,39 +171,36 @@ const usePage = () => {
              // Pausar el escáner de forma segura
              try {
                html5QrCode.pause();
-               console.log("Escáner pausado correctamente");
              } catch (pauseError) {
-               console.warn("Error al pausar escáner (no crítico):", pauseError);
+               // Ignorar error
              }
              
              // Enviar el ID del QR al servidor y mostrar la respuesta
-             console.log("Enviando al servidor:", decodedText);
              const result = await registerQr(decodedText);
-             console.log("Respuesta del servidor:", result);
              
              // Procesar la respuesta
              if (result) {
-               if (result.success) {
+               if (result.status === true || result.success === true) {
                  setScanResult({
-                   success: true,
-                   message: '¡Registro Confirmado!',
-                   description: result.message || 'Bienvenido al Congreso Magno 3.0',
-                   qrContent: decodedText
+                   isSuccess: true,
+                   message: result.message || 'Entrada registrada correctamente',
+                   description: result.data?.[0] 
+                     ? `Bienvenido ${result.data[0].first_name || ''} ${result.data[0].last_name || ''}`
+                     : 'Registro exitoso',
+                   qrContent: decodedText,
+                   data: result.data
                  });
-                 console.log("Registro exitoso:", result);
                } else {
                  setScanResult({
-                   success: false,
-                   message: 'Error en el registro',
-                   description: result.message || 'No se pudo registrar el código QR.',
+                   isSuccess: false,
+                   message: result.message || 'Error al registrar entrada',
+                   description: 'No se pudo registrar la entrada',
                    qrContent: decodedText
                  });
-                 console.warn("Error en el registro:", result);
                }
              } else {
-               console.error("Respuesta del servidor vacía o inválida");
                setScanResult({
-                 success: false,
+                 isSuccess: false,
                  message: 'Error en el registro',
                  description: 'Respuesta del servidor inválida',
                  qrContent: decodedText
@@ -211,19 +218,15 @@ const usePage = () => {
              setIsLoading(false);
              setScanner(null);
            } catch (error) {
-             console.error("Error al registrar QR:", error);
-             
-             // Mostrar error detallado
              let errorMessage = 'Error desconocido';
              if (error instanceof Error) {
                errorMessage = error.message;
-               console.error("Detalles del error:", error.stack);
              }
              
              setScanResult({
-               success: false,
-               message: 'Error en el servidor',
-               description: `No se pudo registrar el QR: ${errorMessage}`,
+               isSuccess: false,
+               message: 'Error de conexión',
+               description: 'No se pudo conectar con el servidor',
                qrContent: decodedText
              });
              
@@ -243,7 +246,6 @@ const usePage = () => {
              // Solo registrar el error si es diferente al anterior
              if (errorRef.current !== error) {
                errorRef.current = error;
-               console.log("Tipo de error:", error);
                
                // Solo mostrar errores críticos de permisos
                if (error.includes("PERMISSION") || 
@@ -251,17 +253,24 @@ const usePage = () => {
                    error.includes("NotAllowedError") ||
                    error.includes("NotFoundError")) {
                  
-                 toast.error('Error de permisos', {
-                   description: 'Por favor, habilita la cámara para continuar',
+                 // Mostrar mensaje amigable al usuario
+                 toast.error('Permiso de cámara requerido', {
+                   description: 'Por favor, permite el acceso a la cámara para escanear códigos QR',
                    duration: 5000
                  });
                  
-                 // Detener el escáner en caso de error crítico
-                 html5QrCode.stop().then(() => {
+                 // Detener el escáner de forma segura
+                 safeStopScanner(html5QrCode).then(() => {
                    setIsScanning(false);
+                   setIsLoading(false);
+                   setScanner(null);
                  }).catch(() => {
                    setIsScanning(false);
+                   setIsLoading(false);
+                   setScanner(null);
                  });
+                 
+                 return;
                }
              }
              
@@ -270,15 +279,16 @@ const usePage = () => {
              
              // Si hay demasiados errores, reiniciar el escáner
              if (errorCountRef.current > 100) {
-               console.log("Demasiados errores, reiniciando escáner...");
                errorCountRef.current = 0;
                
-               html5QrCode.stop().then(() => {
+               safeStopScanner(html5QrCode).then(() => {
                  setTimeout(() => {
                    startScanning();
                  }, 1000);
                }).catch(() => {
                  setIsScanning(false);
+                 setIsLoading(false);
+                 setScanner(null);
                });
              }
            }
@@ -292,25 +302,43 @@ const usePage = () => {
          // Desactivar el loader después de iniciar correctamente
          setIsLoading(false);
        }).catch(err => {
-         console.error("Error al iniciar la cámara:", err);
-         toast.error('Error de cámara', {
-           description: 'Verifica los permisos de la cámara',
+         // Manejar errores de inicio de cámara de forma más amigable
+         let errorMessage = '';
+         
+         // Verificar si es un error de permisos
+         if (err && typeof err === 'object' && 'name' in err) {
+           const errorName = String(err.name || '');
+           
+           if (errorName.includes('NotAllowedError') || 
+               errorName.includes('PermissionDenied') || 
+               errorName.includes('Permission')) {
+             
+             errorMessage = 'Necesitamos acceso a la cámara para escanear códigos QR';
+           } else {
+             errorMessage = 'Verifica los permisos de la cámara';
+           }
+         } else {
+           errorMessage = 'No se pudo iniciar la cámara';
+         }
+         
+         toast.error('Acceso a cámara requerido', {
+           description: errorMessage,
            duration: 3000
          });
+         
          setIsScanning(false);
-         setIsLoading(false); // Desactivar loader en caso de error
-         setScanner(null); // Limpiar la referencia al escáner en caso de error
+         setIsLoading(false);
+         setScanner(null);
        });
        
      } catch (err) {
-       console.error("Error general:", err);
        toast.error('Error al iniciar', {
          description: 'No se pudo iniciar el escáner',
          duration: 3000
        });
        setIsScanning(false);
-       setIsLoading(false); // Desactivar loader en caso de error
-       setScanner(null); // Limpiar la referencia al escáner en caso de error
+       setIsLoading(false);
+       setScanner(null);
      }
    };
  
@@ -319,8 +347,28 @@ const usePage = () => {
        try {
          setIsLoading(true);
          
-         // Usar el método seguro para detener el escáner
-         await safeStopScanner(scanner);
+         // Verificar si el escáner está activo antes de intentar detenerlo
+         if (isActiveScannerRef.current) {
+           try {
+             // Primero intentamos pausar el escáner
+             try {
+               scanner.pause(true);
+               await new Promise(resolve => setTimeout(resolve, 200));
+             } catch (pauseError) {
+               // Continuar con la detención aunque falle la pausa
+             }
+             
+             // Luego intentamos detenerlo con un manejo de errores mejorado
+             await scanner.stop().catch(stopError => {
+               // No propagar este error
+             });
+           } catch (e) {
+             // No propagar este error
+           }
+         }
+         
+         // Marcar como inactivo independientemente del resultado
+         isActiveScannerRef.current = false;
          
          // Actualizar estados después de un breve retraso
          setTimeout(() => {
@@ -328,19 +376,24 @@ const usePage = () => {
            setIsScanning(false);
            setIsLoading(false);
            
-           // Limpiar el elemento DOM del lector
-           const readerElement = document.getElementById("reader");
-           if (readerElement) {
-             readerElement.innerHTML = '';
+           // Limpiar el elemento DOM del lector de manera segura
+           try {
+             const readerElement = document.getElementById("reader");
+             if (readerElement) {
+               readerElement.innerHTML = '';
+             }
+           } catch (domError) {
+             // No crítico
            }
          }, 500);
        } catch (err) {
-         console.error("Error al detener el escáner:", err);
-         setIsLoading(false); // Desactivar loader en caso de error
+         // Asegurarnos de que los estados se actualicen incluso en caso de error
+         setIsLoading(false);
          setScanner(null);
          setIsScanning(false);
        }
      } else {
+       // Si no hay escáner activo, simplemente actualizamos los estados
        setIsScanning(false);
        setIsLoading(false);
      }
@@ -365,7 +418,9 @@ const usePage = () => {
              readerElement.innerHTML = '';
            }
          })
-         .catch(console.error);
+         .catch(() => {
+           // Manejar error silenciosamente
+         });
      } else {
        // Limpiar el elemento DOM del lector
        const readerElement = document.getElementById("reader");
@@ -382,14 +437,14 @@ const usePage = () => {
    return {
      isScanning,
      isLoading,
-     isRegistering, // Exponemos el nuevo estado
+     isRegistering,
      scanResult,
      qrData,
      startScanning,
      stopScanning,
      resetScan,
      setIsScanning,
-     errorCount: errorCountRef.current // Exponer contador para debugging
+     errorCount: errorCountRef.current
    }
 };
 

@@ -107,8 +107,15 @@ export const handleAxiosError = (error: unknown) => {
 
 export const registerQr = async (id: string) => {
     try {
+        // Token JWT fijo para autenticación
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIzNDU2NzEsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQyNjY1NDM5LCJleHAiOjE3NDI3NTE4Mzl9.3PHmqAR2CcdZIwMhHU6kzDmoYUfv_wCrayrui4MEz_4";
+        
         // Usa la ruta relativa ya que baseURL ya está configurado
-        const response = await axiosInstance.post('/assistants/register-entry/',{ id });
+        const response = await axiosInstance.patch(`/assistants/register-entry/${id}`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         // Usa la función de manejo de errores existente
