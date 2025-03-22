@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useLogin } from "./usePage";
 
 // Importaciones de Lucide React
@@ -13,14 +12,15 @@ import bg_login from "../../public/img/bg-login.jpg";
 import load from "../../public/img/loading.svg";
 
 const PageLogin = () => {
-  const router = useRouter();
+
   const {
     register,
     onSubmit,
     isLoading,
     errors,
     showPassword,
-    togglePasswordVisibility,
+    togglePasswordVisibility, 
+    router
   } = useLogin();
 
   return (

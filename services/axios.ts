@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { secureStorage } from './encryption';
 
 // Extendemos la configuración de Axios para incluir _retry
 interface ExtendedAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -7,23 +8,28 @@ interface ExtendedAxiosRequestConfig extends InternalAxiosRequestConfig {
 
 // Creamos una instancia de axios con la configuración base
 const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api',
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
     },
-    timeout: 10000, // 10 segundos
+    withCredentials: true,
 });
 
 // Interceptor para las peticiones
 axiosInstance.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-        // Obtenemos el token del localStorage
-        const token = localStorage.getItem('token');
+        // Obtenemos el token del localStorage de forma segura
+        const token = secureStorage.getItem('token');
         
         // Si existe un token, lo añadimos a los headers
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
+
+        // Aseguramos que los headers CORS estén presentes
+        config.headers['Access-Control-Allow-Origin'] = process.env.NEXT_PUBLIC_API_URL;
+        config.headers['Access-Control-Allow-Credentials'] = 'true';
         
         return config;
     },
@@ -50,15 +56,15 @@ axiosInstance.interceptors.response.use(
 
             try {
                 // Intentamos renovar el token
-                const refreshToken = localStorage.getItem('refreshToken');
+                const refreshToken = secureStorage.getItem('refreshToken');
                 const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
                     refreshToken
                 });
 
                 const { token } = response.data;
 
-                // Guardamos el nuevo token
-                localStorage.setItem('token', token);
+                // Guardamos el nuevo token de forma segura
+                secureStorage.setItem('token', token);
 
                 // Actualizamos el header con el nuevo token
                 if (originalRequest.headers) {
@@ -69,8 +75,8 @@ axiosInstance.interceptors.response.use(
                 return axiosInstance(originalRequest);
             } catch (refreshError) {
                 // Si falla la renovación del token, redirigimos al login
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
+                secureStorage.removeItem('token');
+                secureStorage.removeItem('refreshToken');
                 window.location.href = '/login';
                 return Promise.reject(refreshError);
             }
