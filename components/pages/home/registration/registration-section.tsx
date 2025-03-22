@@ -182,7 +182,7 @@ export default function RegistrationSection() {
               </svg>
             </button>
 
-            <Register />
+            <Register closeModalAction={() => setIsModalOpen(false)} />
           </div>
         </div>
       )}

@@ -23,7 +23,7 @@ const InputField: React.FC<InputFieldProps> = ({
                     onChange={onChange}
                     autoComplete="off"
                     className={`absolute top-0 bg-white text-black left-0 w-full h-full outline-none rounded-[5px] pl-10 pr-3 
-                        border ${errors?.[name] ? 'border-red-500' : 'border-gray-300'}`}
+                        border ${errors && errors[name] ? 'border-red-500' : 'border-gray-300'}`}
                 />
                 {childrenIcon && (
                     <div className="absolute top-0 left-0 w-10 h-full flex items-center justify-center text-gray-400">
