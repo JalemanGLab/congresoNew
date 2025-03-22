@@ -1,79 +1,96 @@
 import axiosInstance from './axios';
-import { secureStorage } from './encryption';
-import { handleAxiosError } from './axios';
+// import { secureStorage } from './encryption'; // Ya no necesitamos la encriptación
 
-// Interfaces
+export interface User {
+    id: string;
+    email: string;
+    name?: string;
+    first_name?: string;
+    last_name?: string;
+    role: string;
+}
+
 export interface LoginCredentials {
     email: string;
     password: string;
 }
 
 export interface AuthResponse {
-    token: string;
-    refreshToken: string;
-    user: {
-        id: string;
-        email: string;
-        name: string;
-        role: string;
+    status: boolean;
+    message: string;
+    data: {
+        token: string;
+        user: User;
     };
 }
 
 export interface AuthError {
     message: string;
-    status: number;
+    error: string;
+    statusCode: number;
 }
 
-// Servicio de autenticación
 export const authService = {
     login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
         try {
-            // Aseguramos que la URL sea correcta
-            const response = await axiosInstance.post('auth/login', credentials);
+            const response = await axiosInstance.post<AuthResponse>('auth/login', credentials);
             
-            if (response.data.token) {
-                // Guardamos los tokens de forma segura
-                secureStorage.setItem('token', response.data.token);
-                secureStorage.setItem('refreshToken', response.data.refreshToken);
-                secureStorage.setItem('user', JSON.stringify(response.data.user));
+            if (response.data.status && response.data.data) {
+                localStorage.setItem('token', response.data.data.token);
+                
+                if (response.data.data.user) {
+                    localStorage.setItem('user', JSON.stringify(response.data.data.user));
+                }
+                return response.data;
+            } else {
+                throw new Error('Formato de respuesta inválido');
             }
-            
-            return response.data;
-        } catch (error) {
-            console.error('Error en login:', error);
-            const axiosError = handleAxiosError(error);
+        } catch (error: any) {
+            // Si es un error de Axios con respuesta del servidor
+            if (error.response) {
+                const errorData = error.response.data;
+                throw {
+                    message: errorData.message || 'Error de autenticación',
+                    error: errorData.error || 'Error desconocido',
+                    statusCode: error.response.status
+                };
+            }
+            // Si es un error de red
+            if (error.request) {
+                throw {
+                    message: 'No se pudo conectar con el servidor',
+                    error: 'NetworkError',
+                    statusCode: 0
+                };
+            }
+            // Cualquier otro tipo de error
             throw {
-                message: axiosError.message,
-                status: axiosError.status
+                message: error.message || 'Error inesperado',
+                error: 'UnknownError',
+                statusCode: 500
             };
         }
     },
 
-    logout: async () => {
-        try {
-            // Llamamos al endpoint de logout
-            await axiosInstance.post('auth/logout');
-        } catch (error) {
-            console.error('Error al cerrar sesión en el servidor:', error);
-        } finally {
-            // Siempre limpiamos el almacenamiento local y redirigimos
-            secureStorage.removeItem('token');
-            secureStorage.removeItem('refreshToken');
-            secureStorage.removeItem('user');
-            window.location.href = '/login';
-        }
+    logout: () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
     },
 
     isAuthenticated: (): boolean => {
-        return !!secureStorage.getItem('token');
+        const token = localStorage.getItem('token');
+        const user = localStorage.getItem('user');
+        return !!(token && user);
     },
 
-    getCurrentUser: () => {
-        const userStr = secureStorage.getItem('user');
-        if (!userStr) return null;
+    getCurrentUser: (): User | null => {
         try {
+            const userStr = localStorage.getItem('user');
+            if (!userStr) return null;
             return JSON.parse(userStr);
-        } catch {
+        } catch (error) {
+            console.error('Error al obtener datos del usuario:', error);
             return null;
         }
     }

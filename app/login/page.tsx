@@ -4,12 +4,14 @@ import Image from "next/image";
 import { useLogin } from "./usePage";
 
 // Importaciones de Lucide React
-import { Mail, Lock, EyeOff, Eye, Calendar, MapPin, Clock } from "lucide-react";
+import { Mail, Lock, EyeOff, Eye, Calendar, MapPin, Clock, X } from "lucide-react";
 
 // Importaciones de imágenes
 import logo from "../../public/img/solventum-v1.png";
 import bg_login from "../../public/img/bg-login.jpg";
 import load from "../../public/img/loading.svg";
+import { Toaster } from "sonner";
+import { PasswordRecoveryForm } from "./components/PasswordRecovery/PasswordRecovery";
 
 const PageLogin = () => {
 
@@ -20,13 +22,44 @@ const PageLogin = () => {
     errors,
     showPassword,
     togglePasswordVisibility, 
-    router
+    router,
+    setViewPasswordRecovery,
+    viewPasswordRecovery
   } = useLogin();
 
   return (
+
     <div className="flex w-full h-screen">
+      <Toaster position="top-right" />
+      {
+        viewPasswordRecovery && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            {/* Overlay con efecto de desenfoque */}
+            <div 
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setViewPasswordRecovery(false)}
+            />
+            
+            {/* Modal */}
+            <div className="relative bg-white rounded-lg shadow-xl w-[90%] max-w-md p-6 z-50">
+              {/* Botón de cerrar */}
+              <button 
+                onClick={() => setViewPasswordRecovery(false)}
+                className="absolute right-10 top-10 text-gray-500 hover:text-gray-700"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex flex-col items-center">
+                
+                <PasswordRecoveryForm />
+              </div>
+            </div>
+          </div>
+        )
+      }
       {/* Panel izquierdo - Formulario */}
-      <div className="flex bg-white w-full items-center justify-center lg:w-[40%]">
+      <div className="flex  bg-white w-full items-center justify-center lg:w-[40%]">
         <div className="flex w-full max-w-[450px] flex-col items-center p-6 sm:p-6 md:p-8">
           <Image
             src={logo}
@@ -127,8 +160,8 @@ const PageLogin = () => {
 
             <button
               type="button"
-              onClick={() => router.push("/recover")}
-              className="text-xs sm:text-sm text-right cursor-pointer text-muted-foreground hover:text-foreground"
+              onClick={() => setViewPasswordRecovery(true)}
+              className="text-xs sm:text-sm text-right cursor-pointer text-neutral-400 hover:text-neutral-800"
             >
               ¿Olvidaste tu contraseña?
             </button>
@@ -151,16 +184,6 @@ const PageLogin = () => {
               )}
             </button>
 
-            <p className="text-xs sm:text-sm text-center text-muted-foreground">
-              ¿Aún no tienes una cuenta?{" "}
-              <button
-                onClick={() => router.push("/register")}
-                className="cursor-pointer font-medium"
-              >
-                Regístrate{" "}
-                <span className="text-background font-bold">aquí</span>
-              </button>
-            </p>
           </form>
         </div>
       </div>
