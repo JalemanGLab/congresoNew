@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ThumbsUp, Search, X } from "lucide-react"
 import useFaq from "./useFaq"
 import { LuCircleHelp } from "react-icons/lu";
-import { DataFAQ, popularQuestions } from "@/components/shared/data/DataFAQ";
+import { DataFAQ, popularQuestions } from "../../../shared/data/dataFAQ";
 
 
 const PageFaq = () => {
