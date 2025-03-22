@@ -15,7 +15,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['6d1f-190-60-37-74.ngrok-free.app'],
+    domains: ['c368-191-156-247-185.ngrok-free.app'],
   },
   experimental: {
     webpackBuildWorker: true,
@@ -29,7 +29,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: 'https://6d1f-190-60-37-74.ngrok-free.app',
+            value: 'https://c368-191-156-247-185.ngrok-free.app',
           },
           {
             key: 'Access-Control-Allow-Methods',

@@ -101,7 +101,23 @@ export const handleAxiosError = (error: unknown) => {
     return {
         message: 'Ocurrió un error inesperado',
         status: 500
+        
     };
 };
+
+export const registerQr = async (id: string) => {
+    try {
+        // Usa la ruta relativa ya que baseURL ya está configurado
+        const response = await axiosInstance.post('/assistants/register-entry/',{ id });
+        return response.data;
+    } catch (error) {
+        // Usa la función de manejo de errores existente
+        const errorInfo = handleAxiosError(error);
+        return {
+            success: false,
+            message: errorInfo.message
+        };
+    }
+}
 
 export default axiosInstance; 
