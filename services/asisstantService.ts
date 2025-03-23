@@ -32,3 +32,14 @@ export const registerQr = async (id: string) => {
     };
   }
 };
+
+export const getAssistants = async () => {
+    try {
+        const response = await axiosInstance.get(`/assistants`);
+        return response.data;
+    } catch (error) {
+        const errorResponse = handleAxiosError(error);
+        throw errorResponse;
+    }
+};
+
