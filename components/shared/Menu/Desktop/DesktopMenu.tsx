@@ -21,14 +21,9 @@ const DesktopMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { user } = useAuthStore();
-  // const { clearAuth } = useAuthStore();
 
   const closeSession = async () => {
     try {
-      // const { error } = await supabase.auth.signOut();
-      // if (error) throw error;
-
-      // clearAuth();
       authService.logout();
       toast.success("Sesión cerrada correctamente");
       router.push("/login");
