@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useAuthStore } from "@/store/authStore";
 
 const UserNav = () => {
@@ -15,7 +15,10 @@ const UserNav = () => {
 
   const getInitials = () => {
     if (!user?.first_name || !user?.last_name) return "AN";
-    return user.first_name.charAt(0).toUpperCase() + user.last_name.charAt(0).toUpperCase();
+    return (
+      user.first_name.charAt(0).toUpperCase() +
+      user.last_name.charAt(0).toUpperCase()
+    );
   };
 
   return (
