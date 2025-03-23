@@ -11,12 +11,14 @@ import ProductsSection from "@/components/pages/home/products/products-section"
 import FaqSection from "@/components/pages/home/faq/faq-section"
 import NewsletterSection from "@/components/pages/home/newsletter/newsletter-section"
 import Footer from "@/components/pages/home/footer/footer"
+import WhatsappButton from "@/components/whatsapp-button"
 export default function Home() {
 
   
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-[#001208] to-[#001810]">
       {/* Header/Navigation */}
+      <WhatsappButton/>
       <Header />
 
       <main className="flex-1">
