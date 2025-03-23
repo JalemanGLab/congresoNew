@@ -1,3 +1,7 @@
+"use client";
+import { useEffect } from "react";
+import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "next/navigation";
 // import solventum from "../assets/img/solventum.svg";
 import UserNav from "@/components/shared/UserNav/UserNav";
 import DesktopMenu from "@/components/shared/Menu/Desktop/DesktopMenu";
@@ -5,7 +9,11 @@ import MobileMenu from "@/components/shared/Menu/Mobile/MobileMenu";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-const PrivateLayout = ({ children }: { children: React.ReactNode }) => {
+export default function PrivateLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col w-screen h-screen">
       <div className="flex flex-row w-full h-12 px-2 items-center justify-between border-b border-neutral-200">
@@ -34,10 +42,10 @@ const PrivateLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="hidden md:flex flex-col w-20 h-full p-2">
           <DesktopMenu />
         </div>
-        <div className="flex flex-col w-full h-full p-2">{children}</div>
+        <div className="flex flex-col w-full h-full p-2">
+          {children}
+        </div>
       </div>
     </div>
   );
-};
-
-export default PrivateLayout;
+}

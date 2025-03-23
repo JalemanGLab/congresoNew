@@ -32,7 +32,6 @@ export const useLogin = () => {
     try {
       setIsLoading(true);
       const response = await authService.login(formData);
-      console.log('Respuesta del login:', response);
       
       if (response.data.user) {
         toast.success("Inicio de sesión exitoso");
