@@ -35,7 +35,11 @@ export const useLogin = () => {
       
       if (response.data.user) {
         toast.success("Inicio de sesión exitoso");
-        router.push("/dashboard");
+        if (response.data.user.role === "admin" || response.data.user.role === "superadmin") {
+          router.push("/dashboard");
+        } else {
+          router.push("/dashboard/profile");
+        }
       }
     } catch (error: any) {
       toast.error("Error al iniciar sesión", {
