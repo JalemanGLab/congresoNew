@@ -10,10 +10,10 @@ const PrivateLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col w-screen h-screen">
       <div className="flex flex-row w-full h-12 px-2 items-center justify-between border-b border-neutral-200">
         <div className="flex flex-row w-full h-full items-center gap-4">
-          <div className="flex md:hidden flex-row h-full items-center">
+          <div className="md:hidden flex flex-row h-full items-center">
             <Sheet>
               <SheetTrigger>
-                <div className="flex cursor-pointer w-8 h-8 rounded text-background  items-center justify-center">
+                <div className="flex cursor-pointer w-8 h-8 rounded text-background items-center justify-center">
                   <HiOutlineMenuAlt2 className="size-5" />
                 </div>
               </SheetTrigger>

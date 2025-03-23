@@ -270,7 +270,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
         )}
 
         {/* Sección de Mi Boleto - Solo visible para usuarios */}
-        {activeTab === "boletos" && (userRole === "usuario" || userRole === "admin") &&  (
+        {activeTab === "boletos" && (userRole === "usuario" || userRole === "admin" )&&  (
           <Card className="bg-neutral-100 border-neutral-200">
             <CardHeader>
               <CardTitle className="text-neutral-900">Mi Boleto</CardTitle>
