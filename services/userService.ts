@@ -1,4 +1,4 @@
-import axiosInstance from './axios';
+import axiosInstance from '@/services/config/axios';
 
 // Interfaces
 export interface User {
