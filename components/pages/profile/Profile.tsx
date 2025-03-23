@@ -11,6 +11,7 @@ import { CalendarDays, Clock, MapPin, Ticket, Eye, EyeOff } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 import { PerfilUsuarioProps, TabType } from "./DTOProfile"
 import useProfile from "./useProfile"
+import { Toaster } from "sonner"
 
 
 export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
@@ -24,13 +25,11 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
     gridCols,
     tabs,
     setActiveTab,
-    showCurrentPassword,
     registerPassword,
     showConfirmPassword,
     errorsPassword,
     handleSubmitInfo,
     onSubmitInfo,
-    setShowCurrentPassword,
     showNewPassword,
     setShowNewPassword,
     newPassword,
@@ -41,6 +40,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
 
   return (
     <div className="container mx-auto py-6 px-4 md:py-10">
+      <Toaster position="top-right" />
       <h1 className="text-3xl font-bold mb-8 text-neutral-900">Mi Perfil</h1>
 
       <div className="w-full mb-8">
@@ -65,7 +65,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
         {/* Sección de Información Personal */}
         {activeTab === "informacion" && (
           <Card className="bg-neutral-100 border-neutral-200">
-            <form onSubmit={handleSubmitInfo(onSubmitInfo)}>
+            <form>
               <CardHeader>
                 <CardTitle className="text-neutral-900">Información Personal</CardTitle>
                 <CardDescription className="text-neutral-600">
@@ -81,6 +81,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                           Identificación
                         </Label>
                         <input
+                          disabled
                           id="identification"
                           className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsInfo.identification ? "border-red-500" : ""}`}
                           {...registerInfo("identification", { required: "La identificación es obligatoria" })}
@@ -93,6 +94,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                           Nombre
                         </Label>
                         <input
+                          disabled
                           id="first_name"
                           className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsInfo.first_name ? "border-red-500" : ""}`}
                           {...registerInfo("first_name", { required: "El nombre es obligatorio" })}
@@ -105,6 +107,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                           Apellido
                         </Label>
                         <input
+                          disabled
                           id="last_name"
                           className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsInfo.last_name ? "border-red-500" : ""}`}
                           {...registerInfo("last_name", { required: "El apellido es obligatorio" })}
@@ -117,6 +120,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                           Teléfono
                         </Label>
                         <input
+                          disabled
                           id="phone"
                           className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsInfo.phone ? "border-red-500" : ""}`}
                           {...registerInfo("phone", { required: "El teléfono es obligatorio" })}
@@ -129,6 +133,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                           Correo electrónico
                         </Label>
                         <input
+                          disabled
                           id="email"
                           type="email"
                           className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsInfo.email ? "border-red-500" : ""}`}
@@ -159,11 +164,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="flex justify-end">
-                <Button type="submit" className="bg-neutral-800 hover:bg-neutral-600 text-neutral-50">
-                  Guardar cambios
-                </Button>
-              </CardFooter>
+             
             </form>
           </Card>
         )}
@@ -180,31 +181,6 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
               </CardHeader>
               <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-3">
-                  <Label htmlFor="currentPassword" className="text-neutral-700">
-                    Contraseña actual
-                  </Label>
-                  <div className="relative">
-                    <input
-                      id="currentPassword"
-                      type={showCurrentPassword ? "text" : "password"}
-                      className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsPassword.currentPassword ? "border-red-500" : ""}`}
-                      {...registerPassword("currentPassword", {
-                        required: "La contraseña actual es obligatoria",
-                      })}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
-                    >
-                      {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </div>
-                  {errorsPassword.currentPassword && (
-                    <p className="text-red-500 text-sm mt-1">{errorsPassword.currentPassword.message}</p>
-                  )}
-                </div>
-                <div className="flex flex-col gap-3">
                   <Label htmlFor="newPassword" className="text-neutral-700">
                     Nueva contraseña
                   </Label>
@@ -212,12 +188,19 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                     <input
                       id="newPassword"
                       type={showNewPassword ? "text" : "password"}
-                      className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsPassword.newPassword ? "border-red-500" : ""}`}
+                      className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${
+                        errorsPassword.newPassword ? "border-red-500" : ""
+                      }`}
                       {...registerPassword("newPassword", {
                         required: "La nueva contraseña es obligatoria",
                         minLength: {
-                          value: 8,
-                          message: "La contraseña debe tener al menos 8 caracteres",
+                          value: 6,
+                          message: "La contraseña debe tener al menos 6 caracteres",
+                        },
+                        pattern: {
+                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                          message:
+                            "La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial",
                         },
                       })}
                     />
@@ -233,6 +216,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                     <p className="text-red-500 text-sm mt-1">{errorsPassword.newPassword.message}</p>
                   )}
                 </div>
+
                 <div className="flex flex-col gap-3">
                   <Label htmlFor="confirmPassword" className="text-neutral-700">
                     Confirmar nueva contraseña
@@ -241,10 +225,13 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                     <input
                       id="confirmPassword"
                       type={showConfirmPassword ? "text" : "password"}
-                      className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${errorsPassword.confirmPassword ? "border-red-500" : ""}`}
+                      className={`w-full rounded-md h-10 border-[1px] pl-3 text-neutral-600 border-neutral-300 outline-none bg-neutral-50 ${
+                        errorsPassword.confirmPassword ? "border-red-500" : ""
+                      }`}
                       {...registerPassword("confirmPassword", {
                         required: "Debes confirmar la contraseña",
-                        validate: (value) => value === newPassword || "Las contraseñas no coinciden",
+                        validate: (value) =>
+                          value === newPassword || "Las contraseñas no coinciden",
                       })}
                     />
                     <button
@@ -256,7 +243,9 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                     </button>
                   </div>
                   {errorsPassword.confirmPassword && (
-                    <p className="text-red-500 text-sm mt-1">{errorsPassword.confirmPassword.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errorsPassword.confirmPassword.message}
+                    </p>
                   )}
                 </div>
               </CardContent>
@@ -270,7 +259,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
         )}
 
         {/* Sección de Mi Boleto - Solo visible para usuarios */}
-        {activeTab === "boletos" && (userRole === "usuario" || userRole === "admin" )&&  (
+        {activeTab === "boletos" && (userRole === "assistant" || userRole === "admin" )&&  (
           <Card className="bg-neutral-100 border-neutral-200">
             <CardHeader>
               <CardTitle className="text-neutral-900">Mi Boleto</CardTitle>

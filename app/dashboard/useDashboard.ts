@@ -2,6 +2,7 @@
 import { IdentificationCell , FullNameCell, DistributorCell, RegistrationDateCell, PaymentStatusCell, EntryStatusCell, PaymentDateCell } from "@/components/pages/dashboard/templates/cellTemplates";
 import { getAssistants } from "@/services/asisstantService";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const useDashboard = () => {
 
@@ -52,9 +53,8 @@ const useDashboard = () => {
         try {
             const response = await getAssistants();
             setAssistants(response.data);
-            console.log(response);
-        } catch (error) {
-            console.error("Error al obtener asistentes:", error);
+        } catch (error:any) {
+            toast.error("Error al obtener asistentes:", error);
             return [];
         }
     }

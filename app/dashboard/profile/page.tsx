@@ -4,7 +4,7 @@ import useProfile from "./useProfile";
 
 export default function ProfilePage() {
   const { rol } = useProfile();
-  console.log(rol)
+
   if (!rol) {
     return <div>Cargando...</div>;
   }
