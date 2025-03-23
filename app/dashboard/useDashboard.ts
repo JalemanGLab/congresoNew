@@ -1,27 +1,25 @@
 'use client'
-import { DocumentNumberCell, NameCell, DistributorCell, DateCell, StatusCell, PaymentStatusCell } from "@/components/pages/dashboard/templates/cellTemplates";
-import { useEffect } from "react";
-import { useAuthStore } from '@/store/authStore';
+import { IdentificationCell , FullNameCell, DistributorCell, RegistrationDateCell, PaymentStatusCell, EntryStatusCell, PaymentDateCell } from "@/components/pages/dashboard/templates/cellTemplates";
+import { getAssistants } from "@/services/asisstantService";
+import { useEffect, useState } from "react";
 
 const useDashboard = () => {
-    const user = useAuthStore((state) => state.user);
-    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+    const [assistants, setAssistants] = useState<any>([]);
     useEffect(() => {
-        console.log(user);
-        console.log(isAuthenticated);
-    }, [user, isAuthenticated]);
+        getAssistantsData();
+    }, []);
 
     const columns = [
         {
             header: "# Documento",
             accessor: "documentNumber",
-            cell: DocumentNumberCell,
+            cell: IdentificationCell,
         },
         {
             header: "Nombre",
             accessor: "name",
-            cell: NameCell,
+            cell: FullNameCell,
         },
         {
             header: "Distribuidor",
@@ -29,9 +27,14 @@ const useDashboard = () => {
             cell: DistributorCell,
         },
         {
-            header: "Estado",
+            header: "Fecha de Registro",
+            accessor: "date",
+            cell: RegistrationDateCell,
+        },
+        {
+            header: "Estado de Ingreso",
             accessor: "status",
-            cell: StatusCell,
+            cell: EntryStatusCell,
         },
         {
             header: "Estado de Pago",
@@ -39,9 +42,9 @@ const useDashboard = () => {
             cell: PaymentStatusCell,
         },
         {
-            header: "Fecha",
-            accessor: "date",
-            cell: DateCell,
+            header: "Fecha de Pago",
+            accessor: "paymentDate",
+            cell: PaymentDateCell,
         },
     ];
 
@@ -207,10 +210,24 @@ const useDashboard = () => {
             "paymentStatus": "pendiente"
         }
     ]
+    
+    const getAssistantsData = async (): Promise<any> => {
+        try {
+            const response = await getAssistants();
+            setAssistants(response.data);
+            console.log(response);
+        } catch (error) {
+            console.error("Error al obtener asistentes:", error);
+            return [];
+        }
+    }
+
+    
 
     return {
         columns,
-        data
+        data,
+        assistants
     };
 };
 

@@ -7,7 +7,8 @@ import TableGlobal from "@/components/shared/TableData/TableGlobal";
 const PageDashboard = () => {
 	const {
 		columns,
-		data
+		data,
+		assistants
 	} = useDashboard();
 
 
@@ -20,7 +21,7 @@ const PageDashboard = () => {
 			</div> */}
 			<TableGlobal
 				columns={columns}
-				data={data}
+				data={assistants}
 				itemsPerPage={6}
 				filters={{
 					all: true,

@@ -3,35 +3,39 @@
 import React from "react";
 import { format } from "@formkit/tempo";
 
-// Definición de tipos
+// Definición de tipos actualizada según los datos reales
 export interface DTOPayment {
-  documentNumber: number;
-  name: string;
+  identification: number;
+  first_name: string;
+  last_name: string;
   distributor: string;
-  date: string;
-  status: string;
-  paymentStatus: string;
+  entry: boolean | null;
+  payment: string | null;
+  payment_update: string | null;
+  // Otros campos que podrían ser necesarios
+  created_at: string;
 }
 
 // Función auxiliar para formatear fechas en español
-const formatDate = (dateString: string) => {
+const formatDate = (dateString: string | null) => {
+  if (!dateString) return "No disponible";
   return format(dateString, { date: 'long' }, 'es');
 };
 
 // Componentes de celda para la tabla de pagos
 // ==========================================
 
-// Celda para mostrar el número de documento
-export const DocumentNumberCell = (row: DTOPayment): React.ReactNode => (
+// Celda para mostrar el número de identificación
+export const IdentificationCell = (row: DTOPayment): React.ReactNode => (
   <div className="font-medium text-[14px] text-neutral-600">
-    {row.documentNumber}
+    {row.identification}
   </div>
 );
 
-// Celda para mostrar el nombre
-export const NameCell = (row: DTOPayment): React.ReactNode => (
+// Celda para mostrar el nombre completo
+export const FullNameCell = (row: DTOPayment): React.ReactNode => (
   <div className="font-medium text-[14px] text-neutral-600">
-    {row.name}
+    {`${row.first_name} ${row.last_name}`}
   </div>
 );
 
@@ -42,40 +46,43 @@ export const DistributorCell = (row: DTOPayment): React.ReactNode => (
   </div>
 );
 
-// Celda para mostrar la fecha formateada
-export const DateCell = (row: DTOPayment): React.ReactNode => (
+// Celda para mostrar la fecha de registro
+export const RegistrationDateCell = (row: DTOPayment): React.ReactNode => (
   <div className="font-medium text-[14px] text-neutral-600">
-    {formatDate(row.date)}
+    {formatDate(row.created_at)}
   </div>
 );
 
-// Celda para mostrar el estado con diferentes estilos según el valor
-export const StatusCell = (row: DTOPayment): React.ReactNode => (
+// Celda para mostrar el estado de entrada
+export const EntryStatusCell = (row: DTOPayment): React.ReactNode => (
   <span
     className={`px-2 py-1 rounded-full text-sm ${
-      row.status === "registrado"
-        ? "bg-neutral-200 text-neutral-700"  // Estilo para estado registrado
-        : row.status === "ingreso"
-        ? "bg-green-100 text-green-800"      // Estilo para estado ingreso
-        : "bg-yellow-100 text-yellow-800"    // Estilo para otros estados
+      row.entry === null || row.entry === false
+        ? "bg-neutral-200 text-neutral-700"  // Estilo para "registrado"
+        : "bg-green-100 text-green-800"      // Estilo para "ingresado"
     }`}
   >
-    {row.status}
+    {row.entry === null || row.entry === false ? "Registrado" : "Ingresado"}
   </span>
 );
 
-// Celda para mostrar el estado de pago con diferentes estilos según el valor
+// Celda para mostrar el estado de pago
 export const PaymentStatusCell = (row: DTOPayment): React.ReactNode => (
   <span
     className={`px-2 py-1 rounded-full text-sm ${
-      row.paymentStatus === "pendiente"
-        ? "bg-red-200 text-red-700"          // Estilo para estado pendiente
-        : row.paymentStatus === "pagado"
-        ? "bg-green-100 text-green-800"      // Estilo para estado pagado
-        : null
+      row.payment === null
+        ? "bg-red-200 text-red-700"          // Estilo para "pendiente"
+        : "bg-green-100 text-green-800"      // Estilo para "pagado"
     }`}
   >
-    {row.paymentStatus}
+    {row.payment === null ? "Pendiente" : "Pagado"}
   </span>
+);
+
+// Celda para mostrar la fecha de pago
+export const PaymentDateCell = (row: DTOPayment): React.ReactNode => (
+  <div className="font-medium text-[14px] text-neutral-600">
+    {row.payment_update ? formatDate(row.payment_update) : "No disponible"}
+  </div>
 );
 
