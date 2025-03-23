@@ -1,8 +1,14 @@
+'use client'
 import { DocumentNumberCell, NameCell, DistributorCell, DateCell, StatusCell, PaymentStatusCell } from "@/components/pages/dashboard/templates/cellTemplates";
-
+import { authService } from "@/services/authService";
+import { useEffect } from "react";
 
 
 const useDashboard = () => {
+
+    useEffect(()=>{
+        console.log(authService.getCurrentUser())
+    },[])
 
 
     const columns = [
