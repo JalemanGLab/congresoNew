@@ -1,15 +1,16 @@
 'use client'
 import { DocumentNumberCell, NameCell, DistributorCell, DateCell, StatusCell, PaymentStatusCell } from "@/components/pages/dashboard/templates/cellTemplates";
-import { authService } from "@/services/authService";
 import { useEffect } from "react";
-
+import { useAuthStore } from '@/store/authStore';
 
 const useDashboard = () => {
+    const user = useAuthStore((state) => state.user);
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-    useEffect(()=>{
-        console.log(authService.getCurrentUser())
-    },[])
-
+    useEffect(() => {
+        console.log(user);
+        console.log(isAuthenticated);
+    }, [user, isAuthenticated]);
 
     const columns = [
         {
@@ -206,7 +207,6 @@ const useDashboard = () => {
             "paymentStatus": "pendiente"
         }
     ]
-
 
     return {
         columns,

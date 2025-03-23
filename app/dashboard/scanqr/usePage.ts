@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Html5Qrcode } from 'html5-qrcode'
 import { toast } from 'sonner'
 // Importamos el servicio que hemos creado
-import { registerQr } from '../../../services/axios';
+import { registerQr } from '@/services/asisstantService';
 
 
 const usePage = () => {
