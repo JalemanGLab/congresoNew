@@ -7,7 +7,6 @@ import TableGlobal from "@/components/shared/TableData/TableGlobal";
 const PageDashboard = () => {
 	const {
 		columns,
-		data,
 		assistants
 	} = useDashboard();
 
