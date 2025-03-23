@@ -26,7 +26,6 @@ export function PasswordRecoveryForm() {
 
     try {
       const response = await recoveryService.sendRecoveryCode(email);
-      console.log('Respuesta del servidor:', response);
       setResponseStatus(response.status);
       
       if (response.status === 201) {
@@ -36,7 +35,6 @@ export function PasswordRecoveryForm() {
         toast.error(response.message || 'Error al enviar el código');
       }
     } catch (error: any) {
-      console.error('Error completo:', error);
       toast.error(error.message || 'Error al enviar el código');
       setResponseStatus(error.response?.status || 400);
     } finally {
@@ -61,7 +59,6 @@ export function PasswordRecoveryForm() {
         toast.error(response.message || 'Código inválido');
       }
     } catch (error: any) {
-      console.error('Error:', error);
       toast.error(error.message || 'Error al verificar el código');
       setResponseStatus(error.response?.status || 400);
     } finally {
@@ -83,7 +80,7 @@ export function PasswordRecoveryForm() {
         toast.error(response.message || 'Error al actualizar la contraseña');
       }
     } catch (error: any) {
-      console.error('Error:', error);
+
       toast.error(error.message || 'Error al actualizar la contraseña');
     } finally {
       setIsSubmitting(false)

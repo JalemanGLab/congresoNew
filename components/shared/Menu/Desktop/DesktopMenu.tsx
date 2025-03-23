@@ -12,6 +12,7 @@ import {
 } from "react-icons/hi2";
 import { toast } from "sonner";
 import { useRouter, usePathname } from "next/navigation";
+import { authService } from "@/services/authService";
 // import { supabase } from "@/lib/supabase";
 // import { useAuthStore } from "@/store/useAuthStore";
 
@@ -26,10 +27,10 @@ const DesktopMenu = () => {
       // if (error) throw error;
 
       // clearAuth();
+      authService.logout()
       toast.success("Sesión cerrada correctamente");
       router.push("/login");
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
       toast.error("Error al cerrar sesión");
     }
   };

@@ -18,7 +18,7 @@ export default function PrivateLayout({
     <div className="flex flex-col w-screen h-screen">
       <div className="flex flex-row w-full h-12 px-2 items-center justify-between border-b border-neutral-200">
         <div className="flex flex-row w-full h-full items-center gap-4">
-          <div className="flex md:hidden flex-row h-full items-center">
+          {/* <div className="md:hidden flex flex-row h-full items-center">
             <Sheet>
               <SheetTrigger>
                 <div className="flex cursor-pointer w-8 h-8 rounded text-background items-center justify-center">
@@ -29,8 +29,8 @@ export default function PrivateLayout({
                 <MobileMenu />
               </SheetContent>
             </Sheet>
-          </div>
-          <div className="hidden md:flex items-center text-background h-full py-1">
+          </div> */}
+          <div className="flex items-center text-background h-full py-1">
             {/* <img src={solventum} alt="solventum" className="h-full" /> */}
             LOGO
           </div>

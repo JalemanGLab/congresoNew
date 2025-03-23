@@ -15,14 +15,13 @@ export interface PersonalInfoForm {
 }
 
 export interface PasswordChangeForm {
-    currentPassword: string
     newPassword: string
     confirmPassword: string
 }
 
 export type TabType = "informacion" | "contrasena" | "boletos"
 
-type UserRole = "usuario" | "admin" | "superadmin"
+type UserRole = "assistant" | "admin" | "superadmin"
 
 export interface PerfilUsuarioProps {
     userRole: UserRole
