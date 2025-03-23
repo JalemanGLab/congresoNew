@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User, LoginCredentials, AuthResponse } from '@/services/authService';
 import axiosInstance from '@/services/config/axios';
+import { toast } from 'sonner';
 
 interface AuthState {
   user: User | null;
@@ -59,8 +60,8 @@ export const useAuthStore = create<AuthState>()(
       logout: async () => {
         try {
           await axiosInstance.post('auth/logout');
-        } catch (error) {
-          console.error('Error en logout:', error);
+        } catch (error:any) {
+          toast.error(error.message)
         } finally {
           set({ user: null, token: null, isAuthenticated: false });
           delete axiosInstance.defaults.headers.common['Authorization'];

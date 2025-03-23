@@ -1,28 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { PasswordChangeForm, PerfilUsuarioProps, PersonalInfoForm, TabType } from "./DTOProfile"
 import { toast } from "sonner"
-
+import { AuthResponse, authService } from "@/services/authService"
 
 const useProfile = ({userRole}:PerfilUsuarioProps) => {
-
     const [activeTab, setActiveTab] = useState<TabType>("informacion")
-    const [usuario] = useState({
-        identification: "123456789",
-        first_name: "Carlos",
-        last_name: "Rodríguez",
-        phone: "+52 55 1234 5678",
-        email: "carlos@ejemplo.com",
-        password: "",
-        role: userRole,
-        token: "",
-        otp: "",
-        otp_expired: false,
-        created_at: new Date().toISOString(),
-        is_active: true
-    })
-
-    const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+    const [data, setData] = useState<any>()
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
@@ -31,22 +15,24 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
         register: registerInfo,
         handleSubmit: handleSubmitInfo,
         formState: { errors: errorsInfo },
-    } = useForm<PersonalInfoForm>({
-        defaultValues: {
-            identification: usuario.identification,
-            first_name: usuario.first_name,
-            last_name: usuario.last_name,
-            phone: usuario.phone,
-            email: usuario.email,
-            password: usuario.password,
-            role: usuario.role,
-            token: usuario.token,
-            otp: usuario.otp,
-            otp_expired: usuario.otp_expired,
-            created_at: usuario.created_at,
-            is_active: usuario.is_active
-        },
-    })
+        setValue
+    } = useForm<PersonalInfoForm>()
+
+    useEffect(()=> {
+        const getData = async ()  => {
+            const data = await authService.getCurrentUser()
+            setData(data)
+            if (data) {
+                setValue('email', data.email || '')
+                setValue('first_name', data.first_name || '')
+                setValue('last_name', data.last_name || '')
+                setValue('identification', data.identification || '')
+                setValue('phone', data.phone || '')
+                setValue('role', data.role || '')
+            }
+        }
+        getData()
+    },[])
 
     // Formulario de cambio de contraseña
     const {
@@ -54,6 +40,7 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
         handleSubmit: handleSubmitPassword,
         formState: { errors: errorsPassword },
         watch,
+        reset: resetPassword
     } = useForm<PasswordChangeForm>()
 
     // Para validar que las contraseñas coincidan
@@ -61,17 +48,29 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
 
     // Manejadores de envío de formularios
     const onSubmitInfo = (data: PersonalInfoForm) => {
-        console.log("Información personal actualizada:", data)
         toast.success("Información actualizada", {
             description: "Tu información personal ha sido actualizada correctamente."
         })
     }
 
-    const onSubmitPassword = (data: PasswordChangeForm) => {
-        console.log("Contraseña actualizada:", data)
-        toast.success("Contraseña actualizada", {
-            description: "Tu contraseña ha sido actualizada correctamente."
-        })
+    const onSubmitPassword = async (data: PasswordChangeForm) => {
+        try {
+            const response = await authService.changePassword(data.newPassword)
+            if (response.status) {
+                toast.success("Contraseña actualizada", {
+                    description: "Tu contraseña ha sido actualizada correctamente."
+                })
+                resetPassword()
+            } else {
+                toast.error("Error al actualizar contraseña", {
+                    description: response.message
+                })
+            }
+        } catch (error: any) {
+            toast.error("Error", {
+                description: error.message || "Error al actualizar la contraseña"
+            })
+        }
     }
 
     const [boletos] = useState([
@@ -98,7 +97,7 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
             },
         ]
 
-        if (userRole === "usuario" || userRole === "admin" ) {
+        if (userRole === "assistant" || userRole === "admin" ) {
             tabs.push({
                 id: "boletos",
                 label: "Mi Boleto",
@@ -111,10 +110,6 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
     const tabs = getTabs()
     const gridCols = tabs.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"
 
-
-
-
-
     return {
         registerInfo, 
         errorsInfo,
@@ -124,20 +119,17 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
         gridCols,
         tabs,
         setActiveTab,
-        showCurrentPassword,
         registerPassword,
         showConfirmPassword,
         errorsPassword,
         handleSubmitInfo,
         onSubmitInfo,
-        setShowCurrentPassword,
         showNewPassword,
         setShowNewPassword,
         newPassword,
         setShowConfirmPassword,
         boletos
     }
-
 }
 
 export default useProfile;

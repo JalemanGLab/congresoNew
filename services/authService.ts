@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/store/authStore';
+import axiosInstance from './config/axios';
 
 export interface User {
   id: string;
@@ -31,6 +32,12 @@ export interface AuthError {
   statusCode: number;
 }
 
+export interface ChangePasswordResponse {
+  status: boolean;
+  message: string;
+  statusCode: number;
+}
+
 export const authService = {
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
     return useAuthStore.getState().login(credentials);
@@ -50,5 +57,21 @@ export const authService = {
 
   getToken: (): string | null => {
     return useAuthStore.getState().token;
+  },
+
+  changePassword: async (newPassword: string): Promise<ChangePasswordResponse> => {
+    try {
+      const response = await axiosInstance.patch<ChangePasswordResponse>('auth/change-password', {
+        newPassword: newPassword
+      });
+      
+      return response.data;
+    } catch (error: any) {
+      throw {
+        status: false,
+        message: error.response?.data?.message || 'Error al cambiar la contraseña',
+        statusCode: error.response?.status || 500
+      };
+    }
   }
 };

@@ -21,7 +21,6 @@ const usePasswordRecovery = () => {
 
     try {
       const response = await recoveryService.sendRecoveryCode(email);
-      console.log('Respuesta del servidor:', response);
       setResponseStatus(response.status);
       
       if (response.status === 201) {
@@ -31,7 +30,6 @@ const usePasswordRecovery = () => {
         toast.error(response.message || 'Error al enviar el código');
       }
     } catch (error: any) {
-      console.error('Error completo:', error);
       toast.error(error.message || 'Error al enviar el código');
       setResponseStatus(error.response?.status || 400);
     } finally {

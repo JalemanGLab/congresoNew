@@ -43,7 +43,6 @@ const useRegisterForm = () => {
 
         setDistributorsOptions(formattedDistributors);
       } catch (error) {
-        console.error("Error fetching distributors:", error);
         toast.error("Error al cargar los distribuidores");
       }
     };
