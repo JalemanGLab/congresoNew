@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -12,39 +12,37 @@ export default function AuthProvider({
   const pathname = usePathname();
   const router = useRouter();
   const { token, user, isAuthenticated } = useAuthStore();
+  const [isValidating, setIsValidating] = useState(true);
 
   useEffect(() => {
-    // Si está autenticado en login, redirigir según rol
-    if (token && user && isAuthenticated && pathname === "/login") {
-      if (user.role === "assistant") {
+    const validateAccess = async () => {
+      if (!token || !isAuthenticated) {
+        if (pathname.startsWith("/dashboard")) {
+          toast.error("Debes iniciar sesión");
+          router.replace("/login");
+        }
+      } else if (pathname === "/login") {
+        router.replace(user?.role === "assistant" ? "/dashboard/profile" : "/dashboard");
+      } else if (pathname === "/dashboard" && user?.role === "assistant") {
+        toast.error("No tienes permisos para acceder al dashboard");
         router.replace("/dashboard/profile");
-      } else {
-        router.replace("/dashboard");
       }
-      return;
-    }
+      setIsValidating(false);
+    };
 
-    // Si intenta acceder al dashboard principal y es asistente
-    if (pathname === "/dashboard" && user?.role === "assistant") {
-      toast.error("No tienes permisos para acceder al dashboard");
-      router.replace("/dashboard/profile");
-      return;
-    }
-
-    // Si no está autenticado y está en ruta protegida
-    if (!token && !isAuthenticated && pathname.startsWith("/dashboard")) {
-      toast.error("Debes iniciar sesión");
-      router.replace("/login");
-      return;
-    }
+    validateAccess();
   }, [pathname, token, isAuthenticated, user?.role]);
 
-  // No renderizar nada si no tiene permisos
+  // No mostrar nada mientras se valida
+  if (isValidating) {
+    return null;
+  }
+
+  // Validaciones de acceso
   if (pathname === "/dashboard" && user?.role === "assistant") {
     return null;
   }
 
-  // No renderizar nada del dashboard si no está autenticado
   if (pathname.startsWith("/dashboard") && (!token || !isAuthenticated)) {
     return null;
   }
