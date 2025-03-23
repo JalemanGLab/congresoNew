@@ -1,5 +1,4 @@
-import axiosInstance, { handleAxiosError } from './axios';
-
+import axiosInstance, { handleAxiosError } from '@/services/config/axios';
 
 export const registerAssistant = async (data: any) => {
     try {
@@ -11,8 +10,7 @@ export const registerAssistant = async (data: any) => {
     }
   };
 
-
-  export const getDistributors = async () => {
+export const getDistributors = async () => {
     try {
         const response = await axiosInstance.get('/distributors');
         return response.data;
@@ -20,4 +18,17 @@ export const registerAssistant = async (data: any) => {
         const errorResponse = handleAxiosError(error);
         throw errorResponse;
     }
+};
+
+export const registerQr = async (id: string) => {
+  try {
+    const response = await axiosInstance.patch(`/assistants/register-entry/${id}`, {});
+    return response.data;
+  } catch (error) {
+    const errorInfo = handleAxiosError(error);
+    return {
+      success: false,
+      message: errorInfo.message
+    };
   }
+};
