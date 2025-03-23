@@ -1,11 +1,16 @@
+'use client'
+
 import useDashboard from "./useDashboard";
 import TableGlobal from "@/components/shared/TableData/TableGlobal";
+
 
 const PageDashboard = () => {
 	const {
 		columns,
 		data
 	} = useDashboard();
+
+
 	return (
 		<div className="w-full flex flex-col gap-8 overflow-hidden">
 			{/* <div className="flex flex-col   sm:flex-row gap-3">
