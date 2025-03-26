@@ -57,11 +57,11 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
   return (
     <div className="w-full bg-white flex flex-col rounded-r-lg p-4 sm:p-6">
       {statusFinish === "success" && (
-        <div className="w-full bg-white border border-gray-200 p-8 rounded-xl shadow-lg">
+        <div className="w-full bg-white border border-gray-200 p-6 sm:p-8 rounded-xl shadow-lg">
           <div className="flex items-center gap-4 mb-6">
-            <div className="bg-gray-100 p-3 rounded-full">
+            <div className="bg-green-100 p-3 rounded-full">
               <svg
-                className="w-6 h-6 text-gray-700"
+                className="w-6 h-6 text-green-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -75,108 +75,127 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
               </svg>
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-black">
                 ¡Registro Exitoso!
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-black mt-1">
                 Recibirás un correo con la información detallada
               </p>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex flex-col gap-3 bg-gray-50 p-4 rounded-lg">
-              <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
-                <div className="bg-white p-2 rounded-lg">
-                  <svg
-                    className="w-5 h-5 text-gray-700"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-                    />
-                  </svg>
+          <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <h3 className="text-lg font-medium text-black mb-3">Resumen de tu registro</h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <h4 className="text-sm font-medium text-black mb-2">Información Personal</h4>
+                <div className="bg-white p-3 rounded-lg shadow-sm">
+                  <div className="flex flex-col space-y-3">
+                    <div className="flex items-start">
+                      <HiOutlineUser className="text-gray-700 mt-0.5 mr-2" />
+                      <div>
+                        <p className="text-xs text-black">Nombre completo</p>
+                        <p className="text-sm font-medium text-black">{watch("first_name")} {watch("last_name")}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <HiOutlineMail className="text-gray-700 mt-0.5 mr-2" />
+                      <div>
+                        <p className="text-xs text-black">Correo electrónico</p>
+                        <p className="text-sm font-medium text-black">{watch("email")}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <HiOutlinePhone className="text-gray-700 mt-0.5 mr-2" />
+                      <div>
+                        <p className="text-xs text-black">Teléfono</p>
+                        <p className="text-sm font-medium text-black">{watch("phone")}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-gray-700">
-                  Entrada digital al evento
-                </span>
               </div>
-
-              <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
-                <div className="bg-white p-2 rounded-lg">
-                  <svg
-                    className="w-5 h-5 text-gray-700"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                    />
-                  </svg>
+              
+              <div>
+                <h4 className="text-sm font-medium text-black mb-2">Información Profesional</h4>
+                <div className="bg-white p-3 rounded-lg shadow-sm">
+                  <div className="flex flex-col space-y-3">
+                    <div className="flex items-start">
+                      <HiOutlineLocationMarker className="text-gray-700 mt-0.5 mr-2" />
+                      <div>
+                        <p className="text-xs text-black">Distribuidor</p>
+                        <p className="text-sm font-medium text-black">{watch("distributor")}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <HiOutlineDocumentText className="text-gray-700 mt-0.5 mr-2" />
+                      <div>
+                        <p className="text-xs text-black">Procedimiento principal</p>
+                        <p className="text-sm font-medium text-black">{watch("main_procedure")}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <MdNumbers className="text-gray-700 mt-0.5 mr-2" />
+                      <div>
+                        <p className="text-xs text-black">Volumen de trabajo</p>
+                        <p className="text-sm font-medium text-black">{watch("cases_per_week")} casos/semana</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-gray-700">
-                  Detalles y agenda del congreso
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="bg-white p-2 rounded-lg">
-                  <svg
-                    className="w-5 h-5 text-gray-700"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                    />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-gray-700">
-                  Confirmación de pago
-                </span>
               </div>
             </div>
+            
+            <div className="bg-white p-4 rounded-lg border-2 border-green-100 shadow-sm">
+              <div className="flex justify-between items-center mb-3">
+                <h4 className="text-sm font-medium text-black">Valor del boleto</h4>
+                <span className="text-lg font-bold text-green-800">$500.000 COP</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="bg-green-100 p-1.5 rounded-full">
+                  <HiOutlineCreditCard className="text-green-700 text-sm" />
+                </div>
+                <div>
+                  <p className="text-xs text-black">Método de pago</p>
+                  <p className="text-sm font-medium text-black">{selectedPayment === "card" ? "Tarjeta de Crédito" : "PSE"}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            <div className="flex items-start gap-3 bg-gray-100 p-4 rounded-lg mt-4">
-              <svg
-                className="w-5 h-5 text-gray-600 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <p className="text-sm text-gray-600">
+          <div className="flex items-start gap-3 bg-gray-100 p-4 rounded-lg mb-6">
+            <svg
+              className="w-5 h-5 text-gray-700 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <div>
+              <p className="text-sm text-black">
                 Si no recibes el correo en los próximos minutos, revisa tu
                 carpeta de spam o contáctanos para ayudarte.
               </p>
+              <p className="text-sm font-medium text-black mt-2">
+                ¡Gracias por registrarte! Te esperamos en el evento.
+              </p>
             </div>
-            <div className="flex justify-end mt-6">
-              <button
-                className="px-4 py-1 bg-[#00391c] text-white font-medium rounded-lg transition-colors"
-                onClick={closeModalAction}
-              >
-                Cerrar
-              </button>
-            </div>
+          </div>
+          
+          <div className="flex justify-end">
+            <button
+              className="px-4 py-2 bg-[#00391c] text-white font-medium rounded-lg transition-colors hover:bg-[#002713]"
+              onClick={closeModalAction}
+            >
+              Cerrar
+            </button>
           </div>
         </div>
       )}
@@ -510,6 +529,12 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
                     </div>
                   </div>
 
+                  {!selectedPayment && (
+                    <div className="text-red-500 text-sm text-center">
+                      Por favor seleccione un método de pago
+                    </div>
+                  )}
+
                   {selectedPayment === "card" && (
                     <div className="col-span-1 md:col-span-2">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -621,10 +646,11 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
 
                     <button
                       type="submit"
-                      disabled={isSubmitting}
-                      className={`w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-[#225d33]
-                            hover:bg-[#1b4829] transition-all duration-300 text-sm font-medium cursor-pointer
-                      ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+                      disabled={isSubmitting || !selectedPayment}
+                      className={`w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] 
+                        ${!selectedPayment ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#225d33] hover:bg-[#1b4829]'} 
+                        transition-all duration-300 text-sm font-medium
+                        ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {isSubmitting ? (
                         <>
