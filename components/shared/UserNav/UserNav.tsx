@@ -8,18 +8,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import useUserNav from "./useUserNav";
 import { useAuthStore } from "@/store/authStore";
 
 const UserNav = () => {
   const { user } = useAuthStore();
-
-  const getInitials = () => {
-    if (!user?.first_name || !user?.last_name) return "AN";
-    return (
-      user.first_name.charAt(0).toUpperCase() +
-      user.last_name.charAt(0).toUpperCase()
-    );
-  };
+  const { getInitials, closeSession } = useUserNav();
 
   return (
     <DropdownMenu>
@@ -39,16 +33,13 @@ const UserNav = () => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="flex justify-between cursor-pointer">
-          Perfil
+           <a href="/dashboard/profile">Perfil</a>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex justify-between cursor-pointer">
-          Mis Compras
-        </DropdownMenuItem>
-        <DropdownMenuItem className="flex justify-between cursor-pointer">
-          Configuración
-        </DropdownMenuItem>
-        <DropdownMenuItem className="flex justify-between cursor-pointer">
-          Ayuda
+        <DropdownMenuItem
+          className="flex justify-between cursor-pointer"
+          onClick={closeSession}
+        >
+          Cerrar sesion
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
