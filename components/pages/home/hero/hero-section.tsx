@@ -1,11 +1,11 @@
 "use client"
 
-import EventSlider from "./event-slider"
+import Slider from "@/components/shared/slider/slider"
 
 export default function HeroSection() {
   return (
     <section id="inicio" className="relative">
-      <EventSlider />
+      <Slider />
     </section>
   )
 }
