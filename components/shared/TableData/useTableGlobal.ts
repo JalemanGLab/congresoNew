@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { format } from "@formkit/tempo";
 
 /**
  * Hook personalizado para manejar la lógica de una tabla global
@@ -16,29 +17,33 @@ const useTableGlobal = (data: any, itemsPerPage: number) => {
     // Opciones de filtrado disponibles
     const filterOptions = [
         { id: 'all', label: 'Todos los campos', type: 'text' },
-        { id: 'documentNumber', label: 'Documento', type: 'text' },
-        { id: 'status', label: 'Estado', type: 'text' },
-        { id: 'date', label: 'Fecha', type: 'date' },
+        { id: 'identification', label: 'Documento', type: 'text' },
+        { id: 'created_at', label: 'Fecha', type: 'date' },
         { id: 'distributor', label: 'Distribuidor', type: 'text' },
-        { id: 'paymentStatus', label: 'Estado de Pago', type: 'text' },
+        { 
+            id: 'entry', 
+            label: 'Estado de Ingreso', 
+            type: 'select',
+            options: [
+                { value: 'null', label: 'Registrado' },
+                { value: 'true', label: 'Ingresado' }
+            ]
+        },
     ];
 
     /**
-     * Formatea una fecha en string al formato dd/mm/yyyy
+     * Formatea una fecha en string al formato dd/mm/yyyy usando @formkit/tempo
      * @param dateString - Fecha en formato string
      * @returns Fecha formateada
      */
     const formatDate = (dateString: string) => {
         try {
             const date = new Date(dateString);
-            const userTimezoneOffset = date.getTimezoneOffset() * 60000;
-            const adjustedDate = new Date(date.getTime() + userTimezoneOffset);
-            
-            const day = String(adjustedDate.getDate()).padStart(2, '0');
-            const month = String(adjustedDate.getMonth() + 1).padStart(2, '0');
-            const year = adjustedDate.getFullYear();
-            
-            return `${day}/${month}/${year}`;
+            const colombiaDate = new Date(date.toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+            return format(colombiaDate.toISOString(), { 
+                date: 'short',
+                time: 'short'
+            }, 'es');
         } catch (error) {
             return '';
         }
@@ -53,20 +58,41 @@ const useTableGlobal = (data: any, itemsPerPage: number) => {
             results = results.filter(item => {
                 // Si el filtro es 'all', busca en todos los campos
                 if (activeFilter === 'all') {
-                    return Object.values(item).some(value => 
-                        value?.toString().toLowerCase().includes(searchTerm)
-                    );
+                    return Object.entries(item).some(([key, value]) => {
+                        // Excluir el campo de fecha de la búsqueda de texto
+                        if (key === 'created_at') return false;
+                        return value?.toString().toLowerCase().includes(searchTerm);
+                    });
                 } 
                 // Si es un filtro de fecha, compara las fechas
-                else if (activeFilter === 'date') {
+                else if (activeFilter === 'created_at') {
                     try {
-                        const itemDateStr = item[activeFilter];
-                        const itemDate = itemDateStr.split('T')[0];
-                        return itemDate === filterValue;
+                        const itemDate = new Date(item[activeFilter]);
+                        // Ajustar la fecha de búsqueda para que sea a las 00:00 en Colombia
+                        const searchDate = new Date(filterValue + 'T00:00:00');
+                        
+                        // Obtener las fechas en Colombia
+                        const itemDateColombia = new Date(itemDate.toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+                        const searchDateColombia = new Date(searchDate.toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+
+                        // Comparar solo año, mes y día
+                        return itemDateColombia.getFullYear() === searchDateColombia.getFullYear() &&
+                               itemDateColombia.getMonth() === searchDateColombia.getMonth() &&
+                               itemDateColombia.getDate() === searchDateColombia.getDate();
                     } catch (error) {
                         return false;
                     }
-                } 
+                }
+                // Si es un filtro de tipo select (estados)
+                else if (activeFilter === 'entry') {
+                    if (filterValue === 'null') {
+                        return item[activeFilter] === null;
+                    }
+                    return item[activeFilter]?.toString() === filterValue;
+                }
+                else if (activeFilter === 'paymentStatus') {
+                    return item[activeFilter]?.toLowerCase() === searchTerm.toLowerCase();
+                }
                 // Para otros filtros, busca en el campo específico
                 else {
                     return item[activeFilter]?.toString().toLowerCase().includes(searchTerm);
