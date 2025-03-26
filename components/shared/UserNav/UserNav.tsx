@@ -13,7 +13,7 @@ import { useAuthStore } from "@/store/authStore";
 
 const UserNav = () => {
   const { user } = useAuthStore();
-  const { getInitials, closeSession } = useUserNav();
+  const { getInitials, closeSession, handleProfileClick } = useUserNav();
 
   return (
     <DropdownMenu>
@@ -32,8 +32,11 @@ const UserNav = () => {
           </p>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex justify-between cursor-pointer">
-           <a href="/dashboard/profile">Perfil</a>
+        <DropdownMenuItem
+          className="flex justify-between cursor-pointer"
+          onClick={handleProfileClick}
+        >
+          Perfil
         </DropdownMenuItem>
         <DropdownMenuItem
           className="flex justify-between cursor-pointer"

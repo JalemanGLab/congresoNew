@@ -16,9 +16,8 @@ const useUserNav = () => {
     };
 
     const handleProfileClick = () => {
-        router.push("/perfil"); // Redirigir a la página de perfil
+        router.push("/dashboard/profile");
     };
-
 
     const closeSession = async () => {
         try {
@@ -35,7 +34,6 @@ const useUserNav = () => {
         closeSession,
         handleProfileClick
     }
-
 }
 
 export default useUserNav
