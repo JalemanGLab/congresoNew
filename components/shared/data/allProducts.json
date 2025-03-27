@@ -1,114 +1,138 @@
 [
   {
     "id": "product1",
-    "name": "Z350XT Kit Introductorio",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Kit completo con jeringas de todos los tonos esenciales. La resina Z350XT ofrece una combinación única de estética, resistencia y manipulación para restauraciones anteriores y posteriores.",
-    "category": "Restauración",
-    "brand": "3M ESPE"
+    "name": "Clarity Ultra lwr cuspid left Rez",
+    "image": "/img/products/clarity-ultra/Clarity_Ultra_lwr_cuspid_left_Rez.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Clarity ultra"
   },
   {
     "id": "product2",
-    "name": "Z350XT Jeringa Individual",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Jeringa individual de resina compuesta Z350XT para reposición. Ofrece alta resistencia al desgaste y excelente pulido para restauraciones duraderas y estéticas.",
-    "category": "Restauración",
-    "brand": "3M ESPE"
+    "name": "Clarity Ultra upr bicuspid left Rez",
+    "image": "/img/products/clarity-ultra/Clarity_Ultra_upr_bicuspid-left_Rez.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Clarity ultra"
   },
   {
     "id": "product3",
-    "name": "Z350XT Flow",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Resina fluida con la misma tecnología de nanorelleno para áreas de difícil acceso. Ideal para pequeñas cavidades y como base en restauraciones profundas.",
-    "category": "Restauración",
-    "brand": "3M ESPE"
+    "name": "Clarity Ultra upr cuspid left Rez",
+    "image": "/img/products/clarity-ultra/Clarity_Ultra_upr_cuspid-left_Rez.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Clarity ultra"
   },
   {
     "id": "product4",
-    "name": "Clarity Advance Kit Completo",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Kit completo de brackets cerámicos para tratamiento de arco completo. Diseñado para ofrecer estética y eficiencia en tratamientos ortodónticos.",
+    "name": "Clarity Ultra upr lateral left Rez",
+    "image": "/img/products/clarity-ultra/Clarity_Ultra_upr_lateral-left_Rez.gif",
+    "description": "",
     "category": "Ortodoncia",
-    "brand": "3M Unitek"
+    "brand": "Clarity ultra"
   },
   {
     "id": "product5",
-    "name": "Clarity Advance Arcos Estéticos",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Arcos recubiertos estéticos para complementar el sistema Clarity Advance. Ofrecen una apariencia discreta sin comprometer la eficacia del tratamiento.",
+    "name": "Clarity Ultra upr lateral rigth Rez",
+    "image": "/img/products/clarity-ultra/Clarity_Ultra_upr_lateral-rigth_Rez.gif",
+    "description": "",
     "category": "Ortodoncia",
-    "brand": "3M Unitek"
+    "brand": "Clarity ultra"
   },
   {
     "id": "product6",
-    "name": "Clarity Ultra Kit Autoligable",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Sistema completo de brackets cerámicos autoligables de última generación. Combina estética superior con la eficiencia de la tecnología autoligable.",
+    "name": "Adhesivo-Dental-3M",
+    "image": "/img/products/SBU+Relyx/Adhesivo-Dental-3M.gif",
+    "description": "",
     "category": "Ortodoncia",
-    "brand": "3M Unitek"
+    "brand": "SBU+ Relix"
   },
   {
     "id": "product7",
-    "name": "Clarity Ultra Herramientas",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Set de herramientas especializadas para el manejo del sistema Clarity Ultra. Diseñadas para facilitar la colocación y ajuste de brackets autoligables.",
+    "name": "Cemento Dental 3M Vista Lateral",
+    "image": "/img/products/SBU+Relyx/Cemento-Dental-3M-Vista-Lateral.gif",
+    "description": "",
     "category": "Ortodoncia",
-    "brand": "3M Unitek"
+    "brand": "SBU+ Relix"
   },
   {
     "id": "product8",
-    "name": "SBU+ Kit Introductorio",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Kit completo con adhesivo Single Bond Universal Plus y cemento RelyX. Solución integral para procedimientos adhesivos y de cementación.",
-    "category": "Adhesivos",
-    "brand": "3M ESPE"
+    "name": "Cemento Resinoso 3M Naranja",
+    "image": "/img/products/SBU+Relyx/Cemento-Resinoso-3M-Naranja.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "SBU+ Relix"
   },
   {
     "id": "product9",
-    "name": "RelyX Universal Clicker",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Dispensador tipo clicker para cemento RelyX Universal con dosificación precisa. Facilita la mezcla y aplicación del cemento para resultados consistentes.",
-    "category": "Cementos",
-    "brand": "3M ESPE"
+    "name": "Kit Cemento Dual3M",
+    "image": "/img/products/SBU+Relyx/Kit-Cemento-Dual3M.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "SBU+ Relix"
   },
   {
     "id": "product10",
-    "name": "Clinpro Clear Kit Preventivo",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Kit completo para prevención y remineralización de lesiones incipientes. Incluye productos para un enfoque integral de la prevención.",
-    "category": "Prevención",
-    "brand": "3M ESPE"
+    "name": "Veneer Cement A1",
+    "image": "/img/products/SBU+Relyx/Veneer-Cement-A1.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "SBU+ Relix"
   },
   {
     "id": "product11",
-    "name": "Clinpro Clear Sellante",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Sellante de fosas y fisuras fotocurable con liberación de flúor. Ofrece protección duradera contra caries en superficies oclusales.",
-    "category": "Prevención",
-    "brand": "3M ESPE"
+    "name": "Filtek Z250 XT Dark Blue",
+    "image": "/img/products/Z350XT/Filtek-Z250-XT-Dark-Blue.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Z350XT"
   },
   {
     "id": "product12",
-    "name": "Easy Match Kit Digital",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Sistema digital para selección precisa de color en restauraciones estéticas. Combina tecnología espectrofotométrica con software de análisis avanzado.",
-    "category": "Estética",
-    "brand": "3M ESPE"
+    "name": "Filtek Z250 XT Light Blue",
+    "image": "/img/products/Z350XT/Filtek-Z250-XT-Light-Blue.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Z350XT"
   },
   {
     "id": "product13",
-    "name": "Easy Match Guía Física",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Guía física de colores fabricada con las resinas originales para comparación directa. Permite una selección precisa de tonos en condiciones de iluminación real.",
-    "category": "Estética",
-    "brand": "3M ESPE"
+    "name": "Filtek Z250 XT Medium Blue",
+    "image": "/img/products/Z350XT/Filtek-Z250-XT-Medium-Blue.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Z350XT"
   },
   {
     "id": "product14",
-    "name": "Easy Match App Pro",
-    "image": "/placeholder.svg?height=400&width=400",
-    "description": "Aplicación profesional para smartphones que permite selección de color mediante fotografía. Utiliza inteligencia artificial para análisis preciso de color dental.",
-    "category": "Estética",
-    "brand": "3M ESPE"
+    "name": "Filtek Z250 XT White Universal",
+    "image": "/img/products/Z350XT/Filtek-Z250-XT-WhiteUniversal.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Z350XT"
+  },
+  {
+    "id": "product15",
+    "name": "Kit de composite Filtek Z250 XT",
+    "image": "/img/products/Z350XT/Kit-de-composite-Filtek-Z250-XT.gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Z350XT"
+  },
+  {
+    "id": "product16",
+    "name": "Z350 XT Universal Restorative A2E (Body)",
+    "image": "/img/products/Z350XT/Z350-XT-Universal-RestorativeA2E(Body).gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Z350XT"
+  },
+  {
+    "id": "product17",
+    "name": "Z350 XT Universal Restorative A2E (Enamel)",
+    "image": "/img/products/Z350XT/Z350-XT-Universal-RestorativeA2E(Enamel).gif",
+    "description": "",
+    "category": "Ortodoncia",
+    "brand": "Z350XT"
   }
 ]
