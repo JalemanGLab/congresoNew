@@ -4,13 +4,10 @@ import allProducts from '../../../shared/data/allProducts.json'
 
 // Definir las categorías disponibles
 export const productCategories = {
-    "Z350XT": ["product1", "product2", "product3"],
-    "Clarity advance": ["product4", "product5"],
-    "Clarity ultra": ["product6", "product7"],
-    "SBU+ Relyx": ["product8", "product9"],
-    "Clinpro Clear": ["product10", "product11"],
-    "Easy Match": ["product12", "product13", "product14"]
-  }
+  "Clarity ultra": ["product1", "product2", "product3", "product4", "product5"],
+  "SBU+ Relix": ["product6", "product7", "product8", "product9", "product10"],
+  "Z350XT": ["product11", "product12", "product13", "product14", "product15", "product16", "product17"]
+}
 
 const useProductsSection =()=>{
 
@@ -19,21 +16,15 @@ const useProductsSection =()=>{
     const [selectedCategory, setSelectedCategory] = useState("Todas")
     const [searchTerm, setSearchTerm] = useState("")
 
-    
-
- 
-
 
     // Función para filtrar productos
     const filterProducts = (category: string | null, search: string) => {
       let filtered = [...allProducts]
-  
       // Filtrar por categoría
       if (category && category !== "Todas") {
         const categoryProducts = productCategories[category as keyof typeof productCategories] || []
         filtered = filtered.filter((product) => categoryProducts.includes(product.id))
       }
-  
       // Filtrar por término de búsqueda
       if (search) {
         const term = search.toLowerCase()
@@ -45,11 +36,9 @@ const useProductsSection =()=>{
             product.brand.toLowerCase().includes(term)
         )
       }
-  
       setFilteredProducts(filtered)
       setShowMore(false)
     }
-  
     // Escuchar eventos de cambio de filtro
     useEffect(() => {
       const handleFilterChange = (e: Event) => {
@@ -59,16 +48,13 @@ const useProductsSection =()=>{
         setSearchTerm(searchTerm || "")
         filterProducts(category, searchTerm)
       }
-  
       window.addEventListener("filterChange", handleFilterChange as EventListener)
       return () => {
         window.removeEventListener("filterChange", handleFilterChange as EventListener)
       }
     }, [])
-  
     const visibleProducts = showMore ? filteredProducts : filteredProducts.slice(0, 6)
     const remainingCount = filteredProducts.length - 6
- 
     return{
         selectedCategory,
         searchTerm,
