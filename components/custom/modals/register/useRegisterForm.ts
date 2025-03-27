@@ -177,6 +177,10 @@ const useRegisterForm = () => {
       }
     }
 
+    // Guardar los datos de pago pero no enviar aún
+    setPaymentData(data);
+    
+    // Preparar los datos finales
     const finalFormData = {
       assistant: {
         identification: infoFormulary?.step1?.id
@@ -214,10 +218,18 @@ const useRegisterForm = () => {
     };
 
     setInfoFormulary(finalFormData);
+    
+    // Avanzar al paso de resumen
+    setStep(4);
+    toast.success("Información de pago guardada correctamente");
+  };
+
+  // Nueva función para procesar el pago final
+  const handleFinalSubmit = async () => {
     setIsSubmitting(true);
 
     try {
-      const response = await registerAssistant(finalFormData);
+      const response = await registerAssistant(infoFormulary);
 
       if (response.status === true) {
         setStatusFinish("success");
@@ -288,6 +300,7 @@ const useRegisterForm = () => {
     handleStep1Submit,
     handleStep2Submit,
     handleStep3Submit,
+    handleFinalSubmit,
     handleSubmit,
     handleSubmitPayment,
     statusFinish,

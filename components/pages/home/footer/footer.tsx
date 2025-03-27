@@ -5,17 +5,17 @@ import Link from "next/link";
 import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
 import {
   FaFacebookF,
-  FaTwitter,
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const socialLinks = [
-    { name: "Facebook", url: "https://facebook.com", icon: FaFacebookF },
-    { name: "Twitter", url: "https://twitter.com", icon: FaTwitter },
-    { name: "Instagram", url: "https://instagram.com", icon: FaInstagram },
-    { name: "LinkedIn", url: "https://linkedin.com", icon: FaLinkedinIn },
+    { name: "Facebook", url: "https://www.facebook.com/SolventumMedical?locale=es_LA", icon: FaFacebookF },
+    { name: "Twitter", url: "https://x.com/solventum?lang=es", icon: FaXTwitter },
+    { name: "Instagram", url: "https://www.instagram.com/solventumdentallatinoamerica/", icon: FaInstagram },
+    { name: "LinkedIn", url: "https://www.linkedin.com/company/solventumhealth", icon: FaLinkedinIn },
   ];
   return (
     <footer className="py-16 bg-[#001208] border-t border-[#00FF66]/10">
