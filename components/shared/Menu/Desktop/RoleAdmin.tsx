@@ -9,7 +9,7 @@ const RoleAdmin = () => {
 
 	return (
 		<div className="flex flex-col w-full gap-4 px-2">
-			<MenuItem text="Dashboard" onClick={() => router.push('/dashboard')} childrenIcon={<TfiDashboard />} />
+			<MenuItem text="Asistentes" onClick={() => router.push('/assistants')} childrenIcon={<TfiDashboard />} />
 			<MenuItem text="Perfil" onClick={() => router.push('/profile')} childrenIcon={<HiOutlineUser />} />
 		</div>
 	);

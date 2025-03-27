@@ -1,10 +1,10 @@
 'use client'
 
-import useDashboard from "./useDashboard";
+import useDashboard from "./useAssistants";
 import TableGlobal from "@/components/shared/TableData/TableGlobal";
 
 
-const PageDashboard = () => {
+const PageAssistants = () => {
 	const {
 		columns,
 		assistants
@@ -30,4 +30,4 @@ const PageDashboard = () => {
 	);
 }
 
-export default PageDashboard;
+export default PageAssistants;
