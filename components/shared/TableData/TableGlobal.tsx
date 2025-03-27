@@ -4,6 +4,7 @@ import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { IoIosSearch, IoMdClose, IoIosArrowDown } from "react-icons/io";
 import useTableGlobal from './useTableGlobal';
 import { TableGlobalProps } from './DTOTableGlobal';
+import { useEffect, useRef } from 'react';
 
 /**
  * Componente de tabla global reutilizable con funcionalidades de filtrado y paginación
@@ -20,6 +21,7 @@ const TableGlobal = ({
   filters,
   emptyMessage = 'No hay datos disponibles',
 }: TableGlobalProps) => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const {
     currentPage,
@@ -39,6 +41,19 @@ const TableGlobal = ({
     setCurrentPage,
     setShowFilterDropdown,
   } = useTableGlobal(data, itemsPerPage);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowFilterDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [setShowFilterDropdown]);
   
   return (
     <div className="w-full flex flex-col gap-4">
@@ -46,7 +61,7 @@ const TableGlobal = ({
       {filters?.all && (
         <div className="w-full max-w-[900px] bg-white p-4 rounded-lg border border-gray-200">
           <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
+            <div className="relative flex-1" ref={dropdownRef}>
               <div className="flex">
                 <button
                   onClick={() => setShowFilterDropdown(!showFilterDropdown)}
@@ -64,33 +79,60 @@ const TableGlobal = ({
                       <input
                         type="text"
                         placeholder={`Buscar  por ${filterOptions.find(opt => opt.id === activeFilter)?.label.toLowerCase()}`}
-                        className="w-full h-10 bg-neutral-50 border border-l-0 border-gray-300 pl-10 pr-4 rounded-r-md outline-none text-sm"
+                        className="w-full h-10 text-neutral-800 bg-neutral-50 border border-l-0 border-gray-300 pl-10 pr-4 rounded-r-md outline-none text-sm"
                         value={filterValue}
                         onChange={(e) => handleFilterChange(e.target.value)}
                       />
                     </div>
-                  ) : (
+                  ) : currentFilterType === 'date' ? (
                     <div className="relative flex-1">
                       <input
                         type="date"
-                        className="w-full h-10 border bg-neutral-50 border-l-0 border-gray-300 px-4 rounded-r-md outline-none text-sm appearance-none"
+                        className="w-full h-10 border text-neutral-800 bg-neutral-50 border-l-0 border-gray-300 px-4 rounded-r-md outline-none text-sm appearance-none"
                         value={filterValue}
-                        onChange={(e) => handleFilterChange(e.target.value)}
+                        onChange={(e) => {
+                          // Ajustar la fecha seleccionada para que sea a las 00:00 en Colombia
+                          const selectedDate = new Date(e.target.value + 'T00:00:00');
+                          const year = selectedDate.getFullYear();
+                          const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                          const day = String(selectedDate.getDate()).padStart(2, '0');
+                          handleFilterChange(`${year}-${month}-${day}`);
+                        }}
                         max="2100-12-31"
                         style={{ colorScheme: 'light' }}
                       />
                       {filterValue && (
                         <div className="absolute right-8 top-1/2 -translate-y-1/2 text-xs text-gray-500 pointer-events-none bg-white px-1">
-                          {formatDate(filterValue)}
+                          {formatDate(filterValue + 'T00:00:00')}
                         </div>
                       )}
                     </div>
-                  )}
+                  ) : currentFilterType === 'select' ? (
+                    <div className="relative flex-1">
+                      <select
+                        className="w-full h-10 border text-neutral-800 bg-neutral-50 border-l-0 border-gray-300 px-4 rounded-r-md outline-none text-sm appearance-none"
+                        value={filterValue}
+                        onChange={(e) => handleFilterChange(e.target.value)}
+                      >
+                        <option value="">Seleccionar opción</option>
+                        {filterOptions
+                          .find(opt => opt.id === activeFilter)
+                          ?.options?.map((option) => (
+                            <option key={option.value} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <IoIosArrowDown className="h-5 w-5 text-gray-400" />
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
               {showFilterDropdown && (
-                <div className="absolute z-10 mt-1 w-[180px] bg-white border border-gray-200 rounded-md shadow-lg">
+                <div className="absolute z-50 mt-1 w-[180px] bg-white border border-gray-200 rounded-md shadow-lg">
                   {filterOptions.map((option) => (
                     <button
                       key={option.id}
@@ -106,7 +148,10 @@ const TableGlobal = ({
 
             {filterValue && (
               <button
-                onClick={() => handleFilterChange('')}
+                onClick={() => {
+                  handleFilterChange('');
+                  handleFilterTypeChange('all');
+                }}
                 className="h-10 cursor-pointer px-4 bg-neutral-800 text-neutral-50 rounded-md flex items-center justify-center gap-2 hover:bg-neutral-900 transition-all duration-300 whitespace-nowrap"
               >
                 <span>Limpiar</span>

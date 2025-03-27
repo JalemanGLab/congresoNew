@@ -1,5 +1,5 @@
-import { useAuthStore } from '@/store/authStore';
-import axiosInstance from './config/axios';
+import { useAuthStore } from "@/store/authStore";
+import axiosInstance from "./config/axios";
 
 export interface User {
   id: string;
@@ -39,12 +39,42 @@ export interface ChangePasswordResponse {
 }
 
 export const authService = {
-  login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-    return useAuthStore.getState().login(credentials);
+  login: async (credentials: LoginCredentials) => {
+    try {
+      const response = await axiosInstance.post<AuthResponse>(
+        "auth/login",
+        credentials
+      );
+      if (response.data.status && response.data.data) {
+        const { token, user } = response.data.data;
+        setTimeout(() => {
+          useAuthStore.getState().setAuth(user, token);
+        }, 0);
+        return response.data;
+      } else {
+        throw new Error("Formato de respuesta no válido");
+      }
+    } catch (error: any) {
+      useAuthStore.getState().clearAuth();
+      throw {
+        message: error.response?.data?.message || "Credenciales incorrectas",
+        error: error.response?.data?.error || "Error de autenticación",
+        statusCode: error.response?.status || 500,
+      };
+    }
   },
 
-  logout: () => {
-    useAuthStore.getState().logout();
+  logout: async () => {
+    try {
+      await axiosInstance.post("auth/logout");
+      setTimeout(() => {
+        useAuthStore.getState().clearAuth();
+      }, 0);
+    } catch (error) {
+      setTimeout(() => {
+        useAuthStore.getState().clearAuth();
+      }, 0);
+    }
   },
 
   isAuthenticated: (): boolean => {
@@ -59,19 +89,25 @@ export const authService = {
     return useAuthStore.getState().token;
   },
 
-  changePassword: async (newPassword: string): Promise<ChangePasswordResponse> => {
+  changePassword: async (
+    newPassword: string
+  ): Promise<ChangePasswordResponse> => {
     try {
-      const response = await axiosInstance.patch<ChangePasswordResponse>('auth/change-password', {
-        newPassword: newPassword
-      });
-      
+      const response = await axiosInstance.patch<ChangePasswordResponse>(
+        "auth/change-password",
+        {
+          newPassword: newPassword,
+        }
+      );
+
       return response.data;
     } catch (error: any) {
       throw {
         status: false,
-        message: error.response?.data?.message || 'Error al cambiar la contraseña',
-        statusCode: error.response?.status || 500
+        message:
+          error.response?.data?.message || "Error al cambiar la contraseña",
+        statusCode: error.response?.status || 500,
       };
     }
-  }
+  },
 };

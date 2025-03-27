@@ -2,31 +2,27 @@
 
 import MenuItem from "./MenuItem";
 import { TfiDashboard } from "react-icons/tfi";
-import { IoSearchOutline } from "react-icons/io5";
-import { GoBell } from "react-icons/go";
 import {
-  HiOutlinePencilSquare,
   HiOutlineUser,
   HiOutlinePower,
   HiOutlineQrCode,
 } from "react-icons/hi2";
 import { toast } from "sonner";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { authService } from "@/services/authService";
 import { useAuthStore } from "@/store/authStore";
-// import { supabase } from "@/lib/supabase";
-// import { useAuthStore } from "@/store/useAuthStore";
 
 const DesktopMenu = () => {
   const router = useRouter();
-  const pathname = usePathname();
-  const { user } = useAuthStore();
+  const { user, clearAuth } = useAuthStore();
 
   const closeSession = async () => {
     try {
-      authService.logout();
+      await authService.logout();
       toast.success("Sesión cerrada correctamente");
-      router.push("/login");
+      setTimeout(() => {
+        router.replace("/login");
+      }, 100);
     } catch (error) {
       toast.error("Error al cerrar sesión");
     }
@@ -34,38 +30,20 @@ const DesktopMenu = () => {
 
   const menuItems = [
     {
-      text: "Dashboard",
-      href: "/dashboard",
+      text: "Asistentes",
+      href: "/assistants",
       icon: <TfiDashboard />,
       roles: ["admin", "superadmin"], // no mostrar a assistant
     },
     {
-      text: "Buscar",
-      href: "/dashboard/search",
-      icon: <IoSearchOutline />,
-      roles: ["admin", "superadmin", "assistant"],
-    },
-    {
-      text: "Gestión",
-      href: "/dashboard/management",
-      icon: <HiOutlinePencilSquare />,
-      roles: ["admin", "superadmin"],
-    },
-    {
-      text: "Alertas",
-      href: "/dashboard/alerts",
-      icon: <GoBell />,
-      roles: ["admin", "superadmin", "assistant"],
-    },
-    {
       text: "Perfil",
-      href: "/dashboard/profile",
+      href: "/profile",
       icon: <HiOutlineUser />,
       roles: ["admin", "superadmin", "assistant"],
     },
     {
       text: "Scan QR",
-      href: "/dashboard/scanqr",
+      href: "/scanqr",
       icon: <HiOutlineQrCode />,
       roles: ["admin", "superadmin"],
     },

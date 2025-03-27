@@ -19,7 +19,12 @@ export interface DTOPayment {
 // Función auxiliar para formatear fechas en español
 const formatDate = (dateString: string | null) => {
   if (!dateString) return "No disponible";
-  return format(dateString, { date: 'long' }, 'es');
+  const date = new Date(dateString);
+  const colombiaDate = new Date(date.toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+  return format(colombiaDate.toISOString(), { 
+    date: 'long',
+    time: 'short'
+  }, 'es');
 };
 
 // Componentes de celda para la tabla de pagos

@@ -1,6 +1,6 @@
 // src/components/header/useHeader.ts
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { NavItem, HeaderHookResult } from "./type";
 
 export const useHeader = (): HeaderHookResult => {
@@ -9,7 +9,7 @@ export const useHeader = (): HeaderHookResult => {
 
   const navItems: NavItem[] = [
     { name: "Inicio", href: "#inicio" },
-    { name: "Evento", href: "#evento" },
+    { name: "Registro", href: "#registro" },
     { name: "Agenda", href: "#agenda" },
     { name: "Ponentes", href: "#ponentes" },
     { name: "Productos", href: "#productos" },
@@ -19,6 +19,19 @@ export const useHeader = (): HeaderHookResult => {
   const handleLoginClick = () => {
     router.push("/login");
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Cerrar sidebar cuando el ancho de pantalla se vuelve de escritorio
+      if (window.innerWidth >= 768) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return {
     router,

@@ -1,22 +1,20 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { User, LoginCredentials, AuthResponse } from '@/services/authService';
-import axiosInstance from '@/services/config/axios';
-import { toast } from 'sonner';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { User } from "@/services/authService";
+import axiosInstance from "@/services/config/axios";
+import Cookies from "js-cookie";
 
 interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  login: (credentials: LoginCredentials) => Promise<AuthResponse>;
-  logout: () => void;
-  setUser: (user: User) => void;
-  setToken: (token: string) => void;
+  setAuth: (user: User, token: string) => void;
+  clearAuth: () => void;
 }
 
 const initializeAxios = (token: string | null) => {
   if (token) {
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
 };
 
@@ -27,55 +25,32 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       isAuthenticated: false,
 
-      setUser: (user: User) => set({ user, isAuthenticated: true }),
-      
-      setToken: (token: string) => {
-        set({ token });
+      setAuth: (user: User, token: string) => {
+        set({ user, token, isAuthenticated: true });
         initializeAxios(token);
+        // Guardar token en cookie para el middleware
+        Cookies.set("_cm_sec", token, {
+          expires: 1, // 1 día
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+          path: "/",
+        });
       },
 
-      login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-        try {
-          const response = await axiosInstance.post<AuthResponse>('auth/login', credentials);
-          
-          if (response.data.status && response.data.data) {
-            const { token, user } = response.data.data;
-            set({ user, token, isAuthenticated: true });
-            initializeAxios(token);
-            return response.data;
-          }
-          throw new Error("Formato de respuesta inválido");
-        } catch (error: any) {
-          if (error.response) {
-            throw {
-              message: error.response.data.message || "Error de autenticación",
-              error: error.response.data.error || "Error desconocido",
-              statusCode: error.response.status,
-            };
-          }
-          throw error;
-        }
-      },
-
-      logout: async () => {
-        try {
-          await axiosInstance.post('auth/logout');
-        } catch (error:any) {
-          toast.error(error.message)
-        } finally {
-          set({ user: null, token: null, isAuthenticated: false });
-          delete axiosInstance.defaults.headers.common['Authorization'];
-          window.location.href = '/login';
-        }
+      clearAuth: () => {
+        set({ user: null, token: null, isAuthenticated: false });
+        delete axiosInstance.defaults.headers.common["Authorization"];
+        // Eliminar cookie
+        Cookies.remove("_cm_sec", { path: "/" });
       },
     }),
     {
-      name: 'auth-storage',
-      partialize: (state) => ({ 
+      name: "auth-storage",
+      partialize: (state) => ({
         user: state.user,
         token: state.token,
-        isAuthenticated: state.isAuthenticated 
+        isAuthenticated: state.isAuthenticated,
       }),
     }
   )
-); 
+);

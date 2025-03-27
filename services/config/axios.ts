@@ -1,10 +1,10 @@
-import axios, { AxiosError } from 'axios';
-import { useAuthStore } from '@/store/authStore';
+import axios, { AxiosError } from "axios";
+import { useAuthStore } from "@/store/authStore";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -20,30 +20,21 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      useAuthStore.getState().logout();
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
-);
-
 export const handleAxiosError = (error: unknown) => {
   if (error instanceof AxiosError) {
-    return error.response?.data || {
-      message: error.message,
-      error: 'Error de conexión',
-      statusCode: error.response?.status || 500
-    };
+    return (
+      error.response?.data || {
+        message: error.message,
+        error: "Error de conexión",
+        statusCode: error.response?.status || 500,
+      }
+    );
   }
   return {
-    message: 'Error inesperado',
-    error: 'Error desconocido',
-    statusCode: 500
+    message: "Error inesperado",
+    error: "Error desconocido",
+    statusCode: 500,
   };
 };
 
-export default axiosInstance; 
+export default axiosInstance;
