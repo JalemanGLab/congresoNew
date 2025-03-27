@@ -14,8 +14,6 @@ import { toast } from "sonner";
 import { useRouter, usePathname } from "next/navigation";
 import { authService } from "@/services/authService";
 import { useAuthStore } from "@/store/authStore";
-// import { supabase } from "@/lib/supabase";
-// import { useAuthStore } from "@/store/useAuthStore";
 
 const DesktopMenu = () => {
   const router = useRouter();
@@ -38,24 +36,6 @@ const DesktopMenu = () => {
       href: "/dashboard",
       icon: <TfiDashboard />,
       roles: ["admin", "superadmin"], // no mostrar a assistant
-    },
-    {
-      text: "Buscar",
-      href: "/dashboard/search",
-      icon: <IoSearchOutline />,
-      roles: ["admin", "superadmin", "assistant"],
-    },
-    {
-      text: "Gestión",
-      href: "/dashboard/management",
-      icon: <HiOutlinePencilSquare />,
-      roles: ["admin", "superadmin"],
-    },
-    {
-      text: "Alertas",
-      href: "/dashboard/alerts",
-      icon: <GoBell />,
-      roles: ["admin", "superadmin", "assistant"],
     },
     {
       text: "Perfil",
