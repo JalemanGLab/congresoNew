@@ -70,5 +70,14 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [...protectedRoutes, ...publicRoutes],
+  matcher: [
+    "/assistants/:path*",
+    "/profile/:path*",
+    "/scanqr/:path*",
+    "/search/:path*",
+    "/alerts/:path*",
+    "/management/:path*",
+    "/login",
+    "/"
+  ]
 };
