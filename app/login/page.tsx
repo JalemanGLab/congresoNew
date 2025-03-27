@@ -4,60 +4,62 @@ import Image from "next/image";
 import { useLogin } from "./usePage";
 
 // Importaciones de Lucide React
-import { Mail, Lock, EyeOff, Eye, Calendar, MapPin, Clock, X } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  EyeOff,
+  Eye,
+  Calendar,
+  MapPin,
+  Clock,
+  X,
+} from "lucide-react";
 
 // Importaciones de imágenes
 import logo from "../../public/img/solventum-v1.png";
 import bg_login from "../../public/img/bg-login.jpg";
 import load from "../../public/img/loading.svg";
-import { Toaster } from "sonner";
 import { PasswordRecoveryForm } from "./components/PasswordRecovery/PasswordRecovery";
 
 const PageLogin = () => {
-
   const {
     register,
     onSubmit,
     isLoading,
     errors,
     showPassword,
-    togglePasswordVisibility, 
+    togglePasswordVisibility,
     router,
     setViewPasswordRecovery,
-    viewPasswordRecovery
+    viewPasswordRecovery,
   } = useLogin();
 
   return (
-
     <div className="flex w-full h-screen">
-      <Toaster position="top-right" />
-      {
-        viewPasswordRecovery && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
-            {/* Overlay con efecto de desenfoque */}
-            <div 
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-              onClick={() => setViewPasswordRecovery(false)}
-            />
-            
-            {/* Modal */}
-            <div className="relative bg-white rounded-lg shadow-xl w-[90%] max-w-md p-6 z-50">
-              {/* Botón de cerrar */}
-              <button 
-                onClick={() => setViewPasswordRecovery(false)}
-                className="absolute right-10 top-10 text-gray-500 hover:text-gray-700"
-              >
-                <X className="w-5 h-5" />
-              </button>
+      {viewPasswordRecovery && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Overlay con efecto de desenfoque */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setViewPasswordRecovery(false)}
+          />
 
-              <div className="flex flex-col items-center">
-                
-                <PasswordRecoveryForm />
-              </div>
+          {/* Modal */}
+          <div className="relative bg-white rounded-lg shadow-xl w-[90%] max-w-md p-6 z-50">
+            {/* Botón de cerrar */}
+            <button
+              onClick={() => setViewPasswordRecovery(false)}
+              className="absolute right-10 top-10 text-gray-500 hover:text-gray-700"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex flex-col items-center">
+              <PasswordRecoveryForm />
             </div>
           </div>
-        )
-      }
+        </div>
+      )}
       {/* Panel izquierdo - Formulario */}
       <div className="flex  bg-white w-full items-center justify-center lg:w-[40%]">
         <div className="flex w-full max-w-[450px] flex-col items-center p-6 sm:p-6 md:p-8">
@@ -66,7 +68,8 @@ const PageLogin = () => {
             alt="logo"
             width={280}
             height={80}
-            className="w-[200px] py-2 sm:w-[240px] md:w-[280px] md:py-4"
+            className="w-[200px] h-auto py-2 sm:w-[240px] md:w-[280px] md:py-4"
+            style={{ height: "auto" }}
           />
           <p className="mb-4 text-xs text-muted-foreground sm:text-sm sm:mb-6">
             Accede a tu cuenta para empezar la experiencia
@@ -183,7 +186,6 @@ const PageLogin = () => {
                 "Iniciar Sesión"
               )}
             </button>
-
           </form>
         </div>
       </div>

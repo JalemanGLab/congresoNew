@@ -23,7 +23,7 @@ const MobileMenu = () => {
       <ScrollArea className="w-full h-full">
         <div className="flex flex-col w-full gap-2">
           <MenuItem
-            text="Dashboard"
+            text="Asistentes"
             onClick={() => {}}
             childrenIcon={<TfiDashboard />}
           />

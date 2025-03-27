@@ -9,7 +9,7 @@ import MobileMenu from "@/components/shared/Menu/Mobile/MobileMenu";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-export default function PrivateLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ export default function PrivateLayout({
     <div className="flex flex-col w-screen h-screen">
       <div className="flex flex-row w-full h-12 px-2 items-center justify-between border-b border-neutral-200">
         <div className="flex flex-row w-full h-full items-center gap-4">
-          {/* <div className="md:hidden flex flex-row h-full items-center">
+          <div className="md:hidden flex flex-row h-full items-center">
             <Sheet>
               <SheetTrigger>
                 <div className="flex cursor-pointer w-8 h-8 rounded text-background items-center justify-center">
@@ -29,7 +29,7 @@ export default function PrivateLayout({
                 <MobileMenu />
               </SheetContent>
             </Sheet>
-          </div> */}
+          </div>
           <div className="flex items-center text-background h-full py-1">
             {/* <img src={solventum} alt="solventum" className="h-full" /> */}
             LOGO
@@ -42,9 +42,7 @@ export default function PrivateLayout({
         <div className="hidden md:flex flex-col w-20 h-full p-2">
           <DesktopMenu />
         </div>
-        <div className="flex flex-col w-full h-full p-2">
-          {children}
-        </div>
+        <div className="flex flex-col w-full h-full p-2">{children}</div>
       </div>
     </div>
   );
