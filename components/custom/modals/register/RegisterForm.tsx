@@ -42,6 +42,7 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
     handleStep1Submit,
     handleStep2Submit,
     handleStep3Submit,
+    handleFinalSubmit,
     distributorsOptions,
     proceduresOptions,
     brandOptions,
@@ -257,7 +258,8 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
             </div>
 
             <div className="w-full bg-white flex flex-col rounded-lg md:gap-4">
-              <ProgressSteps currentStep={step} steps={steps} />
+              {/* Mostrar los pasos solo si no estamos en el resumen */}
+              {step < 4 && <ProgressSteps currentStep={step} steps={steps} />}
 
               {/* PASO 1: INFORMACIÓN PERSONAL */}
               {step === 1 && (
@@ -677,11 +679,170 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
                           Procesando...
                         </>
                       ) : (
-                        "Completar registro"
+                        "Ver resumen"
                       )}
                     </button>
                   </div>
                 </form>
+              )}
+
+              {/* PASO 4: RESUMEN Y CONFIRMACIÓN */}
+              {step === 4 && (
+                <div className="w-full flex flex-col gap-4 mt-4 px-2 sm:px-4 md:px-6">
+                  <div className="text-sm text-center text-[#A0A0A0]">
+                    Revise su información antes de procesar el pago
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <h4 className="text-sm font-medium text-black mb-2">Información Personal</h4>
+                      <div className="bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                        <div className="flex flex-col space-y-3">
+                          <div className="flex items-start">
+                            <HiOutlineUser className="text-gray-700 mt-0.5 mr-2" />
+                            <div>
+                              <p className="text-xs text-black">Nombre completo</p>
+                              <p className="text-sm font-medium text-black">{watch("first_name")} {watch("last_name")}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <HiOutlineMail className="text-gray-700 mt-0.5 mr-2" />
+                            <div>
+                              <p className="text-xs text-black">Correo electrónico</p>
+                              <p className="text-sm font-medium text-black">{watch("email")}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <HiOutlinePhone className="text-gray-700 mt-0.5 mr-2" />
+                            <div>
+                              <p className="text-xs text-black">Teléfono</p>
+                              <p className="text-sm font-medium text-black">{watch("phone")}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <HiOutlineIdentification className="text-gray-700 mt-0.5 mr-2" />
+                            <div>
+                              <p className="text-xs text-black">Cédula</p>
+                              <p className="text-sm font-medium text-black">{watch("id")}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-sm font-medium text-black mb-2">Información Profesional</h4>
+                      <div className="bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                        <div className="flex flex-col space-y-3">
+                          <div className="flex items-start">
+                            <HiOutlineLocationMarker className="text-gray-700 mt-0.5 mr-2" />
+                            <div>
+                              <p className="text-xs text-black">Distribuidor</p>
+                              <p className="text-sm font-medium text-black">{watch("distributor")}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <HiOutlineDocumentText className="text-gray-700 mt-0.5 mr-2" />
+                            <div>
+                              <p className="text-xs text-black">Procedimiento principal</p>
+                              <p className="text-sm font-medium text-black">{watch("main_procedure")}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <MdNumbers className="text-gray-700 mt-0.5 mr-2" />
+                            <div>
+                              <p className="text-xs text-black">Volumen de trabajo</p>
+                              <p className="text-sm font-medium text-black">{watch("cases_per_week")} casos/semana</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white p-4 rounded-lg border-2 border-green-100 shadow-sm">
+                    <div className="flex justify-between items-center mb-3">
+                      <h4 className="text-sm font-medium text-black">Valor del boleto</h4>
+                      <span className="text-lg font-bold text-green-800">$500.000 COP</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="bg-green-100 p-1.5 rounded-full">
+                        <HiOutlineCreditCard className="text-green-700 text-sm" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-black">Método de pago</p>
+                        <p className="text-sm font-medium text-black">{selectedPayment === "card" ? "Tarjeta de Crédito" : "PSE"}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 bg-gray-100 p-4 rounded-lg mb-2">
+                    <svg
+                      className="w-5 h-5 text-gray-700 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <div>
+                      <p className="text-sm text-black">
+                        Al hacer clic en "Procesar pago", acepta nuestros términos y condiciones.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="w-full flex flex-col-reverse sm:flex-row justify-between">
+                    <button
+                      type="button"
+                      onClick={() => setStep(3)}
+                      className="w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] bg-white border border-[#333333] text-[#333333] rounded-lg flex items-center justify-center gap-2 hover:bg-gray-200 transition-all duration-300 text-sm font-medium cursor-pointer"
+                    >
+                      Volver
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleFinalSubmit}
+                      disabled={isSubmitting}
+                      className={`w-full sm:w-[180px] md:w-[200px] h-[45px] sm:h-[50px] rounded-lg flex items-center justify-center gap-2 text-white border border-[#1E4D2B] bg-[#225d33] hover:bg-[#1b4829] transition-all duration-300 text-sm font-medium
+                        ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <svg
+                            className="animate-spin -ml-1 mr-2 h-4 w-4 sm:h-5 sm:w-5 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Procesando...
+                        </>
+                      ) : (
+                        "Procesar pago"
+                      )}
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
           </div>

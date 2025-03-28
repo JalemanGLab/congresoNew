@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 // Rutas que requieren autenticación
 const protectedRoutes = [
-  "/assistants",
+  "/dashboard",
   "/profile",
   "/scanqr",
   "/search",
@@ -12,11 +12,11 @@ const protectedRoutes = [
 ];
 
 // Rutas públicas
-const publicRoutes = ["/login", "/"];
+const publicRoutes = ["/login"];
 
 // Rutas específicas por rol
 const assistantRoutes = ["/profile", "/scanqr"];
-const adminRoutes = ["/assistants", "/management"];
+const adminRoutes = ["/dashboard", "/management"];
 
 function parseJwt(token: string) {
   try {
@@ -44,7 +44,7 @@ export function middleware(request: NextRequest) {
       // Si está en rutas públicas, redirigir según rol
       if (publicRoutes.some((route) => pathname === route)) {
         const redirectUrl =
-          userRole === "assistant" ? "/profile" : "/assistants";
+          userRole === "assistant" ? "/profile" : "/dashboard";
         return NextResponse.redirect(new URL(redirectUrl, request.url));
       }
 
@@ -71,7 +71,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/assistants/:path*",
+    "/dashboard/:path*",
     "/profile/:path*",
     "/scanqr/:path*",
     "/search/:path*",

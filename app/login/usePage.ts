@@ -27,7 +27,7 @@ export const useLogin = () => {
         if (response.data.user.role === "assistant") {
           router.replace("/profile");
         } else {
-          router.replace("/assistants");
+          router.replace("/dashboard");
         }
       }, 0);
     } catch (error: any) {

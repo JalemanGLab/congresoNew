@@ -36,8 +36,8 @@ const MobileMenu = () => {
 
   const menuItems = [
     {
-      text: "Asistentes",
-      href: "/assistants",
+      text: "Dashboard",
+      href: "/dashboard",
       icon: <TfiDashboard />,
       roles: ["admin", "superadmin"],
     },
