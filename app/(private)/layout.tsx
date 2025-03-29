@@ -25,7 +25,7 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex flex-col w-full h-screen overflow-x-hidden">
-      <div className="flex flex-row h-12 px-2 items-center justify-between border-b border-neutral-200">
+      <div className="flex flex-row h-12 p-2 items-center justify-between border-b border-neutral-200">
         <div className="flex flex-row w-full h-full items-center gap-4">
           <div className="md:hidden flex flex-row h-full items-center">
             <Sheet>
@@ -36,7 +36,7 @@ export default function DashboardLayout({
               </SheetTrigger>
               <SheetContent side="left" className="w-[280px]">
                 <SheetHeader>
-                  <SheetTitle>LOGO</SheetTitle>
+                  <SheetTitle>Congreso Magno 3.0</SheetTitle>
                   <SheetDescription></SheetDescription>
                 </SheetHeader>
                 <MobileMenu />
@@ -47,9 +47,8 @@ export default function DashboardLayout({
               </SheetContent>
             </Sheet>
           </div>
-          <div className="hidden md:flex items-center text-background h-full py-1">
-            {/* <img src={solventum} alt="solventum" className="h-full" /> */}
-            LOGO
+          <div className="hidden md:flex items-center text-background h-full font-semibold">
+            Congreso Magno 3.0
           </div>
         </div>
 
