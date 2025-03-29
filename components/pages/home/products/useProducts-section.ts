@@ -6,7 +6,10 @@ import allProducts from '../../../shared/data/allProducts.json'
 export const productCategories = {
   "Clarity ultra": ["product1", "product2", "product3", "product4", "product5"],
   "SBU+ Relix": ["product6", "product7", "product8", "product9", "product10"],
-  "Z350XT": ["product11", "product12", "product13", "product14", "product15", "product16", "product17"]
+  "Z350XT": ["product11", "product12", "product13", "product14", "product15", "product16", "product17"],
+  "Clarity advance": [""],
+  "Clinpro Clear": [""],
+  "Easy Match": [""],
 }
 
 const useProductsSection =()=>{
@@ -32,7 +35,7 @@ const useProductsSection =()=>{
           (product) =>
             product.name.toLowerCase().includes(term) ||
             product.description.toLowerCase().includes(term) ||
-            product.category.toLowerCase().includes(term) ||
+            // product.category.toLowerCase().includes(term) ||
             product.brand.toLowerCase().includes(term)
         )
       }
