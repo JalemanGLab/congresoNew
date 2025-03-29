@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+// import { Badge } from "@/components/ui/badge"
 import useProductCard from "./useProduct-card"
 
 interface ProductCardProps {
@@ -10,16 +10,12 @@ interface ProductCardProps {
   name: string
   image: string
   description: string
-  category: string
-  features?: string[]
-  specifications?: string[]
   brand?: string
 }
 
-export default function ProductCard({ 
-  name, 
-  image, 
-  category,
+export default function ProductCard({
+  name,
+  image,
 }: ProductCardProps) {
 
   const {
@@ -28,9 +24,9 @@ export default function ProductCard({
   } = useProductCard()
 
   return (
-    <> 
-      <Card className="bg-[#001208] min-w-[350px] max-w-[350px] h-[350px] border-[#00FF66]/10 overflow-hidden hover:border-[#00FF66]/30 transition-all group shadow-lg relative">
-        <CardContent className="w-full h-full p-6 flex flex-col items-center justify-between relative">
+    <>
+      <Card className="bg-[#001208] min-w-[320px] max-w-[320px] h-[320px] border-[#00FF66]/10 overflow-hidden hover:border-[#00FF66]/30 transition-all group shadow-lg relative">
+        <CardContent className="w-full h-full p-6 flex flex-col items-center gap-5 relative">
           {/* Imagen con efecto de expansión */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
             <div className="w-full h-full bg-white rounded-lg p-4">
@@ -45,7 +41,7 @@ export default function ProductCard({
             </div>
           </div>
 
-          <div className="relative w-40 h-40 group-hover:opacity-0 transition-all duration-500">
+          <div className="relative w-52 h-52 group-hover:opacity-0 transition-all duration-500">
             <div className="w-full h-full bg-white rounded-2xl p-2">
               <div className="relative w-full h-full">
                 <Image
@@ -57,17 +53,9 @@ export default function ProductCard({
               </div>
             </div>
           </div>
-
-          {/* Contenido */}
-          <div className="w-full text-center group-hover:opacity-0 transition-all duration-500">
-            <Badge variant="outline" className="mb-3 bg-[#00FF66]/10 text-[#00FF66] border-[#00FF66]/20 px-3 py-1">
-              {category}
-            </Badge>
-            <h3 className="text-xl font-bold text-white">{name}</h3>
-          </div>
+          <h3 className="text-xl font-bold text-white text-center">{name}</h3>
         </CardContent>
       </Card>
-
     </>
   )
 }
