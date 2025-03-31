@@ -132,6 +132,9 @@ const useTableGlobal = (data: any, itemsPerPage: number) => {
     // Obtiene el tipo de filtro actual
     const currentFilterType = filterOptions.find(opt => opt.id === activeFilter)?.type || 'text';
 
+
+    
+
     return {
         currentPage,
         filterValue,

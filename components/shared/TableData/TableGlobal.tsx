@@ -77,7 +77,7 @@ const TableGlobal = ({
       // Cerrar alerta de carga
       await Swal.fire({
         title: 'Éxito',
-        text: result.message || 'Estado de pago actualizado exitosamente',
+        text: result.data.message || 'Estado de pago actualizado exitosamente',
         icon: 'success',
       });
 
