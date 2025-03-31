@@ -8,6 +8,7 @@ const protectedRoutes = [
   "/scanqr",
   "/search",
   "/alerts",
+  "/reports",
   "/management",
 ];
 
@@ -16,7 +17,7 @@ const publicRoutes = ["/login"];
 
 // Rutas específicas por rol
 const assistantRoutes = ["/profile", "/scanqr"];
-const adminRoutes = ["/dashboard", "/management"];
+const adminRoutes = ["/dashboard", "/management", "/reports"];
 
 function parseJwt(token: string) {
   try {
@@ -77,6 +78,7 @@ export const config = {
     "/search/:path*",
     "/alerts/:path*",
     "/management/:path*",
+    "/reports/:path*",
     "/login",
     "/"
   ]
