@@ -85,6 +85,12 @@ const PageDashboard = () => {
           filters={{
             all: true,
           }}
+          refresh={{
+            show: true,
+            onRefresh: () => {
+              console.log("Refreshing...");
+            },
+          }}
         />
       </div>
     </div>

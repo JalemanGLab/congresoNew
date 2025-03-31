@@ -10,8 +10,10 @@ export interface DTOPayment {
   last_name: string;
   distributor: string;
   entry: boolean | null;
-  payment: string | null;
+  payment_status: string | null;
   payment_update: string | null;
+  transaction_id: string;
+  payment_ref: string | null;
   // Otros campos que podrían ser necesarios
   created_at: string;
 }
@@ -58,6 +60,12 @@ export const RegistrationDateCell = (row: DTOPayment): React.ReactNode => (
   </div>
 );
 
+export const PaymentRefCell = (row: DTOPayment): React.ReactNode => (
+  <div className="font-medium text-[14px] text-neutral-600">
+    {row.payment_ref ? row.payment_ref : "No disponible"}
+  </div>
+);
+
 // Celda para mostrar el estado de entrada
 export const EntryStatusCell = (row: DTOPayment): React.ReactNode => (
   <span
@@ -75,19 +83,13 @@ export const EntryStatusCell = (row: DTOPayment): React.ReactNode => (
 export const PaymentStatusCell = (row: DTOPayment): React.ReactNode => (
   <span
     className={`px-2 py-1 rounded-full text-sm ${
-      row.payment === null
+      row.payment_status === null
         ? "bg-red-200 text-red-700"          // Estilo para "pendiente"
-        : "bg-green-100 text-green-800"      // Estilo para "pagado"
+        : "bg-green-100 text-green-800"      // Estilo para "aprobado"
     }`}
   >
-    {row.payment === null ? "Pendiente" : "Pagado"}
+    {row.payment_status === null ? "Pendiente" : "Aprobado"}
   </span>
 );
 
-// Celda para mostrar la fecha de pago
-export const PaymentDateCell = (row: DTOPayment): React.ReactNode => (
-  <div className="font-medium text-[14px] text-neutral-600">
-    {row.payment_update ? formatDate(row.payment_update) : "No disponible"}
-  </div>
-);
 

@@ -6,7 +6,7 @@ import {
   RegistrationDateCell,
   PaymentStatusCell,
   EntryStatusCell,
-  PaymentDateCell,
+  PaymentRefCell,
 } from "@/components/pages/dashboard/templates/cellTemplates";
 import { getAssistants } from "@/services/asisstantService";
 import { useEffect, useState, useRef } from "react";
@@ -76,9 +76,13 @@ const useDashboard = () => {
       cell: PaymentStatusCell,
     },
     {
-      header: "Fecha de Pago",
-      accessor: "paymentDate",
-      cell: PaymentDateCell,
+      header: "Referencia de Pago",
+      accessor: "payment_ref",
+      cell: PaymentRefCell,
+    },
+    {
+      header: "Acciones",
+      accessor: "actions",
     },
   ];
 

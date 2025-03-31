@@ -19,4 +19,8 @@ export interface TableGlobalProps {
   
     isLoading?: boolean;
     emptyMessage?: string;
+    refresh?: {
+      show: boolean;
+      onRefresh: () => void;
+    };
   }
