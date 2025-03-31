@@ -5,13 +5,12 @@ import {
   HiOutlinePower,
   HiOutlineQrCode,
   HiOutlineUser,
+  HiOutlineDocumentText,
 } from "react-icons/hi2";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { authService } from "@/services/authService";
 import { toast } from "sonner";
-import { DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import Image from "next/image";
 import { SheetClose } from "@/components/ui/sheet";
 
 const MobileMenu = () => {
@@ -51,6 +50,12 @@ const MobileMenu = () => {
       text: "Scan QR",
       href: "/scanqr",
       icon: <HiOutlineQrCode />,
+      roles: ["admin", "superadmin"],
+    },
+    {
+      text: "Reportes",
+      href: "/reports",
+      icon: <HiOutlineDocumentText />,
       roles: ["admin", "superadmin"],
     },
   ];
