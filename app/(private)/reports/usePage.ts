@@ -9,10 +9,10 @@ interface Distributor {
 }
 
 interface Assistant {
-  documentNumber: string;
-  name: string;
+  identification: string;
+  first_name: string;
   distributor: string;
-  paymentStatus: string;
+  payment_status: string;
   status: string;
 }
 
@@ -24,7 +24,7 @@ function usePage() {
     try {
       setLoading(true);
       const response = await getAssistants();
-      
+
       // Filtrar asistentes por distribuidor
       const filteredAssistants = response.data.filter(
         (assistant: Assistant) => assistant.distributor === distributorName
@@ -32,11 +32,10 @@ function usePage() {
 
       // Preparar datos para Excel
       const excelData = filteredAssistants.map((assistant: Assistant) => ({
-        "Número de Documento": assistant.documentNumber,
-        "Nombre Completo": assistant.name,
-        "Distribuidor": assistant.distributor,
-        "Estado de Pago": assistant.paymentStatus,
-        "Estado de Ingreso": assistant.status,
+        "Número de Documento": assistant.identification,
+        "Nombre Completo": assistant.first_name,
+        Distribuidor: assistant.distributor,
+        "Estado de Pago": assistant.payment_status,
       }));
 
       // Crear workbook y worksheet
@@ -47,7 +46,9 @@ function usePage() {
       XLSX.utils.book_append_sheet(wb, ws, "Reporte");
 
       // Generar archivo
-      const fileName = `reporte_${distributorName}_${new Date().toISOString().split('T')[0]}.xlsx`;
+      const fileName = `reporte_${distributorName}_${
+        new Date().toISOString().split("T")[0]
+      }.xlsx`;
       XLSX.writeFile(wb, fileName);
 
       toast.success("Reporte generado exitosamente");
@@ -62,10 +63,12 @@ function usePage() {
     try {
       const response = await getAssistants();
       const uniqueDistributors = Array.from(
-        new Set(response.data.map((assistant: Assistant) => assistant.distributor))
-      ).map(name => ({
-        id: name,
-        name: name
+        new Set(
+          response.data.map((assistant: Assistant) => assistant.distributor)
+        )
+      ).map((name) => ({
+        id: name as string,
+        name: name as string,
       }));
       setDistributors(uniqueDistributors);
     } catch (error) {
@@ -77,7 +80,7 @@ function usePage() {
     distributors,
     loading,
     generateExcel,
-    getUniqueDistributors
+    getUniqueDistributors,
   };
 }
 
