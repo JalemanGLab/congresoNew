@@ -6,6 +6,7 @@ import {
   HiOutlineUser,
   HiOutlinePower,
   HiOutlineQrCode,
+  HiOutlineDocumentText,
 } from "react-icons/hi2";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -45,6 +46,12 @@ const DesktopMenu = () => {
       text: "Scan QR",
       href: "/scanqr",
       icon: <HiOutlineQrCode />,
+      roles: ["admin", "superadmin"],
+    },
+    {
+      text: "Reportes",
+      href: "/reports",
+      icon: <HiOutlineDocumentText />,
       roles: ["admin", "superadmin"],
     },
   ];
