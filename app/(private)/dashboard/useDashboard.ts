@@ -211,7 +211,8 @@ const useDashboard = () => {
     distributorData,
     chartRef,
     chartInstance,
-    initializeChart
+    initializeChart,
+    getAssistantsData
   };
 };
 

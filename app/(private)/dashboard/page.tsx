@@ -12,7 +12,8 @@ const PageDashboard = () => {
     mainCity, 
     distributorData, 
     chartRef, 
-    initializeChart 
+    initializeChart,
+    getAssistantsData 
   } = useDashboard();
   
   useEffect(() => {
@@ -87,9 +88,7 @@ const PageDashboard = () => {
           }}
           refresh={{
             show: true,
-            onRefresh: () => {
-              console.log("Refreshing...");
-            },
+            onRefresh: getAssistantsData,
           }}
         />
       </div>

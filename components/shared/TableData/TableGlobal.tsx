@@ -231,10 +231,10 @@ const TableGlobal = ({
                         {refresh?.show && column.accessor === 'actions' && (
                           <button
                             onClick={() => handleRefresh(row.transaction_id)}
-                            className="p-1.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors"
+                            className="p-1 text-neutral-600 hover:text-neutral-800 bg-neutral-200 hover:bg-neutral-300 rounded-full transition-colors"
                             title="Refrescar estado de pago"
                           >
-                            <BiRefresh className="w-5 h-5" />
+                            <BiRefresh className="text-2xl" />
                           </button>
                         )}
                       </td>
