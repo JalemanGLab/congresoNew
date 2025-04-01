@@ -10,7 +10,7 @@ export const useEvent = () => {
   };
 
   const eventData = {
-    title: "Sobre el Evento",
+    title: "Información relevante",
     description:
       "El Congreso Magno 3.0 es el evento más importante del año para profesionales y empresas que buscan innovar y crecer en el mercado actual.",
     subtitle: "Un evento diseñado para profesionales",
