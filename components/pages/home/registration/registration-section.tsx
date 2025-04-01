@@ -60,7 +60,7 @@ export default function RegistrationSection() {
                   BIENVENIDOS A MAGNO 3.0
                 </div>
                 <div className="text-white text-xl font-normal md:text-2xl lg:text-3xl">
-                  LA CUMBRE DE LA INNOVACIÓN DONTOLÓGICA
+                  LA CUMBRE DE LA INNOVACIÓN ODONTOLÓGICA
                 </div>
               </div>
             </div>

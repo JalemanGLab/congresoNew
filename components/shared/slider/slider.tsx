@@ -24,7 +24,7 @@ export default function Slider() {
       {/* Primera vista */}
       <div
         className={`absolute inset-0 transition-all duration-1000 ${
-          0 === currentSlide ? "scale-100" : "opacity-0 scale-105"
+          0 === currentSlide ? "opacity-100 z-10" : "opacity-0 scale-105 -z-10"
         }`}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -36,11 +36,12 @@ export default function Slider() {
           }
           alt="Image1"
           fill
+          priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#001208] via-[#001208]/70 to-transparent" />
-        <div className="absolute inset-0 flex flex-col gap-6 sm:gap-10 items-center justify-center transition-all duration-1000 opacity-100 translate-y-0">
-          <div className="text-center space-y-4 sm:space-y-4 md:space-y-6 px-4 max-w-5xl">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#001208] via-[#001208]/70 to-transparent z-10" />
+        <div className="absolute inset-0 flex flex-col gap-6 sm:gap-10 items-center justify-center z-20 pointer-events-none">
+          <div className="text-center space-y-4 sm:space-y-4 md:space-y-6 px-4 max-w-5xl pointer-events-none">
             <div className="inline-block px-1.5 py-[1px] rounded-full border border-[#82ffe4] text-white text-2xl md:text-4xl">
               CONGRESO
             </div>
@@ -66,20 +67,20 @@ export default function Slider() {
               </div>
             </div>
           </div>
-          {/* <button
+          <button
             type="button"
             onClick={scrollToRegistro}
-            className="flex justify-center items-center cursor-pointer rounded-full bg-[#15d094] text-black font-semibold text-base sm:text-lg px-6 sm:px-8 md:px-10 py-2 sm:py-2.5 hover:opacity-80 transition-all duration-300"
+            className="pointer-events-auto relative z-30 flex justify-center items-center cursor-pointer rounded-full bg-[#15d094] text-black font-semibold text-base sm:text-lg px-6 sm:px-8 md:px-10 py-2 sm:py-2.5 hover:bg-[#13bb85] active:scale-95 transition-all duration-300"
           >
             Ir al evento
-          </button> */}
+          </button>
         </div>
       </div>
 
       {/* Segunda vista */}
       <div
         className={`absolute inset-0 transition-all duration-1000 ${
-          1 === currentSlide ? "scale-100" : "opacity-0 scale-105"
+          1 === currentSlide ? "opacity-100 z-10" : "opacity-0 scale-105 -z-10"
         }`}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -141,7 +142,7 @@ export default function Slider() {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-black/30 hover:bg-black/50 text-white z-10"
+        className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-black/30 hover:bg-black/50 text-white z-40"
         onClick={goToPrevSlide}
       >
         <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
@@ -151,7 +152,7 @@ export default function Slider() {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-black/30 hover:bg-black/50 text-white z-10"
+        className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-black/30 hover:bg-black/50 text-white z-40"
         onClick={goToNextSlide}
       >
         <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
@@ -159,7 +160,7 @@ export default function Slider() {
       </Button>
 
       {/* Indicators */}
-      <div className="absolute bottom-6 sm:bottom-12 left-0 right-0 flex justify-center gap-2 sm:gap-4 z-10">
+      <div className="absolute bottom-6 sm:bottom-12 left-0 right-0 flex justify-center gap-2 sm:gap-4 z-40">
         <button
           onClick={() => goToSlide(0)}
           className={`w-2 sm:w-3 h-2 sm:h-3 rounded-full transition-all ${
