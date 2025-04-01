@@ -20,8 +20,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col w-full h-screen overflow-x-hidden">
-      <div className="flex flex-row h-12 p-2 items-center justify-between border-b border-neutral-200">
+    <div className="bg-white flex flex-col w-full h-screen overflow-hidden">
+      <div className="flex flex-row h-10 px-2 items-center justify-between border-b border-neutral-200 flex-shrink-0">
         <div className="flex flex-row w-full h-full items-center gap-4">
           <div className="md:hidden flex flex-row h-full items-center">
             <Sheet>
@@ -50,11 +50,13 @@ export default function DashboardLayout({
 
         <UserNav />
       </div>
-      <div className="flex flex-row w-full h-full">
-        <div className="hidden md:flex flex-col w-20 h-full p-2">
+      <div className="flex flex-row w-full h-[calc(100vh-2.5rem)] overflow-hidden">
+        <div className="hidden md:flex flex-col w-16 h-full py-2 px-1 flex-shrink-0">
           <DesktopMenu />
         </div>
-        <div className="flex flex-col w-full h-full p-2 overflow-x-hidden overflow-y-auto">{children}</div>
+        <main className="flex-1 overflow-y-auto overflow-x-hidden">
+          {children}
+        </main>
       </div>
     </div>
   );

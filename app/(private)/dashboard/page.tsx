@@ -26,11 +26,11 @@ const PageDashboard = () => {
   }, [distributorData, chartRef, initializeChart]);
 
   return (
-    <div className="w-full flex flex-col gap-8 p-4">
+    <div className="w-full flex flex-col gap-4 p-3">
       {/* Contenedor de tarjetas con responsive mejorado */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {/* Card 1: Total de Asistentes */}
-        <div className="w-full bg-white shadow-sm border border-gray-100 rounded-lg p-5 flex flex-col justify-between min-h-[200px]">
+        <div className="w-full bg-white shadow-sm border border-gray-100 rounded-lg p-5 flex flex-col justify-between min-h-[180px]">
           <div className="flex justify-between items-center">
             <h3 className="font-semibold text-gray-800 text-lg">Asistentes Totales</h3>
             <div className="p-2 bg-blue-100 rounded-full">
@@ -46,7 +46,7 @@ const PageDashboard = () => {
         </div>
         
         {/* Card 3: Ciudad Principal - Movida a la segunda posición en móvil */}
-        <div className="w-full bg-white shadow-sm border border-gray-100 rounded-lg p-5 flex flex-col justify-between min-h-[200px]">
+        <div className="w-full bg-white shadow-sm border border-gray-100 rounded-lg p-5 flex flex-col justify-between min-h-[180px]">
           <div className="flex justify-between items-center">
             <h3 className="font-semibold text-gray-800 text-lg">Ciudad Principal</h3>
             <div className="p-2 bg-orange-100 rounded-full">
@@ -64,14 +64,14 @@ const PageDashboard = () => {
         </div>
         
         {/* Card 2: Distribuidores (Gráfico) - Ocupa todo el ancho en lg */}
-        <div className="w-full bg-white shadow-sm border border-gray-100 rounded-lg p-5 flex flex-col md:col-span-2 lg:col-span-1 min-h-[300px]">
+        <div className="w-full bg-white shadow-sm border border-gray-100 rounded-lg p-5 flex flex-col md:col-span-2 lg:col-span-1 min-h-[180px]">
           <div className="flex justify-between items-center mb-4">
             <h3 className="font-semibold text-gray-800 text-lg">Distribuidores</h3>
             <div className="p-2 bg-purple-100 rounded-full">
               <FiShoppingBag className="text-purple-600 text-xl" />
             </div>
           </div>
-          <div className="flex-grow relative min-h-[200px]">
+          <div className="flex-grow relative min-h-[170px]">
             <canvas ref={chartRef} />
           </div>
         </div>
