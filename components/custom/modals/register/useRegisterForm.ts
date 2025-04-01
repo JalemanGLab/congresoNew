@@ -52,7 +52,6 @@ const useRegisterForm = () => {
         const distributors = await getDistributors();
 
         if (!Array.isArray(distributors)) {
-          console.error("Error: La respuesta de distribuidores no es un array", distributors);
           toast.error("Error al cargar los distribuidores. Formato de datos incorrecto.");
           return;
         }
@@ -65,7 +64,6 @@ const useRegisterForm = () => {
 
         setDistributorsOptions(formattedDistributors);
       } catch (error) {
-        console.error("Error al cargar distribuidores:", error);
         toast.error("Error al cargar los distribuidores. Por favor, actualice la página.");
       }
     };
@@ -166,7 +164,6 @@ const useRegisterForm = () => {
       setStep(2);
       toast.success("Información personal guardada correctamente");
     } catch (error) {
-      console.error("Error al procesar datos personales:", error);
       toast.error("Ha ocurrido un error al procesar sus datos personales");
     }
   };
@@ -175,7 +172,6 @@ const useRegisterForm = () => {
   const handleStep2Submit = async (data: any) => {
     try {
       const cleanedData = cleanDataBeforeSubmit(data);
-      console.log("Datos paso 2:", cleanedData);
 
       if (
         !data.distributor ||
@@ -211,7 +207,6 @@ const useRegisterForm = () => {
         ...cleanedData
       });
     } catch (error) {
-      console.error("Error al procesar datos profesionales:", error);
       toast.error("Ha ocurrido un error al procesar sus datos profesionales");
     }
   };
@@ -223,7 +218,6 @@ const useRegisterForm = () => {
       setStep(3);
       toast.success("Información profesional guardada correctamente");
     } catch (error: any) {
-      console.error("Error de validación:", error);
       toast.error(error.message || "Ha ocurrido un error inesperado");
     }
   };
@@ -266,12 +260,10 @@ const useRegisterForm = () => {
         }
       };
 
-      console.log("Enviando datos al backend:", userData);
 
       // Intentar registrar con el backend
       try {
         const response = await registerAssistant(userData);
-        console.log("Respuesta del backend:", response);
 
         if (response && response.status === true && response.url_redirect) {
           // Usar la URL que proporciona el backend
@@ -285,14 +277,12 @@ const useRegisterForm = () => {
         }
       } catch (connectionError: any) {
         // Error de conexión o registro
-        console.error("Error al intentar registrar:", connectionError);
 
         // Mostrar mensaje de error genérico
         toast.error(connectionError.message || "Error en el registro. Por favor intenta nuevamente.");
         setStatusFinish("error");
       }
     } catch (error: any) {
-      console.error("Error general en el proceso:", error);
       toast.error("Ocurrió un error inesperado. Por favor intenta de nuevo más tarde.");
       setStatusFinish("error");
     } finally {
@@ -304,10 +294,6 @@ const useRegisterForm = () => {
   const redirectToPayment = () => {
     try {
       if (redirectUrl) {
-        // Log para depuración
-        console.log("Redirigiendo a URL de pago:", redirectUrl);
-
-        // Redirigir a la URL proporcionada por el backend
         window.location.href = redirectUrl;
       } else {
         // Si no hay URL de redirección, mostrar un mensaje de error claro
@@ -315,7 +301,6 @@ const useRegisterForm = () => {
         setStatusFinish("error");
       }
     } catch (error) {
-      console.error("Error al redirigir al pago:", error);
       toast.error("Error al redirigir al pago. Por favor intente nuevamente.");
       setStatusFinish("error");
     }
