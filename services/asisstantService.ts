@@ -43,3 +43,13 @@ export const getAssistants = async () => {
     }
 };
 
+export const refreshTransaction = async (transaction_id: string) => {
+  try {
+    const response = await axiosInstance.get(`/payments/transaction/${transaction_id}`);
+    return response;
+  } catch (error) { 
+    const errorResponse = handleAxiosError(error);
+    throw errorResponse;
+  }
+};
+

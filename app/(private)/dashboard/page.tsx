@@ -12,7 +12,8 @@ const PageDashboard = () => {
     mainCity, 
     distributorData, 
     chartRef, 
-    initializeChart 
+    initializeChart,
+    getAssistantsData 
   } = useDashboard();
   
   useEffect(() => {
@@ -81,9 +82,13 @@ const PageDashboard = () => {
         <TableGlobal
           columns={columns}
           data={assistants}
-          itemsPerPage={6}
+          itemsPerPage={5}
           filters={{
             all: true,
+          }}
+          refresh={{
+            show: true,
+            onRefresh: getAssistantsData,
           }}
         />
       </div>

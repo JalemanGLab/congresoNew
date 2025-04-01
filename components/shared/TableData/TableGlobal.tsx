@@ -1,10 +1,12 @@
 "use client"
 
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiRefresh } from 'react-icons/bi';
 import { IoIosSearch, IoMdClose, IoIosArrowDown } from "react-icons/io";
 import useTableGlobal from './useTableGlobal';
 import { TableGlobalProps } from './DTOTableGlobal';
 import { useEffect, useRef } from 'react';
+import Swal from 'sweetalert2';
+import { refreshTransaction } from '@/services/asisstantService';
 
 /**
  * Componente de tabla global reutilizable con funcionalidades de filtrado y paginación
@@ -13,6 +15,7 @@ import { useEffect, useRef } from 'react';
  * @param itemsPerPage - Número de elementos por página (por defecto 4)
  * @param filters - Configuración de filtros
  * @param emptyMessage - Mensaje a mostrar cuando no hay datos (por defecto 'No hay datos disponibles')
+ * @param refresh - Configuración para refrescar la tabla
  */
 const TableGlobal = ({
   columns,
@@ -20,6 +23,7 @@ const TableGlobal = ({
   itemsPerPage = 4,
   filters,
   emptyMessage = 'No hay datos disponibles',
+  refresh,
 }: TableGlobalProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -55,6 +59,41 @@ const TableGlobal = ({
     };
   }, [setShowFilterDropdown]);
   
+  const handleRefresh = async (transaction_id: string) => {
+    try {
+      // Mostrar alerta de carga
+      Swal.fire({
+        title: 'Cargando...',
+        text: 'Por favor espere',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      // Realizar la consulta usando el servicio
+      const result = await refreshTransaction(transaction_id);
+
+      // Cerrar alerta de carga
+      await Swal.fire({
+        title: 'Éxito',
+        text: result.data.message || 'Estado de pago actualizado exitosamente',
+        icon: 'success',
+      });
+
+      // Refrescar la tabla
+      if (refresh?.onRefresh) {
+        refresh.onRefresh();
+      }
+    } catch (error: any) {
+      await Swal.fire({
+        title: 'Error',
+        text: error.message || 'Ocurrió un error al actualizar el estado del pago',
+        icon: 'error',
+      });
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-4">
       {/* Filtros y Búsqueda */}
@@ -189,6 +228,15 @@ const TableGlobal = ({
                         className="px-4 py-4 text-sm text-neutral-600 whitespace-nowrap"
                       >
                         {column.cell ? column.cell(row) : row[column.accessor]}
+                        {refresh?.show && column.accessor === 'actions' && (
+                          <button
+                            onClick={() => handleRefresh(row.transaction_id)}
+                            className="p-1 text-neutral-600 hover:text-neutral-800 bg-neutral-200 hover:bg-neutral-300 rounded-full transition-colors"
+                            title="Refrescar estado de pago"
+                          >
+                            <BiRefresh className="text-2xl" />
+                          </button>
+                        )}
                       </td>
                     ))}
                   </tr>

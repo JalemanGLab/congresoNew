@@ -2,6 +2,7 @@
 
 import React from "react";
 import { HiOutlineClipboardList, HiOutlineUser, HiOutlineCreditCard } from "react-icons/hi";
+import { FaUserShield } from "react-icons/fa";
 import { ProgressStepsProps } from "./type";
 import { useProgress } from "./useProgress";
 
@@ -10,14 +11,16 @@ const ProgressSteps: React.FC<ProgressStepsProps> = (props) => {
 
   const icons = {
     1: <HiOutlineUser className="w-6 h-6" />,
-    2: <HiOutlineClipboardList className="w-6 h-6" />,
-    3: <HiOutlineCreditCard className="w-6 h-6" />
+    2: <FaUserShield className="w-6 h-6" />,
+    3: <HiOutlineClipboardList className="w-6 h-6" />,
+    4: <HiOutlineCreditCard className="w-6 h-6" />
   };
 
   const labelSteps: Record<number, string> = {
     1: "Datos personales",
-    2: "Datos de envío",
-    3: "Método de pago"
+    2: "Datos profesionales",
+    3: "Confirmación de datos",
+    4: "Proceso de pago"
   }
 
   const { stepIcons, isClickable, progressWidth } = useProgress({
@@ -27,7 +30,7 @@ const ProgressSteps: React.FC<ProgressStepsProps> = (props) => {
 
   return (
     <div className="w-full flex justify-center items-center">
-      <div className="relative flex items-center justify-between w-full max-w-md ">
+      <div className="relative flex items-center justify-between w-full max-w-xl ">
         <div className="absolute h-1 top-6 left-0 right-0 mr-10 ml-10 bg-[#E5E5E5]" />
         <div
           className="absolute h-1 top-6 left-0 bg-[#00391c] transition-all duration-300 ml-7"
@@ -51,7 +54,7 @@ const ProgressSteps: React.FC<ProgressStepsProps> = (props) => {
             </div>
 
             <span
-              className={`hidden md:block text-xs mt-2 font-medium ${currentStep >= stepNumber ? "text-[#00391c]" : "text-[#666666]"}`}
+              className={`hidden lg:block text-xs mt-2 font-medium ${currentStep >= stepNumber ? "text-[#00391c]" : "text-[#666666]"}`}
             >
              {labelSteps[stepNumber]}
             </span>

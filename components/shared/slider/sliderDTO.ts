@@ -4,7 +4,9 @@ export type Slide = {
     src: string;
     alt: string;
     date?: string;
-    title?: string;
+    title1?: string;
+    title2?: string;
     country?: string;
     subtitle?: string;
+    congreso?: string;
 }

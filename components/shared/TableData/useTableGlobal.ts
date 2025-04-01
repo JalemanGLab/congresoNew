@@ -29,6 +29,18 @@ const useTableGlobal = (data: any, itemsPerPage: number) => {
                 { value: 'true', label: 'Ingresado' }
             ]
         },
+        {
+            id: 'payment_status',
+            label: 'Estado de Pago',
+            type: 'select',
+            options: [
+                { value: 'PENDIENTE', label: 'Pendiente' },
+                { value: 'APROBADA', label: 'Aprobado' },
+                { value: 'COMENZADA', label: 'Comenzada' },
+                { value: 'RECHAZADA', label: 'Rechazada' },
+                { value: 'FALLIDA', label: 'Fallida' }
+            ]
+        }
     ];
 
     /**
@@ -90,8 +102,8 @@ const useTableGlobal = (data: any, itemsPerPage: number) => {
                     }
                     return item[activeFilter]?.toString() === filterValue;
                 }
-                else if (activeFilter === 'paymentStatus') {
-                    return item[activeFilter]?.toLowerCase() === searchTerm.toLowerCase();
+                else if (activeFilter === 'payment_status') {
+                    return item[activeFilter] === filterValue;
                 }
                 // Para otros filtros, busca en el campo específico
                 else {
@@ -131,6 +143,9 @@ const useTableGlobal = (data: any, itemsPerPage: number) => {
 
     // Obtiene el tipo de filtro actual
     const currentFilterType = filterOptions.find(opt => opt.id === activeFilter)?.type || 'text';
+
+
+    
 
     return {
         currentPage,
