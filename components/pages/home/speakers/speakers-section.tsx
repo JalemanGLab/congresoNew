@@ -39,11 +39,11 @@ export default function SpeakersSection() {
       </div>
       <div className="container relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Ponentes Destacados</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Conferencistas</h2>
           <div className="h-1 w-24 bg-gradient-to-r from-[#00FF66]/50 to-[#00FF66] mx-auto mb-6"></div>
           <p className="text-white/80 max-w-3xl mx-auto text-lg">
             Conoce a los expertos que compartirán su conocimiento y experiencia en el Congreso Magno 3.0. Haz clic en
-            cada ponente para ver más detalles.
+            cada conferencista para ver más detalles.
           </p>
         </div>
 
