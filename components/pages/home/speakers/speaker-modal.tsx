@@ -74,7 +74,7 @@ export default function SpeakerModal({
 
         <div className="grid md:grid-cols-2 gap-8 p-8">
           <div className="space-y-6">
-            <div className="relative h-80 w-full rounded-xl overflow-hidden">
+            <div className="relative h-96 w-full rounded-xl overflow-hidden">
               <Image src={image || "/placeholder.svg"} alt={name} fill className="object-cover" />
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function SpeakerModal({
 
             <div className="h-1 w-20 bg-[#00FF66]/50"></div>
 
-            <div>
+            <div className="max-h-[300px] overflow-y-auto custom-scrollbar">
               <h3 className="text-xl font-medium text-white mb-3">Biografía</h3>
               <p className="text-white/80 leading-relaxed">{bio}</p>
             </div>

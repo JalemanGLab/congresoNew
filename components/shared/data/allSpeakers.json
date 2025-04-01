@@ -1,66 +1,50 @@
 [
 	{
 		"id": "speaker1",
-		"name": "Ana Martínez",
-		"role": "CEO de Innovatech",
-		"image": "https://img.freepik.com/foto-gratis/hermosa-joven-doctora-mirando-camara-oficina_1301-7807.jpg?height=400&width=400",
-		"topic": "Transformación Digital",
-		"bio": "Ana Martínez es una reconocida experta en transformación digital con más de 15 años de experiencia en el sector odontológico. Como CEO de Innovatech, ha liderado proyectos de digitalización en más de 200 clínicas dentales en toda Latinoamérica."
+		"name": "Dr. Alfonso María de los Reyes Victoria",
+		"role": "Ortodoncista",
+		"image": "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/speaker/1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzcGVha2VyLzEucG5nIiwiaWF0IjoxNzQzNDg3MTMwLCJleHAiOjE3NzUwMjMxMzB9.TTP9C5I4tbooe3O9R395Fg3HL8mxxLsv8vMcq4jMk5Y",
+		"topic": "Odontólogo Ortodoncista",
+		"bio": "Odontólogo Ortodoncista egresado de la Pontificia Universidad Javeriana. Fue Director del Posgrado de Ortodoncia (2002-2010) y actualmente es docente en diversas áreas: Clínica de Autoligado, Minitornillos en Ortodoncia, Clínica de Ortodoncia Lingual, y Clínica de Anomalías Dentomaxilofaciales y Seminario Interdisciplinario en la Pontificia Universidad Javeriana. Reconocido conferencista nacional e internacional para 3M Solventum."
 	},
 	{
 		"id": "speaker2",
-		"name": "Carlos Rodríguez",
-		"role": "Director de Estrategia",
-		"image": "https://www.stelorder.com/wp-content/uploads/2021/09/portada-empresario-individual.jpg?height=400&width=400",
-		"topic": "Liderazgo Empresarial",
-		"bio": "Carlos Rodríguez es Director de Estrategia en una de las redes de clínicas dentales más importantes de Colombia. Su experiencia en gestión empresarial y liderazgo ha transformado la manera en que se administran las clínicas modernas."
+		"name": "Dr. Fernando Kleinübing Rhoden",
+		"role": "Ortodoncista",
+		"image": "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/speaker/2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzcGVha2VyLzIucG5nIiwiaWF0IjoxNzQzNDg3MTQ0LCJleHAiOjE3NzUwMjMxNDR9.iCWL0YG_UBoU-Oa4j-uTEgXoilZa-deLYUul8xXwNf4",
+		"topic": "Ortodoncia Avanzada",
+		"bio": "Licenciado en Odontología por el Centro Universitario de Maringá (UNICESUMAR) – Maringá, PR (2008). Cuenta con Especialización en Ortodoncia por la Universidad del Sagrado Corazón (USC) – Bauru, SP (2011) y Maestría en Ortodoncia por la misma institución (2015). Actualmente es Coordinador del Programa de Posgrado en Ortodoncia en el Instituto Rhoden, Passo Fundo, RS. Es Socio Propietario de Rhoden y Leão Odontología en Passo Fundo, RS."
 	},
 	{
 		"id": "speaker3",
-		"name": "Laura Gómez",
-		"role": "Experta en Marketing",
-		"image": "https://retos-directivos.eae.es/wp-content/uploads/2021/04/iStock-1211968241.jpg?height=400&width=400",
-		"topic": "Estrategias de Crecimiento",
-		"bio": "Laura Gómez es especialista en marketing digital para el sector odontológico. Ha desarrollado estrategias de crecimiento para más de 300 consultorios dentales, logrando aumentar su captación de pacientes en un promedio del 40%."
+		"name": "Dr. Oswaldo Scopin de Andrade",
+		"role": "Prostodoncista",
+		"image": "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/speaker/3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzcGVha2VyLzMucG5nIiwiaWF0IjoxNzQzNDg3MTU3LCJleHAiOjE3NzUwMjMxNTd9.yBcEoNcMoNcB7q-CtcajpWPX4Bhw8aqtwrEEBVcbOpg",
+		"topic": "Odontología Estética Avanzada",
+		"bio": "Máster y Doctor en Prótesis Dental por la Facultad de Odontología de Piracicaba (FOP) de la Universidad Estatal de Campinas (UNICAMP), Brasil. Realizó el 'Curso de Postgrado Avanzado en Prótesis Dentales' por la Universidad de Nueva York-Facultad de Odontología-Estados Unidos (1995-1996) y fue 'Teaching Fellow' (profesor clínico adjunto) en el Departamento de Prostodoncia de la Facultad de Odontología de NYU (1996-97). Se desempeñó como Editor en jefe del Journal of Clinical Dentistry and Research/Dental Press de Estética, publicación oficial de la Sociedad Brasileña de Odontología Estética, SBOE (2016-2018). Actualmente es Coordinador del Curso de Postgrado en Odontología Estética del Centro Universitario SENAC, São Paulo, desde 2004. Fue Coordinador del Curso de Postgrado de Especialización en Implantología del mismo centro (2004-2014)."
 	},
 	{
 		"id": "speaker4",
-		"name": "Javier Moreno",
-		"role": "Consultor Internacional",
-		"image": "https://educacionejecutivablog.wordpress.com/wp-content/uploads/2015/06/tec_monterrey_empresario_5.jpg?height=400&width=400",
-		"topic": "Tendencias Globales",
-		"bio": "Javier Moreno es un reconocido consultor internacional especializado en tendencias del sector odontológico. Ha visitado más de 30 países estudiando las últimas innovaciones y prácticas en odontología moderna."
+		"name": "Dr. Andrés Enrique Ponce Villarroel",
+		"role": "Especialista en Rehabilitación Oral",
+		"image": "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/speaker/4.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzcGVha2VyLzQucG5nIiwiaWF0IjoxNzQzNDg3MTcyLCJleHAiOjE3NzUwMjMxNzJ9.dCDUYwCwj7a9KLqUKFQ7KkeL6X_GfHCi4ckUVLpmNB8",
+		"topic": "Odontología Estética",
+		"bio": "Cirujano Dentista por la Universidad de La Frontera (2006). Especialista en Rehabilitación Oral por la Universidad del Desarrollo (2011). Cuenta con Diplomados en Odontología Estética y Adhesiva (Universidad Austral de Chile, 2008), Gestión en Salud (Universidad de La Frontera, 2015) y Marketing mención Marketing Digital (Universidad Adolfo Ibáñez, 2018). Ha sido Presidente de SPROCh Temuco (2014-2018) y actualmente es Director de SPROCh Temuco. Es miembro del Education Committee del International College of Proshodontists, Profesor Invitado de Educación Continua en la Medical University of South Carolina (EE.UU.), Key Opinion Leader de Solventum y Certified Trainer de Style Italiano."
 	},
 	{
 		"id": "speaker5",
-		"name": "María López",
-		"role": "Especialista en Implantología",
-		"image": "https://www.colgate.com/content/dam/cp-sites/oral-care/oral-care-center/global/article/woman-dentist-in-a-consultory.jpg?height=400&width=400",
-		"topic": "Implantes Dentales Avanzados",
-		"bio": "María López es una reconocida especialista en implantología con más de 12 años de experiencia. Ha realizado más de 3,000 procedimientos de implantes y es pionera en técnicas mínimamente invasivas."
+		"name": "Dr. Michael Wendler Ernst",
+		"role": "Especialista en Prótesis e Implantología",
+		"image": "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/speaker/5.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzcGVha2VyLzUucG5nIiwiaWF0IjoxNzQzNDg3MTgzLCJleHAiOjE3NzUwMjMxODN9.Yx3lEYDGGM0TEmivRTiNqHeDrp7CPfrRTTU1QmqrIOI",
+		"topic": "Estética e Implantología",
+		"bio": "Cirujano Dentista, Licenciado en Odontología por la Universidad de Concepción, Chile (2009). Especialista en Prótesis Fija, Removible e Implantología por la Universidad Nacional de Córdoba, Argentina (2013). Doctor en Odontología por la Universidad Friedrich-Alexander de Erlangen Nuremberg, Alemania (2017). Realizó una Estadía Postdoctoral en la División de Biomateriales, Facultad de Odontología, Universidad de Nueva York, EE.UU. (2017). Actualmente es Profesor Asociado y Presidente del Comité de Investigación en la Facultad de Odontología, Universidad de Concepción, Chile (2022). Docente en pre y postgrado en programas de especialidades, maestría en Ciencias Odontológicas y cursos de educación continua. Autor y co-autor de más de 30 publicaciones científicas indexadas en WOS, Scopus y Scielo."
 	},
 	{
 		"id": "speaker6",
-		"name": "Roberto Sánchez",
-		"role": "Director Clínico",
-		"image": "https://i2-implantologia.com/wp-content/uploads/2023/10/dr-pelayo-gil-abando.webp?height=400&width=400",
-		"topic": "Gestión de Clínicas Dentales",
-		"bio": "Roberto Sánchez es director clínico de una de las redes de clínicas más grandes de Latinoamérica. Su enfoque en la optimización de procesos ha revolucionado la forma de gestionar clínicas dentales modernas."
-	},
-	{
-		"id": "speaker7",
-		"name": "Elena Ramírez",
-		"role": "Ortodoncista",
-		"image": "https://www.perspectiva.gt/wp-content/uploads/19-empresari-1.jpg?height=400&width=400",
-		"topic": "Ortodoncia Digital",
-		"bio": "Elena Ramírez es especialista en ortodoncia digital y ha sido pionera en la implementación de tecnologías 3D para el diagnóstico y tratamiento ortodóntico. Su enfoque combina la precisión digital con la experiencia clínica."
-	},
-	{
-		"id": "speaker8",
-		"name": "Sofía Mendoza",
-		"role": "Endodoncista",
-		"image": "https://s3-sa-east-1.amazonaws.com/doctoralia.co/doctor/6c5fd3/6c5fd36b708abd17c8ea930c3a3a074a_large.jpg?height=400&width=400",
-		"topic": "Endodoncia Microscópica",
-		"bio": "Sofía Mendoza es referente en endodoncia microscópica, utilizando tecnología de última generación para tratamientos de conductos complejos. Su precisión y técnica han establecido nuevos estándares en la especialidad."
+		"name": "Dra. Juliana Romanelli Abi Faraj",
+		"role": "Especialista en Ortodoncia",
+		"image": "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/speaker/6.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzcGVha2VyLzYucG5nIiwiaWF0IjoxNzQzNDg3MTk3LCJleHAiOjE3NzUwMjMxOTd9.SZMNOs4zrdxp60t_CMNHEJDhKpRLEwoaPkcinhwkiPQ",
+		"topic": "Ortodoncia y Ortopedia Facial",
+		"bio": "Especialista en Ortodoncia y Ortopedia Facial por UNICASTELO. Cuenta con una Maestría en Prótesis Oral y Maxilofacial por la Facultad de Odontología de la Universidad de São Paulo (FOUSP). Actualmente es propietaria de una clínica privada en São Paulo, donde aplica técnicas innovadoras en tratamientos ortodónticos."
 	}
 ]
