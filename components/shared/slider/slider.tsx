@@ -9,7 +9,6 @@ import RegistrationModal from "@/components/pages/home/registration/registration
 
 export default function Slider() {
     const {
-        slides,
         currentSlide,
         videoRefs,
         goToNextSlide,
@@ -18,10 +17,9 @@ export default function Slider() {
         handleTouchStart,
         handleTouchMove,
         handleTouchEnd,
-        hasContent,
         isModalOpen,
         setIsModalOpen
-      } = useSlider()
+    } = useSlider()
 
     return (
         <div
@@ -30,65 +28,58 @@ export default function Slider() {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-            {slides.map((slide, index) => (
-                <div
-                    key={slide.id}
-                    className={`absolute inset-0 transition-all duration-1000 ${index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}
-                >
-                    {slide.type === 'image' ? (
-                        <Image
-                            src={slide.src}
-                            alt={slide.alt}
-                            fill
-                            className="object-cover"
-                            priority={index === 0}
-                        />
-                    ) : (
-                        <video
-                            ref={(el) => {
-                                if (videoRefs.current) {
-                                    videoRefs.current[index] = el
-                                }
-                            }}
-                            src={slide.src}
-                            muted
-                            playsInline
-                            loop
-                            className="absolute inset-0 w-full h-full object-cover"
-                        />
-                    )}
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#001208] via-[#001208]/70 to-transparent" />
-
-                    {/* Contenido del slide - Solo se muestra si hay contenido */}
-                    {hasContent(slide) && (
-                        <div
-                            className={`absolute inset-0 flex items-center justify-center transition-all duration-1000 ${
-                                index === currentSlide ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                            }`}
-                        >
-                            <div className="text-center space-y-4 sm:space-y-6 md:space-y-8 px-4 max-w-5xl">
-                                {slide.date && (
-                                    <div className="inline-block px-4 py-1.5 rounded-full bg-[#00FF66]/20 text-[#00FF66] font-medium text-sm mb-2 sm:mb-4">
-                                        {slide.date}
-                                    </div>
-                                )}
-                                {(slide.title || slide.country) && (
-                                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-wider leading-tight">
-                                        {slide.title}
-                                        {slide.country && <span className="block text-[#00FF66]">{slide.country}</span>}
-                                    </h2>
-                                )}
-                                {slide.subtitle && (
-                                    <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto">
-                                        {slide.subtitle}
-                                    </p>
-                                )}
+            {/* Primera vista */}
+            <div
+                className={`absolute inset-0 transition-all duration-1000 ${0 === currentSlide ? "scale-100" : "opacity-0 scale-105"}`}
+            >
+                <Image
+                    src={"https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/sliders/web_slider_01.webp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzbGlkZXJzL3dlYl9zbGlkZXJfMDEud2VicCIsImlhdCI6MTc0MzQ4MjU2NywiZXhwIjoxNzc1MDE4NTY3fQ.fyfmX40KFjTkgWS6gpYTpbLF7DUe7y6mKAiS94cbuPg"}
+                    alt="Primera vista del congreso"
+                    fill
+                    className="object-cover"
+                    priority={true}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#001208] via-[#001208]/70 to-transparent" />
+                <div className="absolute inset-0 flex flex-col gap-6 sm:gap-10 items-center justify-center transition-all duration-1000 opacity-100 translate-y-0">
+                    <div className="text-center space-y-4 sm:space-y-4 md:space-y-6 px-4 max-w-5xl">
+                        <div className="inline-block px-1.5 py-[1px] rounded-full border border-[#82ffe4] text-white text-2xl md:text-4xl">
+                            CONGRESO
+                        </div>
+                        <div className="flex flex-row gap-1 sm:gap-2 items-center justify-center text-white tracking-wider leading-tight">
+                            <span className="text-6xl md:text-8xl lg:text-9xl font-bold block text-[#00e02b]">MAGNO</span>
+                            <span className="text-6xl md:text-8xl lg:text-9xl font-light block text-[#acffe0]">3.0</span>
+                        </div>
+                        <div className="flex flex-col justify-center items-center gap-1 sm:gap-2">
+                            <div className="flex flex-row gap-1 sm:gap-2">
+                                <div className="text-[#acffe0] font-light text-3xl sm:text-3xl md:text-4xl lg:text-5xl">Colombia</div>
+                                <div className="text-[#acffe0] font-semibold text-3xl sm:text-3xl md:text-4xl lg:text-5xl">2025</div>
+                            </div>
+                            <div className="font-light text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                                11 Junio
                             </div>
                         </div>
-                    )}
+                    </div>
+                    <div 
+                        onClick={() => setIsModalOpen(true)}
+                        className="flex justify-center items-center cursor-pointer rounded-full bg-[#15d094] text-black font-semibold text-base sm:text-lg px-6 sm:px-8 md:px-10 py-2 sm:py-2.5 hover:opacity-80 transition-all duration-300"
+                    >
+                        Registrarme al evento
+                    </div>
                 </div>
-            ))}
+            </div>
+
+            {/* Segunda vista */}
+            <div
+                className={`absolute inset-0 transition-all duration-1000 ${1 === currentSlide ? "scale-100" : "opacity-0 scale-105"}`}
+            >
+                <Image
+                    src={"https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/sliders/web_slider_02.webp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzbGlkZXJzL3dlYl9zbGlkZXJfMDIud2VicCIsImlhdCI6MTc0MzQ4MjU2NywiZXhwIjoxNzc1MDE4NTY3fQ.fyfmX40KFjTkgWS6gpYTpbLF7DUe7y6mKAiS94cbuPg"}
+                    alt="Segunda vista del congreso"
+                    fill
+                    className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#001208] via-[#001208]/70 to-transparent" />
+            </div>
 
             {/* Navigation arrows */}
             <Button
@@ -113,16 +104,20 @@ export default function Slider() {
 
             {/* Indicators */}
             <div className="absolute bottom-6 sm:bottom-12 left-0 right-0 flex justify-center gap-2 sm:gap-4 z-10">
-                {slides.map((_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => goToSlide(index)}
-                        className={`w-2 sm:w-3 h-2 sm:h-3 rounded-full transition-all ${
-                            index === currentSlide ? "bg-[#00FF66] w-8 sm:w-12" : "bg-white/50 hover:bg-white/80"
-                        }`}
-                        aria-label={`Ir a diapositiva ${index + 1}`}
-                    />
-                ))}
+                <button
+                    onClick={() => goToSlide(0)}
+                    className={`w-2 sm:w-3 h-2 sm:h-3 rounded-full transition-all ${
+                        0 === currentSlide ? "bg-[#00FF66] w-8 sm:w-12" : "bg-white/50 hover:bg-white/80"
+                    }`}
+                    aria-label="Ir a diapositiva 1"
+                />
+                <button
+                    onClick={() => goToSlide(1)}
+                    className={`w-2 sm:w-3 h-2 sm:h-3 rounded-full transition-all ${
+                        1 === currentSlide ? "bg-[#00FF66] w-8 sm:w-12" : "bg-white/50 hover:bg-white/80"
+                    }`}
+                    aria-label="Ir a diapositiva 2"
+                />
             </div>
 
             {/* Modal de registro */}
