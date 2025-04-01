@@ -3,61 +3,91 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+interface Distributor {
+  value: string;
+  label: string;
+  id: number;
+}
+
 const useRegisterForm = () => {
+  // Estados principales
   const [step, setStep] = useState(1);
-  const [selectedPayment, setSelectedPayment] = useState<"card" | "pse" | null>(
-    null
-  );
-  const [paymentData, setPaymentData] = useState<any>(null);
-  const [statusFinish, setStatusFinish] = useState<"success" | "error" | "not">(
-    "not"
-  );
+  const [statusFinish, setStatusFinish] = useState<"success" | "error" | "not">("not");
   const [personalData, setPersonalData] = useState<any>(null);
   const [infoFormulary, setInfoFormulary] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
+  const [registeredUser, setRegisteredUser] = useState<any>(null);
+  const [isClient, setIsClient] = useState(false);
+  const [forceRedirect, setForceRedirect] = useState(false);
+  const [redirectAttempts, setRedirectAttempts] = useState(0);
 
-  const [distributorsOptions, setDistributorsOptions] = useState([]);
+  // Estado para rastrear si hemos recibido respuesta válida del backend
+  const [backendResponseReceived, setBackendResponseReceived] = useState(false);
 
+  // Estado para distribuidores
+  const [distributorsOptions, setDistributorsOptions] = useState<Distributor[]>([]);
+
+  // Mapeo de nombres de distribuidores para mantener consistencia visual
+  const distributorLabels: { [key: string]: string } = {
+    dental_83: "Dental 83",
+    dental_nader: "Dental Nader",
+    dentales_market: "Dentales Market",
+    casa_dental: "Casa Dental",
+    orbidental: "Orbidental",
+    bracket: "Bracket",
+    adental: "Adental",
+  };
+
+  // Verificar que estamos en el cliente antes de renderizar
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Cargar distribuidores
   useEffect(() => {
     const fetchDistributors = async () => {
       try {
         const { getDistributors } = await import("@/services/asisstantService");
         const distributors = await getDistributors();
 
-        // Mapeo de nombres para mantener los values específicos
-        const distributorLabels: { [key: string]: string } = {
-          dental_83: "Dental 83",
-          dental_nader: "Dental Nader",
-          dentales_market: "Dentales Market",
-          casa_dental: "Casa Dental",
-          orbidental: "Orbidental",
-          bracket: "Bracket",
-          adental: "Adental",
-        };
+        if (!Array.isArray(distributors)) {
+          console.error("Error: La respuesta de distribuidores no es un array", distributors);
+          toast.error("Error al cargar los distribuidores. Formato de datos incorrecto.");
+          return;
+        }
 
         const formattedDistributors = distributors.map((distributor: any) => ({
-          value: distributor.name, // Mantenemos el value original
-          label: distributorLabels[distributor.name] || distributor.name, // Usamos el label mapeado o el nombre original si no existe mapeo
+          value: distributor.name,
+          label: distributorLabels[distributor.name] || distributor.name,
           id: distributor.id,
         }));
 
         setDistributorsOptions(formattedDistributors);
       } catch (error) {
-        toast.error("Error al cargar los distribuidores");
+        console.error("Error al cargar distribuidores:", error);
+        toast.error("Error al cargar los distribuidores. Por favor, actualice la página.");
       }
     };
 
     fetchDistributors();
   }, []);
 
+  // Reiniciar contador de intentos al cambiar de paso
+  useEffect(() => {
+    setRedirectAttempts(0);
+    setForceRedirect(false);
+  }, [step]);
+
+  // Opciones para los selectores
   const proceduresOptions = [
-    { value: "odontologia_general", label: "Odontología General" },
-    { value: "restauraciones_indirectas", label: "Restauraciones indirectas" },
-    { value: "restauraciones_directas", label: "Restauraciones directas" },
-    { value: "diseno_sonrisa", label: "Diseño de sonrisa" },
-    { value: "ortodoncia_tradicional", label: "Ortodoncia tradicional" },
-    { value: "ortodoncia_autoligado", label: "Ortodoncia con autoligado" },
-    { value: "ortodoncia_alineadores", label: "Ortodoncia con Alineadores" },
+    { value: "odontologia general", label: "Odontología General" },
+    { value: "restauraciones indirectas", label: "Restauraciones indirectas" },
+    { value: "restauraciones directas", label: "Restauraciones directas" },
+    { value: "diseño de sonrisa", label: "Diseño de sonrisa" },
+    { value: "ortodoncia tradicional", label: "Ortodoncia tradicional" },
+    { value: "ortodoncia autoligado", label: "Ortodoncia con autoligado" },
+    { value: "ortodoncia alineadores", label: "Ortodoncia con Alineadores" },
     { value: "odontopediatra", label: "Odontopediatra" },
     { value: "estudiante", label: "Estudiante" },
     { value: "otro", label: "Otro" },
@@ -70,19 +100,8 @@ const useRegisterForm = () => {
     { value: "ormco", label: "Ormco" },
     { value: "forestadent", label: "Forestadent" },
     { value: "invisalign", label: "Invisalign" },
-    { value: "clear_correct", label: "Clear Correct" },
+    { value: "clear correct", label: "Clear Correct" },
     { value: "otro", label: "Otro ¿Cuál?" },
-  ];
-
-  const banksOptions = [
-    { value: "bancolombia", label: "Bancolombia" },
-    { value: "banco_bogota", label: "Banco de Bogotá" },
-    { value: "davivienda", label: "Davivienda" },
-    { value: "bbva", label: "BBVA" },
-    { value: "banco_occidente", label: "Banco de Occidente" },
-    { value: "banco_popular", label: "Banco Popular" },
-    { value: "banco_agrario", label: "Banco Agrario" },
-    { value: "banco_avvillas", label: "Banco AV Villas" },
   ];
 
   const documentTypeOptions = [
@@ -93,7 +112,22 @@ const useRegisterForm = () => {
     { value: "ti", label: "Tarjeta de Identidad" },
   ];
 
-  // Formulario principal para info personal y profesional
+  // Limpiar datos antes de enviar
+  const cleanDataBeforeSubmit = (data: Record<string, any>) => {
+    const cleanedData: Record<string, any> = {};
+
+    Object.keys(data).forEach((key) => {
+      if (typeof data[key] === "string") {
+        cleanedData[key] = data[key].replace(/_/g, " ");
+      } else {
+        cleanedData[key] = data[key];
+      }
+    });
+
+    return cleanedData;
+  };
+
+  // Configuración del formulario
   const {
     register,
     handleSubmit,
@@ -106,213 +140,226 @@ const useRegisterForm = () => {
     mode: "onChange",
   });
 
-  // Formulario separado para pagos
-  const {
-    register: registerPayment,
-    handleSubmit: handleSubmitPayment,
-    control: controlPayment,
-    formState: { errors: paymentErrors },
-    trigger: triggerPayment,
-  } = useForm({
-    mode: "onChange",
-  });
-
+  // PASO 1: Datos personales
   const handleStep1Submit = async (data: any) => {
-    const isValid = await trigger([
-      "first_name",
-      "last_name",
-      "email",
-      "id",
-      "phone",
-      "city",
-    ]);
-    if (!isValid) {
-      toast.error("Por favor complete todos los campos requeridos");
-      return;
-    }
-    setInfoFormulary((prev: Record<string, any>) => ({
-      ...prev,
-      step1: data,
-    }));
-    setStep(2);
-    toast.success("Información personal guardada correctamente");
-  };
-
-  const handleStep2Submit = async (data: any) => {
-    if (
-      !data.distributor ||
-      !data.main_procedure ||
-      !data.brand ||
-      !data.cases_per_week
-    ) {
-      toast.error("Por favor complete todos los campos requeridos");
-      return;
-    }
-    setInfoFormulary((prev: Record<string, any>) => ({
-      ...prev,
-      step2: data,
-    }));
-    setStep(3);
-    setPersonalData(data);
-    toast.success("Información profesional guardada correctamente");
-  };
-
-  const handleStep3Submit = async (data: any) => {
-    if (selectedPayment === "card") {
-      const isValid = await triggerPayment([
-        "card_name",
-        "card_number",
-        "expiry_date",
-        "cvc",
+    try {
+      const cleanedData = cleanDataBeforeSubmit(data);
+      const isValid = await trigger([
+        "first_name",
+        "last_name",
+        "email",
+        "id",
+        "phone",
+        "city",
       ]);
+
       if (!isValid) {
-        toast.error("Por favor complete todos los campos de la tarjeta");
+        toast.error("Por favor complete todos los campos requeridos");
         return;
       }
-    } else if (selectedPayment === "pse") {
-      const isValid = await triggerPayment(["bank", "document_type"]);
-      if (!isValid) {
-        toast.error("Por favor complete todos los campos de PSE");
-        return;
-      }
+
+      setInfoFormulary((prev: Record<string, any>) => ({
+        ...prev,
+        step1: cleanedData,
+      }));
+
+      setStep(2);
+      toast.success("Información personal guardada correctamente");
+    } catch (error) {
+      console.error("Error al procesar datos personales:", error);
+      toast.error("Ha ocurrido un error al procesar sus datos personales");
     }
-
-    // Guardar los datos de pago pero no enviar aún
-    setPaymentData(data);
-    
-    // Preparar los datos finales
-    const finalFormData = {
-      assistant: {
-        identification: infoFormulary?.step1?.id
-          ? Number(infoFormulary.step1.id)
-          : undefined,
-        first_name: infoFormulary?.step1?.first_name,
-        last_name: infoFormulary?.step1?.last_name,
-        phone: infoFormulary?.step1?.phone,
-        email: infoFormulary?.step1?.email,
-        main_procedure: infoFormulary?.step2?.main_procedure,
-        product_brand: infoFormulary?.step2?.brand,
-        weekly_procedure: infoFormulary?.step2?.cases_per_week,
-        contact: true,
-        distributor: infoFormulary?.step2?.distributor,
-        city: infoFormulary?.step1?.city,
-      },
-      payment: {
-        type: selectedPayment?.toUpperCase(),
-        value: 500000,
-        ...(selectedPayment === "pse" && {
-          pse: {
-            bank: data.bank,
-            type_person: "natural",
-          },
-        }),
-        ...(selectedPayment === "card" && {
-          card: {
-            name: data.card_name,
-            number: data.card_number,
-            expiry_date: data.expiry_date,
-            cvc: data.cvc,
-          },
-        }),
-      },
-    };
-
-    setInfoFormulary(finalFormData);
-    
-    // Avanzar al paso de resumen
-    setStep(4);
-    toast.success("Información de pago guardada correctamente");
   };
 
-  // Nueva función para procesar el pago final
-  const handleFinalSubmit = async () => {
+  // PASO 2: Datos profesionales
+  const handleStep2Submit = async (data: any) => {
+    try {
+      const cleanedData = cleanDataBeforeSubmit(data);
+      console.log("Datos paso 2:", cleanedData);
+
+      if (
+        !data.distributor ||
+        !data.main_procedure ||
+        !data.brand ||
+        !data.cases_per_week
+      ) {
+        toast.error("Por favor complete todos los campos requeridos");
+        return;
+      }
+
+      // Obtener el distributor_id del distributor seleccionado
+      const selectedDistributor = distributorsOptions.find(
+        (dist: any) => dist.value === data.distributor
+      );
+
+      if (!selectedDistributor) {
+        toast.error("El distribuidor seleccionado no es válido");
+        return;
+      }
+
+      setInfoFormulary((prev: Record<string, any>) => ({
+        ...prev,
+        step2: {
+          ...cleanedData,
+          distributor_id: selectedDistributor?.id
+        },
+      }));
+
+      // Validar los datos del usuario antes de avanzar al paso 3
+      await validateUserData({
+        ...infoFormulary?.step1,
+        ...cleanedData
+      });
+    } catch (error) {
+      console.error("Error al procesar datos profesionales:", error);
+      toast.error("Ha ocurrido un error al procesar sus datos profesionales");
+    }
+  };
+
+  // Función para validar los datos del usuario antes de avanzar al resumen
+  const validateUserData = async (data: any) => {
+    try {
+      setPersonalData(data);
+      setStep(3);
+      toast.success("Información profesional guardada correctamente");
+    } catch (error: any) {
+      console.error("Error de validación:", error);
+      toast.error(error.message || "Ha ocurrido un error inesperado");
+    }
+  };
+
+  // PASO 3: Confirmación de datos
+  const handleStep3Submit = async () => {
     setIsSubmitting(true);
 
     try {
-      const response = await registerAssistant(infoFormulary);
+      if (!infoFormulary?.step1 || !infoFormulary?.step2) {
+        throw new Error("Por favor complete todos los campos requeridos");
+      }
 
-      if (response.status === true) {
-        setStatusFinish("success");
-        localStorage.removeItem("registerStep");
-        localStorage.removeItem("registerForm");
-      } else {
+      // Encontrar el ID del distribuidor seleccionado
+      const selectedDistributor = distributorsOptions.find(
+        (dist: any) => dist.value === infoFormulary.step2.distributor
+      );
+
+      if (!selectedDistributor) {
+        throw new Error("Distribuidor no válido");
+      }
+
+      // Preparar los datos del usuario
+      const userData = {
+        assistant: {
+          identification: Number(infoFormulary.step1.id),
+          first_name: infoFormulary.step1.first_name,
+          last_name: infoFormulary.step1.last_name,
+          phone: infoFormulary.step1.phone,
+          email: infoFormulary.step1.email,
+          city: infoFormulary.step1.city,
+          distributor: infoFormulary.step2.distributor,
+          distributor_id: selectedDistributor.id,
+          main_procedure: infoFormulary.step2.main_procedure,
+          product_brand: infoFormulary.step2.brand === "otro"
+            ? infoFormulary.step2.other_brand
+            : infoFormulary.step2.brand,
+          weekly_procedure: infoFormulary.step2.cases_per_week,
+          contact: infoFormulary.step2.comercialInfo || false
+        }
+      };
+
+      console.log("Enviando datos al backend:", userData);
+
+      // Intentar registrar con el backend
+      try {
+        const response = await registerAssistant(userData);
+        console.log("Respuesta del backend:", response);
+
+        if (response && response.status === true && response.url_redirect) {
+          // Usar la URL que proporciona el backend
+          setRedirectUrl(response.url_redirect);
+          setRegisteredUser(response.data?.[0] || null);
+          setStep(4);
+          toast.success("Registro exitoso");
+        } else if (response) {
+          // Si hay respuesta pero con error
+          throw new Error(response.message || "Error en el registro");
+        }
+      } catch (connectionError: any) {
+        // Error de conexión o registro
+        console.error("Error al intentar registrar:", connectionError);
+
+        // Mostrar mensaje de error genérico
+        toast.error(connectionError.message || "Error en el registro. Por favor intenta nuevamente.");
         setStatusFinish("error");
-
-        // Marcar campos con error
-        if (response.message?.includes("assistant.identification")) {
-          setError("id", { type: "server", message: " " });
-        }
-        if (response.message?.includes("assistant.first_name")) {
-          setError("first_name", { type: "server", message: " " });
-        }
-        if (response.message?.includes("assistant.last_name")) {
-          setError("last_name", { type: "server", message: " " });
-        }
-        if (response.message?.includes("assistant.phone")) {
-          setError("phone", { type: "server", message: " " });
-        }
-        if (response.message?.includes("assistant.email")) {
-          setError("email", { type: "server", message: " " });
-        }
-        if (response.message?.includes("assistant.city")) {
-          setError("city", { type: "server", message: " " });
-        }
       }
     } catch (error: any) {
+      console.error("Error general en el proceso:", error);
+      toast.error("Ocurrió un error inesperado. Por favor intenta de nuevo más tarde.");
       setStatusFinish("error");
-      
-      // Nuevos mensajes de error
-      if (error.message?.includes('número de teléfono ya está registrado')) {
-        setError('phone', { type: 'server' });
-      }
-      if (error.message?.includes('correo electrónico ya está registrado')) {
-        setError('email', { type: 'server' });
-      }
-      if (error.message?.includes('número de identificación ya está registrado')) {
-        setError('id', { type: 'server' });
-      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Añadir una nueva función para limpiar estados
+  // Función para redirigir al usuario a la plataforma de pago
+  const redirectToPayment = () => {
+    try {
+      if (redirectUrl) {
+        // Log para depuración
+        console.log("Redirigiendo a URL de pago:", redirectUrl);
+
+        // Redirigir a la URL proporcionada por el backend
+        window.location.href = redirectUrl;
+      } else {
+        // Si no hay URL de redirección, mostrar un mensaje de error claro
+        toast.error("No se ha podido obtener el enlace de pago. Contacte a soporte o intente nuevamente.");
+        setStatusFinish("error");
+      }
+    } catch (error) {
+      console.error("Error al redirigir al pago:", error);
+      toast.error("Error al redirigir al pago. Por favor intente nuevamente.");
+      setStatusFinish("error");
+    }
+  };
+
+  // Limpiar el formulario
   const resetForm = () => {
     setInfoFormulary(null);
     setPersonalData(null);
-    setPaymentData(null);
-    setSelectedPayment(null);
     setStatusFinish("not");
     setStep(1);
+    setRedirectUrl(null);
+    setRegisteredUser(null);
+    setRedirectAttempts(0);
+    setForceRedirect(false);
+    setBackendResponseReceived(false);
   };
 
   return {
     step,
     setStep,
-    selectedPayment,
-    setSelectedPayment,
     register,
-    registerPayment,
     control,
-    controlPayment,
     errors,
-    paymentErrors,
     handleStep1Submit,
     handleStep2Submit,
     handleStep3Submit,
-    handleFinalSubmit,
     handleSubmit,
-    handleSubmitPayment,
     statusFinish,
     setStatusFinish,
     distributorsOptions,
     proceduresOptions,
     brandOptions,
-    banksOptions,
     documentTypeOptions,
     watch,
     isSubmitting,
     resetForm,
+    redirectUrl,
+    redirectToPayment,
+    registeredUser,
+    isClient,
+    redirectAttempts,
+    forceRedirect,
+    backendResponseReceived
   };
 };
 
