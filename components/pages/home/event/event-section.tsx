@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
+import { Clock, Ticket, Calendar, MapPin } from "lucide-react";
 import { useEvent } from "./useEvent";
 
 export default function EventSection() {
@@ -48,20 +48,38 @@ export default function EventSection() {
               {eventData.mainText}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {eventData.features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="bg-[#001208] p-6 rounded-xl border border-[#00FF66]/10 shadow-lg h-full"
-                >
-                  <h4 className="text-[#00FF66] font-medium mb-3 text-lg">
-                    {feature.title}
-                  </h4>
-                  <p className="text-white/70">
-                    {feature.description}
-                  </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+              <div className="bg-[#001208]/80 backdrop-blur-sm p-6 rounded-xl border border-[#00FF66]/20 shadow-lg flex flex-col items-center text-center group hover:border-[#00FF66]/40 transition-all">
+                <div className="h-14 w-14 rounded-full bg-[#00FF66]/10 flex items-center justify-center mb-4 group-hover:bg-[#00FF66]/20 transition-colors">
+                  <Calendar className="h-7 w-7 text-[#00FF66]" />
                 </div>
-              ))}
+                <h3 className="text-white font-bold text-lg mb-1">Fecha</h3>
+                <p className="text-white/80">15 de Julio, 2025</p>
+              </div>
+
+              <div className="bg-[#001208]/80 backdrop-blur-sm p-6 rounded-xl border border-[#00FF66]/20 shadow-lg flex flex-col items-center text-center group hover:border-[#00FF66]/40 transition-all">
+                <div className="h-14 w-14 rounded-full bg-[#00FF66]/10 flex items-center justify-center mb-4 group-hover:bg-[#00FF66]/20 transition-colors">
+                  <Clock className="h-7 w-7 text-[#00FF66]" />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-1">Horario</h3>
+                <p className="text-white/80">9:00 AM - 6:00 PM</p>
+              </div>
+
+              <div className="bg-[#001208]/80 backdrop-blur-sm p-6 rounded-xl border border-[#00FF66]/20 shadow-lg flex flex-col items-center text-center group hover:border-[#00FF66]/40 transition-all">
+                <div className="h-14 w-14 rounded-full bg-[#00FF66]/10 flex items-center justify-center mb-4 group-hover:bg-[#00FF66]/20 transition-colors">
+                  <MapPin className="h-7 w-7 text-[#00FF66]" />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-1">Ubicación</h3>
+                <p className="text-white/80">Centro de Convenciones, Bogotá</p>
+              </div>
+
+              <div className="bg-[#001208]/80 backdrop-blur-sm p-6 rounded-xl border border-[#00FF66]/20 shadow-lg flex flex-col items-center text-center group hover:border-[#00FF66]/40 transition-all">
+                <div className="h-14 w-14 rounded-full bg-[#00FF66]/10 flex items-center justify-center mb-4 group-hover:bg-[#00FF66]/20 transition-colors">
+                  <Ticket className="h-7 w-7 text-[#00FF66]" />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-1">Entradas</h3>
+                <p className="text-white/80">Limitadas (1000 disponibles)</p>
+              </div>
             </div>
 
             <div className="pt-4">

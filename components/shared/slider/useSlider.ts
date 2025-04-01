@@ -9,7 +9,6 @@ const useSlider = () => {
     const [touchStart, setTouchStart] = useState(0)
     const [touchEnd, setTouchEnd] = useState(0)
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
-    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const goToNextSlide = useCallback(() => {
         setCurrentSlide((prev) => (prev === TOTAL_SLIDES - 1 ? 0 : prev + 1))
@@ -37,6 +36,10 @@ const useSlider = () => {
         }
     }, [isAutoPlaying, goToNextSlide])
 
+    const scrollToRegistro = () => {
+        const registroSection = document.querySelector('#registro')
+        registroSection?.scrollIntoView({ behavior: 'smooth' })
+    }
 
     const handleTouchStart = (e: React.TouchEvent) => {
         setTouchStart(e.targetTouches[0].clientX)
@@ -72,8 +75,7 @@ const useSlider = () => {
         handleTouchMove,
         handleTouchEnd,
         hasContent,
-        isModalOpen,
-        setIsModalOpen
+        scrollToRegistro
     }
 }
 
