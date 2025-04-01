@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Faq from "../../../custom/modals/faq/Faq";
 import useFaqSection from "./useFaq-section";
 
 export default function FaqSection() {
-  const { Render, toggleModal } = useFaqSection();
+  const { Render, toggleModal, closeModalAction } = useFaqSection();
 
   return (
     <section
@@ -46,7 +46,7 @@ export default function FaqSection() {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#00FF66]/10 rounded-full blur-3xl"></div>
             <Image
-              src="/img/fq.PNG?height=600&width=800"
+              src="https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/question/001.webp?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJxdWVzdGlvbi8wMDEud2VicCIsImlhdCI6MTc0MzQ5MDY3MCwiZXhwIjoxNzc1MDI2NjcwfQ.wDQ2zXkdCzd1UDtUHV1eRMOit2FlgxIEzFn1Akn2T4k"
               alt="Preguntas frecuentes"
               width={600}
               height={400}
@@ -57,7 +57,7 @@ export default function FaqSection() {
       </div>
 
       <Render>
-        <Faq />
+        <Faq onClose={closeModalAction} />
       </Render>
 
     </section>

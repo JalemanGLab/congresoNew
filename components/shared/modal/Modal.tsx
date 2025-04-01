@@ -26,10 +26,10 @@ const ModalHome = (options: ModalOptions = {}): ModalReturn => {
 
   const Render = ({ children }: { children: ReactNode }): ReactNode | null => {
     return isOpen && (
-      <div className="fixed inset-0 z-[9999] bg-black/50 overflow-hidden">
+      <div className="fixed inset-0 z-[9999] bg-black/50 flex items-center justify-center">
         <div
           onClick={(e) => e.stopPropagation()}
-          className="w-full h-full bg-gradient-to-br from-[#031a10] to-[#073723] overflow-y-auto"
+          className="w-full h-full bg-gradient-to-br from-[#031a10] to-[#073723] flex flex-col overflow-hidden"
         >
           <div className='w-full font-semibold items-center flex justify-end px-5 pt-4'>
             <button
@@ -41,7 +41,7 @@ const ModalHome = (options: ModalOptions = {}): ModalReturn => {
               </svg>
             </button>
           </div>
-          <div className="px-6 md:px-8 py-2">
+          <div className="flex-1 flex justify-center items-start overflow-hidden m-5 lg:mb-6">
             {children}
           </div>
         </div>
