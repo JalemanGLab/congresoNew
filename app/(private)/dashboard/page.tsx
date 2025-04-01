@@ -26,7 +26,7 @@ const PageDashboard = () => {
   }, [distributorData, chartRef, initializeChart]);
 
   return (
-    <div className="w-full flex flex-col gap-8 p-4 pb-14 overflow-y-auto">
+    <div className="w-full flex flex-col gap-8 p-4">
       {/* Contenedor de tarjetas con responsive mejorado */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {/* Card 1: Total de Asistentes */}

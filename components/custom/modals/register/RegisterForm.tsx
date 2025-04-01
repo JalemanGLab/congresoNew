@@ -117,6 +117,7 @@ const RegisterForm = ({ closeModalAction }: RegisterFormProps) => {
                 redirectUrl={redirectUrl}
                 watch={watch}
                 registeredUser={registeredUser}
+                onClose={closeModalAction}
               />
             )}
           </div>

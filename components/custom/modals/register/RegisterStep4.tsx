@@ -1,5 +1,6 @@
 import { UseFormWatch } from "react-hook-form";
 import { AlertCircle, CheckCircle2, ExternalLink } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface RegisterStep4Props {
   setStep: (step: number) => void;
@@ -11,6 +12,7 @@ interface RegisterStep4Props {
     first_name?: string;
     email?: string;
   };
+  onClose?: () => void;
 }
 
 const RegisterStep4 = ({
@@ -19,8 +21,18 @@ const RegisterStep4 = ({
   isSubmitting,
   redirectUrl,
   watch,
-  registeredUser
+  registeredUser,
+  onClose
 }: RegisterStep4Props) => {
+  
+  // Efecto para abrir automáticamente la URL de redirección en una nueva pestaña
+  useEffect(() => {
+    if (redirectUrl) {
+      const newWindow = window.open(redirectUrl, '_blank');
+      if (newWindow) newWindow.focus();
+    }
+  }, [redirectUrl]);
+
   // Si aún no hay URL de redirección, mostrar el resumen y confirmación
   if (!redirectUrl) {
     return (
@@ -83,8 +95,7 @@ const RegisterStep4 = ({
     <div className="w-full flex flex-col gap-6 mt-4 px-2 sm:px-4 md:px-6">
       <div className="bg-green-50 border border-green-100 rounded-lg p-6">
         <div className="flex items-center gap-4 mb-6">
-          <CheckCircle2 className="w-8 h-8 text-green-600" />
-          <div>
+          <div className="w-full flex flex-col justify-center items-center gap-2">
             <h2 className="text-xl font-semibold text-green-900">
               ¡Registro exitoso!
             </h2>
@@ -98,45 +109,39 @@ const RegisterStep4 = ({
 
         <div className="space-y-6">
           <div className="bg-white border border-green-200 rounded-lg p-4">
-            <h3 className="text-base font-medium text-green-900 mb-2">
-              Pasos para completar tu inscripción:
-            </h3>
-            <ol className="list-decimal list-inside space-y-2 text-sm text-green-800">
-              <li>
-                Serás redirigido automáticamente a la plataforma de pago en unos
-                segundos.
-              </li>
-              <li>
-                Completa el proceso de pago con tu método preferido.
-              </li>
-              <li>
-                Recibirás un correo de confirmación en{' '}
+            <div className="space-y-2 text-sm text-green-800">
+              <div>
+                Se ha abierto automáticamente una nueva pestaña con la plataforma de pago.
+              </div>
+              <div>
+                Una vez verificada la transacción, recibirás un correo de confirmación en{' '}
                 <span className="font-medium">
                   {registeredUser?.email || watch("email")}
                 </span>
                 {' '}con los detalles de acceso.
-              </li>
-            </ol>
+              </div>
+            </div>
           </div>
 
-          <div className="bg-green-100/50 rounded-lg p-4">
-            <p className="text-sm text-green-800 text-center">
-              Si no eres redirigido automáticamente, haz clic en el botón de abajo
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <a
-              href={redirectUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-[#225d33] text-white rounded-lg hover:bg-[#1b4829] transition-colors"
-            >
-              Ir a plataforma de pago
-              <ExternalLink className="w-4 h-4" />
-            </a>
+          <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-4 flex items-start gap-3">
+            <AlertCircle className="text-yellow-600 w-5 h-5 mt-0.5" />
+            <div>
+              <p className="text-sm text-yellow-800">
+                Si la página de pago no se abrió automáticamente, por favor verifica que no esté bloqueada por tu navegador.
+              </p>
+            </div>
           </div>
         </div>
+      </div>
+      
+      <div className="flex justify-end mt-4">
+        <button
+          type="button"
+          onClick={onClose}
+          className="px-6 py-2 bg-[#225d33] text-white rounded-lg hover:bg-[#1b4829] transition-colors"
+        >
+          Cerrar
+        </button>
       </div>
     </div>
   );
