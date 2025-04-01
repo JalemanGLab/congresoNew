@@ -16,7 +16,7 @@ export function useProgress({
   const isClickable = (step: number): boolean => !!(allowNavigation && onStepClick && step <= currentStep);
 
   //porcentaje de progreso para la barra
-  const progressWidth = `${((currentStep - 1) / (steps.length - 1)) * 85}%`;
+  const progressWidth = `${((currentStep - 1) / (steps.length - 1)) * 90}%`;
 
   return {
     stepIcons,
