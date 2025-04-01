@@ -61,7 +61,7 @@ const DesktopMenu = () => {
   );
 
   return (
-    <div className="flex w-full h-full flex-col justify-between rounded-lg border border-neutral-300 p-2">
+    <div className="bg-white flex w-full h-full flex-col justify-between rounded-lg border border-neutral-300 p-2">
       <div className="flex flex-col gap-3">
         {filteredMenuItems.map((item) => (
           <MenuItem
