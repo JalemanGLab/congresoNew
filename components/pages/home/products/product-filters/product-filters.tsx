@@ -49,7 +49,10 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
               ))}
             </div>
           </div>
-          <button className="w-full bg-[#15d094] cursor-pointer text-[#002422] text-sm font-bold py-3 rounded-full hover:bg-[#13bb85] transition-colors">
+          <button 
+            className="w-full bg-[#15d094] cursor-pointer text-[#002422] text-sm font-bold py-3 rounded-full hover:bg-[#13bb85] transition-colors"
+            onClick={() => window.open("https://drive.google.com/drive/folders/1ApdvkbzjFLYxZ3_0LgviAc-lKiqSr58b", "_blank")}
+          >
             Descargar Brochure
           </button>
         </div>
@@ -74,7 +77,10 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
               ))}
             </div>
           </div>
-          <button className="bg-[#15d094] cursor-pointer text-[#002422] font-bold px-6 py-3 rounded-full hover:bg-[#13bb85] transition-colors whitespace-nowrap">
+          <button 
+            className="bg-[#15d094] cursor-pointer text-[#002422] font-bold px-6 py-3 rounded-full hover:bg-[#13bb85] transition-colors whitespace-nowrap"
+            onClick={() => window.open("https://drive.google.com/drive/folders/1ApdvkbzjFLYxZ3_0LgviAc-lKiqSr58b", "_blank")}
+          >
             Descargar Brochure
           </button>
         </div>
