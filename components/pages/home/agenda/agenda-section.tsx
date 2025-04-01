@@ -1,22 +1,17 @@
-"use client"
+"use client";
 
-import Image from "next/image"
+import Image from "next/image";
+import Section1 from "./components/Section1/section1";
+import Section2 from "./components/Section2/section2";
 
 export default function AgendaSection() {
   return (
-    <section id="agenda" className="bg-[#001A0E] relative overflow-hidden h-screen">
-      {/* Fondo con patrón de líneas onduladas */}
-      <div className="absolute inset-0">
-        <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-QjrWrdwPXiIPwxC4yuRPasKoax35AJ.png"
-          alt="Background pattern"
-          fill
-          className="object-cover"
-        />
-      </div>
-
-  
+    <section
+      id="agenda"
+      className="bg-[#001A0E] w-full flex flex-col items-center justify-center gap-10"
+    >
+      <Section1 />
+      <Section2 />
     </section>
-  )
+  );
 }
-
