@@ -184,26 +184,42 @@ export default function Section2() {
           </div>
           {/* Timeline Dental */}
           <div className="relative">
-            {/* Línea vertical - Quitamos la altura fija y usamos bottom-0 */}
-            <div className="absolute left-4 top-8 bottom-8 w-[1px] bg-[#05dd4d]" />
+            {/* Línea vertical */}
+            <div className={cn(
+              "absolute w-[1px] bg-[#05dd4d] top-8 bottom-8",
+              activeDentalTab === "dental_morning" ? "left-4" : "right-4"
+            )} />
 
             {/* Items del timeline */}
             <div className="relative space-y-8">
               {getTimelineData(activeDentalTab).map((item, index) => (
-                <div key={index} className="relative pl-12">
+                <div key={index} className={cn(
+                  "relative flex",
+                  activeDentalTab === "dental_morning" 
+                    ? "pl-12 flex-row" 
+                    : "pr-12 flex-row-reverse"
+                )}>
                   {/* Círculo numerado */}
-                  <div className="absolute left-0 w-8 h-8 bg-[#05dd4d] rounded-full flex items-center justify-center text-[#001208] font-medium">
+                  <div className={cn(
+                    "absolute w-8 h-8 bg-[#05dd4d] rounded-full flex items-center justify-center text-[#001208] font-medium",
+                    activeDentalTab === "dental_morning" ? "left-0" : "right-0"
+                  )}>
                     {item.step}
                   </div>
 
                   {/* Contenido */}
-                  <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
-                  <h3 className="text-white font-medium mb-1">{item.title}</h3>
-                  {item.speaker && (
-                    <p className="text-white font-light text-sm">
-                      {item.speaker}
-                    </p>
-                  )}
+                  <div className={cn(
+                    "flex-1",
+                    activeDentalTab === "dental_morning" ? "pl-12" : "pr-12"
+                  )}>
+                    <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
+                    <h3 className="text-white font-medium mb-1">{item.title}</h3>
+                    {item.speaker && (
+                      <p className="text-white font-light text-sm">
+                        {item.speaker}
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -246,26 +262,42 @@ export default function Section2() {
           </div>
           {/* Timeline Ortodoncia */}
           <div className="relative">
-            {/* Línea vertical - Quitamos la altura fija y usamos bottom-0 */}
-            <div className="absolute left-4 top-8 bottom-8 w-[1px] bg-[#05dd4d]" />
+            {/* Línea vertical */}
+            <div className={cn(
+              "absolute w-[1px] bg-[#05dd4d] top-8 bottom-8",
+              activeOrtodonciaTab === "ortodoncia_morning" ? "left-4" : "right-4"
+            )} />
 
             {/* Items del timeline */}
             <div className="relative space-y-8">
               {getTimelineData(activeOrtodonciaTab).map((item, index) => (
-                <div key={index} className="relative pl-12">
+                <div key={index} className={cn(
+                  "relative flex",
+                  activeOrtodonciaTab === "ortodoncia_morning" 
+                    ? "pl-12 flex-row" 
+                    : "pr-12 flex-row-reverse"
+                )}>
                   {/* Círculo numerado */}
-                  <div className="absolute left-0 w-8 h-8 bg-[#05dd4d] rounded-full flex items-center justify-center text-[#001208] font-medium">
+                  <div className={cn(
+                    "absolute w-8 h-8 bg-[#05dd4d] rounded-full flex items-center justify-center text-[#001208] font-medium",
+                    activeOrtodonciaTab === "ortodoncia_morning" ? "left-0" : "right-0"
+                  )}>
                     {item.step}
                   </div>
 
                   {/* Contenido */}
-                  <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
-                  <h3 className="text-white font-medium mb-1">{item.title}</h3>
-                  {item.speaker && (
-                    <p className="text-white font-light text-sm">
-                      {item.speaker}
-                    </p>
-                  )}
+                  <div className={cn(
+                    "flex-1",
+                    activeOrtodonciaTab === "ortodoncia_morning" ? "pl-12" : "pr-12"
+                  )}>
+                    <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
+                    <h3 className="text-white font-medium mb-1">{item.title}</h3>
+                    {item.speaker && (
+                      <p className="text-white font-light text-sm">
+                        {item.speaker}
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -301,11 +333,27 @@ export default function Section2() {
         {/* Un solo timeline basado en el tab activo */}
         <div className="mt-10">
           <div className="relative">
-            {/* Línea vertical - Quitamos la altura fija y usamos bottom-0 */}
-            <div className="absolute left-4 top-8 bottom-8 w-[1px] bg-[#05dd4d]" />
+            {/* Línea vertical */}
+            <div className={cn(
+              "absolute w-[1px] bg-[#05dd4d] top-8 bottom-8",
+              {
+                "left-4": activeTab === "dental_morning",
+                "left-[25%]": activeTab === "dental_afternoon",
+                "left-[50%]": activeTab === "ortodoncia_morning",
+                "left-[75%]": activeTab === "ortodoncia_afternoon"
+              }
+            )} />
 
             {/* Items del timeline */}
-            <div className="relative space-y-8">
+            <div className={cn(
+              "relative space-y-8",
+              {
+                "pl-0": activeTab === "dental_morning",
+                "pl-[calc(25%-16px)]": activeTab === "dental_afternoon",
+                "pl-[calc(50%-16px)]": activeTab === "ortodoncia_morning",
+                "pl-[calc(75%-16px)]": activeTab === "ortodoncia_afternoon"
+              }
+            )}>
               {getTimelineData(activeTab).map((item, index) => (
                 <div key={index} className="relative pl-12">
                   {/* Círculo numerado */}
