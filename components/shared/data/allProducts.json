@@ -117,5 +117,75 @@
     "image": "/img/products/Z350XT/Z350-XT-Universal-RestorativeA2E(Enamel).gif",
     "description": "",
     "brand": "Z350XT"
+  },
+  {
+    "id": "product18",
+    "name": "Clarity Advanced Upper Cuspid Hook",
+    "image": "/img/products/Clarity-advance/Clarity_Advanced_Upper_Cuspid_Hook.gif",
+    "description": "",
+    "brand": "Clarity Advanced"
+  },
+  {
+    "id": "product19",
+    "name": "Clarity Advanced Upper Cuspid Hook",
+    "image": "/img/products/Clarity-advance/Clarity_Advanced_Upper_Cuspid_Hook2.gif",
+    "description": "",
+    "brand": "Clarity Advanced"
+  },
+  {
+    "id": "product20",
+    "name": "3M Clinpro Clear Fluoride Treatment",
+    "image": "/img/products/Clinpro-Clear/3M_OCSD_Cornerstone-Prototype_SoloProductFlavorless-1.gif",
+    "description": "",
+    "brand": "Clinpro"
+  },
+  {
+    "id": "product21",
+    "name": "3M™ Clinpro™ Clear Fluoride Treatment",
+    "image": "/img/products/Clinpro-Clear/3M_OCSD_Cornerstone-Prototype_SoloProductFlavorless.gif",
+    "description": "",
+    "brand": "Clinpro"
+  },
+  {
+    "id": "product22",
+    "name": "3M™ Clinpro™ Clear Fluoride Treatment",
+    "image": "/img/products/Clinpro-Clear/3M_OCSD_Cornerstone-Prototype_SoloProductMint.gif",
+    "description": "",
+    "brand": "Clinpro"
+  },
+  {
+    "id": "product23",
+    "name": "3M Filtek Easy Match Universal Restorative Intro Kit, 6120K, 4 g, Syringe, 3/KT",
+    "image": "/img/products/Easy-match/3M™-Filtek™-Easy-Match-Universal-Restorative-Intro-Kit,-6110K,-0.2-g,-Capsule,-60KT.gif",
+    "description": "",
+    "brand": "Easy Match"
+  },
+  {
+    "id": "product24",
+    "name": "3M Filtek Easy Match Universal Restorative Intro Kit, 6120K, 4 g, Syringe",
+    "image": "/img/products/Easy-match/3M™-Filtek™-Easy-Match-Universal-Restorative-Intro-Kit,-6120K,-4-g,-Syringe.gif",
+    "description": "",
+    "brand": "Easy Match"
+  },
+  {
+    "id": "product25",
+    "name": "3M Filtek Easy Match Universal Restorative, 6120B, Bright, 4 g, Syringe",
+    "image": "/img/products/Easy-match/3M™-Filtek™-Easy-Match-Universal-Restorative,-6120B,-Bright,-4-g,-Syringe,-1BAG.gif",
+    "description": "",
+    "brand": "Easy Match"
+  },
+  {
+    "id": "product26",
+    "name": "3M Filtek™ Easy Match Universal Restorative, 6120N, Natural, 4 g, Syringe",
+    "image": "/img/products/Easy-match/3M™-Filtek™-Easy-Match-Universal-Restorative,-6120N,-Natural,-4-g,-Syringe,-1BAG.gif",
+    "description": "",
+    "brand": "Easy Match"
+  },
+  {
+    "id": "product27",
+    "name": "3M Filtek™ Easy Match Universal Restorative, 6120W, Warm, 4 g, Syringe",
+    "image": "/img/products/Easy-match/3M™-Filtek™-Easy-Match-Universal-Restorative,-6120W,-Warm,-4-g,-Syringe,-1BAG.gif",
+    "description": "",
+    "brand": "Easy Match"
   }
 ]

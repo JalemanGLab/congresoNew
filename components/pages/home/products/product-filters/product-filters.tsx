@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, X } from "lucide-react";
@@ -21,10 +21,26 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
     setSearchTerm,
     handleCategoryChange,
     clearFilters,
+    setSelectedCategory,
+    handleDownloadBrochures,
   } = useProductFilter(categories);
 
   // Check if any filters are active
-  const isFiltered = selectedCategory !== "Todas" || searchTerm !== "";
+  const isFiltered = selectedCategory !== "" || searchTerm !== "";
+
+  useEffect(() => {
+    const handleResetFilters = () => {
+      // Resetear la categoría seleccionada
+      setSelectedCategory("");
+      // Resetear cualquier otro estado que necesites limpiar
+    };
+    
+    window.addEventListener("resetFilters", handleResetFilters);
+    
+    return () => {
+      window.removeEventListener("resetFilters", handleResetFilters);
+    };
+  }, []);
 
   return (
     <div className="bg-[#001208]/80 backdrop-blur-sm rounded-2xl border border-[#00FF66]/20 shadow-xl p-4 md:p-6 lg:p-8">
@@ -51,9 +67,9 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
           </div>
           <button 
             className="w-full bg-[#15d094] cursor-pointer text-[#002422] text-sm font-bold py-3 rounded-full hover:bg-[#13bb85] transition-colors"
-            onClick={() => window.open("https://drive.google.com/drive/folders/1ApdvkbzjFLYxZ3_0LgviAc-lKiqSr58b", "_blank")}
+            onClick={handleDownloadBrochures}
           >
-            Descargar Brochure
+            Descargar Brochures
           </button>
         </div>
 
@@ -79,9 +95,9 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
           </div>
           <button 
             className="bg-[#15d094] cursor-pointer text-[#002422] font-bold px-6 py-3 rounded-full hover:bg-[#13bb85] transition-colors whitespace-nowrap"
-            onClick={() => window.open("https://drive.google.com/drive/folders/1ApdvkbzjFLYxZ3_0LgviAc-lKiqSr58b", "_blank")}
+            onClick={handleDownloadBrochures}
           >
-            Descargar Brochure
+            Descargar Brochures
           </button>
         </div>
       </div>

@@ -22,7 +22,7 @@ export default function ProductsSection() {
   } = useProductsSection()
 
   return (
-    <section id="productos" className="py-28 bg-gradient-to-b from-[#001810] to-[#002A1A] relative overflow-hidden">
+    <section id="productos" className="py-5 bg-gradient-to-b from-[#001810] to-[#002A1A] relative overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=800&width=1600')] bg-no-repeat bg-cover opacity-5"></div>
       </div>
@@ -42,44 +42,35 @@ export default function ProductsSection() {
         {/* Product Grid */}
         <div className="mt-12">
           {filteredProducts.length === 0 ? (
-            <div className="text-center py-12 bg-[#001208]/80 backdrop-blur-sm rounded-2xl border border-[#00FF66]/20 shadow-xl">
-              <p className="text-white text-lg">No se encontraron productos que coincidan con los criterios de búsqueda.</p>
-              <p className="text-white/70 mt-2">Intenta con otros filtros o términos de búsqueda.</p>
-            </div>
+            <div></div>
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {visibleProducts.map((product) => (
+                {filteredProducts.map((product) => (
                   <div key={product.id} className="flex justify-center">
                     <ProductCard {...product} />
                   </div>
                 ))}
               </div>
 
-              {/* Ver más/menos buttons */}
-              {remainingCount > 0 && !showMore && (
-                <div className="text-center mt-12">
-                  <Button
-                    variant="outline"
-                    className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66] transition-colors duration-200"
-                    onClick={() => setShowMore(true)}
-                  >
-                    Ver más ({remainingCount} productos)
-                  </Button>
-                </div>
-              )}
-
-              {showMore && (
-                <div className="text-center mt-12">
-                  <Button
-                    variant="outline"
-                    className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66] transition-colors duration-200"
-                    onClick={() => setShowMore(false)}
-                  >
-                    Ver menos
-                  </Button>
-                </div>
-              )}
+              {/* Botón de cerrar */}
+              <div className="text-center mt-12">
+                <Button
+                  variant="outline"
+                  className="border-[#00FF66]/30 text-white hover:bg-[#00FF66]/10 hover:border-[#00FF66] transition-colors duration-200"
+                  onClick={() => {
+                    // Limpiar productos y categoría seleccionada
+                    window.dispatchEvent(new CustomEvent('filterChange', { 
+                      detail: { category: null, searchTerm: '' } 
+                    }));
+                    
+                    // Disparar evento para limpiar la categoría seleccionada en el componente de filtros
+                    window.dispatchEvent(new CustomEvent('resetFilters'));
+                  }}
+                >
+                  Cerrar
+                </Button>
+              </div>
             </>
           )}
         </div>
