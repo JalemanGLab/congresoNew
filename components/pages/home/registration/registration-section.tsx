@@ -1,21 +1,36 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Register from "../../../custom/modals/register/Register";
 import Image from "next/image";
-import useRegistration from "./useRegistration";
 
 export default function RegistrationSection() {
-  const { isModalOpen, closeModal, openModal } = useRegistration();
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
   useEffect(() => {
     if (isModalOpen) {
+      const currentScrollPosition = window.scrollY;
+      setScrollPosition(currentScrollPosition);
+      document.body.style.top = `-${currentScrollPosition}px`;
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: "instant",
+      });
     }
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
     };
   }, [isModalOpen]);
 
@@ -58,20 +73,26 @@ export default function RegistrationSection() {
                   </div>
                 </div>
               </div>
+              <div className="text-white text-base font-normal md:text-lg lg:text-xl">
+                El congreso MAGNO 3.0 es el evento odontológico más esperado del año, 
+                donde la innovación, la tecnología y el conocimiento se reúnen en un solo lugar. 
+                Una experiencia inmersiva que conectará a profesionales con las últimas tendencias en odontología y ortodoncia.
+                Una oportunidad única para aprender, actualizarse y vivir la evolución de la salud dental.
+              </div>
             </div>
-            <div className="text-white text-base font-normal md:text-lg lg:text-xl">
-              EI evento odontológico más grande del año, donde expertos del
-              sector presentan conferencias de vanguardia g las últimas
-              tecnologías en salud dental. Una experiencia inmersiva que
-              transformará la industria.
+            <div
+              onClick={() => setIsModalOpen(true)}
+              className="w-[250px] h-[45px] flex justify-center items-center rounded-full font-semibold text-base bg-[#00de4c] text-[#01332b] hover:bg-[#00c544] transition-colors cursor-pointer"
+            >
+              Registrarme ahora
             </div>
           </div>
-          <div
-            onClick={openModal}
-            className="w-[250px] h-[45px] flex justify-center items-center rounded-full font-semibold text-base bg-[#00de4c] text-[#01332b] hover:bg-[#00c544] transition-colors cursor-pointer"
-          >
-            Vive la experiencia
-          </div>
+
+
+
+
+
+
         </div>
       </div>
 
@@ -79,11 +100,11 @@ export default function RegistrationSection() {
         <div className="fixed left-0 top-0 right-0 bottom-0 inset-0 z-50 flex items-center justify-center">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={closeModal}
+            onClick={() => setIsModalOpen(false)}
           />
           <div className="relative flex justify-center items-center bg-gradient-to-br from-[#031a10] to-[#073723] w-full h-screen shadow-xl px-4 sm:px-6 lg:px-8">
             <button
-              onClick={closeModal}
+              onClick={() => setIsModalOpen(false)}
               className="absolute top-3 right-3 text-green-400 hover:text-green-600 transition-colors z-50 hover:bg-green-500/20 rounded-sm p-1"
             >
               <svg
@@ -101,7 +122,7 @@ export default function RegistrationSection() {
                 />
               </svg>
             </button>
-            <Register closeModalAction={closeModal} />
+            <Register closeModalAction={() => setIsModalOpen(false)} />
           </div>
         </div>
       )}
