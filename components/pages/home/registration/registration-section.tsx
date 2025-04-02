@@ -1,66 +1,61 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Register from "../../../custom/modals/register/Register";
 import Image from "next/image";
+import useRegistration from "./useRegistration";
 
 export default function RegistrationSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
+  const { isModalOpen, closeModal, openModal } = useRegistration();
+  
   useEffect(() => {
     if (isModalOpen) {
-      const currentScrollPosition = window.scrollY;
-      setScrollPosition(currentScrollPosition);
-      document.body.style.top = `-${currentScrollPosition}px`;
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      window.scrollTo({
-        top: scrollPosition,
-        behavior: "instant",
-      });
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
   return (
     <section
       id="registro"
-      className="w-full py-6 lg:py-12 bg-gradient-to-b from-[#001208] to-[#002A1A] relative overflow-hidden"
+      className="w-full relative overflow-hidden"
     >
-      <div className="w-full max-w-[1430px] mx-auto flex flex-col justify-center items-center lg:flex-row gap-6 lg:gap-20 px-4 ">
-        <div className="w-full h-[180px] sm:h-[250px] md:h-[300px] lg:h-[600px] lg:max-w-[500px] rounded-xl lg:rounded-2xl bg-[#003b2f] relative overflow-hidden">
-          <Image
-            src="https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/event/001.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJldmVudC8wMDEucG5nIiwiaWF0IjoxNzQzNDkwNDYyLCJleHAiOjE3NzUwMjY0NjJ9.ezhE_2WJI9goCnVY6WMdn0wmDrw4fYFEnWHDceWVxBI"
-            alt="Doctor profesional sonriendo"
-            fill
-            className="object-cover object-top lg:object-center"
-            priority
-          />
-        </div>
-        <div className="flex w-full lg:w-[550px] flex-col gap-6 lg:gap-20">
-          <div className="flex flex-col gap-6 lg:gap-10">
-            <div className="flex flex-col gap-2 md:gap-3">
-              <div className="text-xl font-semibold md:text-2xl lg:text-3xl text-[#05dd4d]">
-                Sobre el evento
-              </div>
-              <div className="flex flex-col gap-1">
-                <div className="text-white text-xl font-semibold md:text-2xl lg:text-3xl">
-                  BIENVENIDOS A MAGNO 3.0
+      <div 
+        className="w-full py-20 px-4 md:px-8"
+        style={{
+          backgroundImage: `url('https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/event/background_event.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJldmVudC9iYWNrZ3JvdW5kX2V2ZW50LmpwZyIsImlhdCI6MTc0MzU1OTY5MywiZXhwIjoxNzc1MDk1NjkzfQ.vfr4_18rZXVljS2aGLA3p2Dq6UckTr_oFV1iqvsvi3I')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="w-full max-w-[1430px] mx-auto flex flex-col justify-center items-center lg:flex-row gap-6 lg:gap-20 px-4 ">
+          <div className="w-full h-[180px] sm:h-[250px] md:h-[300px] lg:h-[600px] lg:max-w-[500px] bg-[#003b2f] relative overflow-hidden">
+            <Image
+              src="https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/event/doc_section_evento.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJldmVudC9kb2Nfc2VjdGlvbl9ldmVudG8uanBnIiwiaWF0IjoxNzQzNTU5NjM5LCJleHAiOjE3NzUwOTU2Mzl9.uUXg0L3U-UtlliEuJNJWrciu6hcEa7zKZG4s7a5m2NY"
+              alt="Doctor profesional sonriendo"
+              fill
+              className="object-cover object-top lg:object-center"
+              priority
+            />
+          </div>
+          <div className="flex w-full lg:w-[550px] flex-col gap-6 lg:gap-20">
+            <div className="flex flex-col gap-6 lg:gap-10">
+              <div className="flex flex-col gap-2 md:gap-3">
+                <div className="text-xl font-semibold md:text-2xl lg:text-3xl text-[#05dd4d]">
+                  Sobre el evento
                 </div>
-                <div className="text-white text-xl font-normal md:text-2xl lg:text-3xl">
-                  LA CUMBRE DE LA INNOVACIÓN ODONTOLÓGICA
+                <div className="flex flex-col gap-1">
+                  <div className="text-white text-xl font-semibold md:text-2xl lg:text-3xl">
+                    Bienvenidos al Congreso MAGNO 3.0
+                  </div>
+                  <div className="text-white text-xl font-normal md:text-2xl lg:text-3xl">
+                    La Cumbre de la Innovación Odontológica
+                  </div>
                 </div>
               </div>
             </div>
@@ -72,7 +67,7 @@ export default function RegistrationSection() {
             </div>
           </div>
           <div
-            onClick={() => setIsModalOpen(true)}
+            onClick={openModal}
             className="w-[250px] h-[45px] flex justify-center items-center rounded-full font-semibold text-base bg-[#00de4c] text-[#01332b] hover:bg-[#00c544] transition-colors cursor-pointer"
           >
             Vive la experiencia
@@ -84,11 +79,11 @@ export default function RegistrationSection() {
         <div className="fixed left-0 top-0 right-0 bottom-0 inset-0 z-50 flex items-center justify-center">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setIsModalOpen(false)}
+            onClick={closeModal}
           />
           <div className="relative flex justify-center items-center bg-gradient-to-br from-[#031a10] to-[#073723] w-full h-screen shadow-xl px-4 sm:px-6 lg:px-8">
             <button
-              onClick={() => setIsModalOpen(false)}
+              onClick={closeModal}
               className="absolute top-3 right-3 text-green-400 hover:text-green-600 transition-colors z-50 hover:bg-green-500/20 rounded-sm p-1"
             >
               <svg
@@ -106,7 +101,7 @@ export default function RegistrationSection() {
                 />
               </svg>
             </button>
-            <Register closeModalAction={() => setIsModalOpen(false)} />
+            <Register closeModalAction={closeModal} />
           </div>
         </div>
       )}

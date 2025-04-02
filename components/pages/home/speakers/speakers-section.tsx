@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { ArrowRight, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import SpeakerCard from "./speaker-card"
@@ -15,22 +15,8 @@ export default function SpeakersSection() {
   const [showAllSpeakers, setShowAllSpeakers] = useState(false)
   const [selectedSpeakerId, setSelectedSpeakerId] = useState<string | null>(null)
 
-  // Estado para almacenar los ponentes en orden aleatorio
-  const [randomizedSpeakers, setRandomizedSpeakers] = useState(allSpeakers)
-
-  // Función para aleatorizar el orden de los ponentes
-  const randomizeSpeakers = () => {
-    const shuffled = [...allSpeakers].sort(() => Math.random() - 0.5)
-    setRandomizedSpeakers(shuffled)
-  }
-
-  // Aleatorizar los ponentes al cargar el componente
-  useEffect(() => {
-    randomizeSpeakers()
-  }, [])
-
   // Determinar qué ponentes mostrar basado en el estado
-  const displayedSpeakers = showAllSpeakers ? randomizedSpeakers : randomizedSpeakers.slice(0, INITIAL_SPEAKERS_COUNT)
+  const displayedSpeakers = showAllSpeakers ? allSpeakers : allSpeakers.slice(0, INITIAL_SPEAKERS_COUNT)
 
   return (
     <section id="ponentes" className="py-28 bg-[#001810] relative overflow-hidden">
@@ -47,7 +33,7 @@ export default function SpeakersSection() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 content-center gap-8">
           {displayedSpeakers.map((speaker) => (
             <SpeakerCard
               key={speaker.id}
@@ -56,6 +42,7 @@ export default function SpeakersSection() {
               role={speaker.role}
               image={speaker.image}
               topic={speaker.topic}
+              country={speaker.country}
               onOpenModal={() => setSelectedSpeakerId(speaker.id)}
             />
           ))}
