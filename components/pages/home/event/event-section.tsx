@@ -10,11 +10,15 @@ export default function EventSection() {
   return (
     <section
       id="evento"
-      className="py-16 md:py-20 lg:py-28 bg-gradient-to-b from-[#002A1A] to-[#001810] relative overflow-hidden"
+      className="py-16 md:py-20 lg:py-28 relative overflow-hidden bg-[#003027]"
     >
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=800&width=1600')] bg-no-repeat bg-cover opacity-5"></div>
+      <div className="absolute inset-0 overflow-visible">
+        {/* Círculo superior izquierdo */}
+        <div className="absolute z-10 top-[260px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* Círculo inferior derecho */}
+        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
       </div>
+
       <div className="container relative z-10">
         <div className="text-center mb-12 lg:mb-20">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
@@ -26,7 +30,7 @@ export default function EventSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ">
           <div className="rounded-2xl overflow-hidden h-[300px] lg:h-[500px] relative shadow-2xl shadow-[#00FF66]/5 border border-[#00FF66]/10">
             <iframe
               src={eventData.mapUrl}

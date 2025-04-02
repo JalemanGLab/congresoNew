@@ -16,7 +16,13 @@ export default function Footer() {
     { name: "World", url: "https://www.solventum.com/", icon: TbWorld },
   ];
   return (
-    <footer className="py-16 bg-[#001208] border-t border-[#00FF66]/10">
+    <footer className="py-16 bg-[#003027] relative">
+      <div className="absolute inset-0 overflow-visible">
+        {/* Círculo superior izquierdo */}
+        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* Círculo inferior derecho */}
+        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+      </div>
       <div className="container">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-6">

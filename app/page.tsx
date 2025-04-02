@@ -13,7 +13,7 @@ import Footer from "@/components/pages/home/footer/footer";
 import WhatsappButton from "@/components/whatsapp-button";
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-[#001208] to-[#001810]">
+    <div className="flex min-h-screen flex-col bg-[#003027]">
       {/* Header/Navigation */}
       <WhatsappButton />
       <Header />
@@ -32,10 +32,10 @@ export default function Home() {
         <AgendaSection />
 
         {/* Event Summary with Map */}
-        <EventSection />
+        <EventSection  />
 
         {/* Products Section */}
-        <ProductsSection />
+        <ProductsSection  />
 
         {/* FAQ Section */}
         <FaqSection />

@@ -5,9 +5,9 @@ import Threads from "../../../Threads"
 
 export default function CountdownSection() {
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="py-16 relative overflow-hidden bg-[#003027]">
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[#0c1d14]"></div>
+        <div className="absolute top-0 left-0 w-full h-full "></div>
         <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
           <Threads
             color={[2/255, 180/255, 108/255]}
