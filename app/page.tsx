@@ -13,7 +13,7 @@ import Footer from "@/components/pages/home/footer/footer";
 import WhatsappButton from "@/components/whatsapp-button";
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#003027]">
+    <div className="flex min-h-screen flex-col overflow-hidden bg-[#003027]">
       {/* Header/Navigation */}
       <WhatsappButton />
       <Header />

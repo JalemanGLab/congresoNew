@@ -35,7 +35,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate])
 
   return (
-    <div className="flex justify-center items-end gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-5xl mx-auto">
+    <div className="flex justify-center items-end gap-6 px-4 sm:gap-8 md:gap-10 lg:gap-12 max-w-5xl mx-auto">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="flex flex-col items-center">
           <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#00FF66]">

@@ -147,7 +147,7 @@ export default function Section2() {
   return (
     <>
       {/* Versión Mobile (se oculta en lg) */}
-      <div className="lg:hidden w-full flex flex-col gap-16 max-w-[1425px] mx-auto px-4 py-12">
+      <div className="lg:hidden w-full flex flex-col gap-12 max-w-[1425px] mx-auto px-10 py-12">
         {/* Primer tab y timeline */}
         <div className="w-full flex flex-col gap-10">
           <div className="bg-[#001208]/80 backdrop-blur-sm rounded-[32px] p-1">
@@ -210,7 +210,7 @@ export default function Section2() {
                   {/* Contenido */}
                   <div className={cn(
                     "flex-1",
-                    activeDentalTab === "dental_morning" ? "pl-12" : "pr-12"
+                    activeDentalTab === "dental_morning" ? "pl-4 lg:pl-12" : "pr-4 lg:pr-12"
                   )}>
                     <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
                     <h3 className="text-white font-medium mb-1">{item.title}</h3>
@@ -237,10 +237,10 @@ export default function Section2() {
                   activeOrtodonciaTab === "ortodoncia_morning" ? "bg-[#0c231b]" : ""
                 )}
               >
-                <div className="text-center text-white/80 text-[13px] leading-none">
+                <div className="text-center text-white/80 text-[12px] leading-none">
                   Mañana
                 </div>
-                <div className="text-center text-white text-[13px] font-medium uppercase leading-tight">
+                <div className="text-center text-white text-[12px] font-medium uppercase leading-tight">
                   Salon Ortodoncia
                 </div>
               </div>
@@ -254,7 +254,7 @@ export default function Section2() {
                 <div className="text-center text-white/80 text-[11px] leading-none">
                   Tarde
                 </div>
-                <div className="text-center text-white text-[13px] font-medium uppercase leading-tight">
+                <div className="text-center text-white text-[11px] font-medium uppercase leading-tight">
                   Salon Ortodoncia
                 </div>
               </div>
@@ -288,7 +288,7 @@ export default function Section2() {
                   {/* Contenido */}
                   <div className={cn(
                     "flex-1",
-                    activeOrtodonciaTab === "ortodoncia_morning" ? "pl-12" : "pr-12"
+                    activeOrtodonciaTab === "ortodoncia_morning" ? "pl-4 lg:pl-12" : "pr-4 lg:pr-12"
                   )}>
                     <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
                     <h3 className="text-white  font-medium mb-1">{item.title}</h3>

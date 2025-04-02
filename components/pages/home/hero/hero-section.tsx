@@ -7,7 +7,7 @@ export default function HeroSection() {
   const { scrollToRegistro } = useHero();
 
   return (
-    <section id="inicio" className="relative w-full h-screen">
+    <section id="inicio" className="relative w-full h-screen overflow-x-hidden">
       {/* Contenedor de la imagen de fondo con position relative */}
       <div className="relative w-full h-full">
         <div className="absolute inset-0">
@@ -23,9 +23,9 @@ export default function HeroSection() {
         </div>
 
         {/* Contenido principal */}
-        <div className="relative h-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 flex flex-col justify-center items-center text-center">
-          <div className=" flex flex-col items-center justify-center gap-10">
-            <div className="flex flex-col">
+        <div className="relative h-full max-w-7xl mx-auto  md:px-8 lg:px-12 flex flex-col justify-center items-center text-center">
+          <div className=" flex flex-col items-center  justify-center gap-10">
+            <div className="flex flex-col px-4">
               {/* Título Congreso */}
               <h1 className="text-white text-start text-[20px] sm:text-[24px] md:text-[32px] lg:text-[40px] font-light mb-1 leading-[1.1]">
                 Congreso

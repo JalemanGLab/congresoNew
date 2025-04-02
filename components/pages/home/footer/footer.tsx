@@ -17,12 +17,6 @@ export default function Footer() {
   ];
   return (
     <footer className="py-16 bg-[#003027] relative">
-      <div className="absolute inset-0 overflow-visible">
-        {/* Círculo superior izquierdo */}
-        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
-        {/* Círculo inferior derecho */}
-        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
-      </div>
       <div className="container">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-6">
@@ -35,7 +29,7 @@ export default function Footer() {
                 className="object-contain"
               />
             </div>
-            <p className="text-white/60 leading-relaxed">
+            <p className="text-white/60 max-w-[300px] leading-relaxed">
               Liderando el Congreso Magno 3.0, el evento más importante del año
               para profesionales y empresas del sector odontológico. Innovación,
               conocimiento y networking en un solo lugar.
@@ -54,7 +48,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="w-full max-w-[200px] ">
             <h3 className="text-white font-medium text-lg mb-6">
               Enlaces Rápidos
             </h3>
@@ -102,12 +96,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="w-full max-w-[200px]">
             <h3 className="text-white font-medium text-lg mb-6">Contacto</h3>
-            <ul className="space-y-4">
+            <ul className="space-y-4 ">
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-[#00FF66] mt-0.5" />
-                <span className="text-white/60 flex flex-wrap">
+                <span className="text-white/60 max-w-[200px] break-words">
                   registro@congresomagnocolombia.com
                 </span>
               </li>
@@ -117,7 +111,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-6 w-6 text-[#00FF66] mt-0.5" />
-                <span className="text-white/60">Maloka, Bogotá, Colombia</span>
+                <span className="text-white/60 ">Maloka, Bogotá, Colombia</span>
               </li>
             </ul>
           </div>
