@@ -12,10 +12,13 @@ export default function FaqSection() {
   return (
     <section
       id="preguntas"
-      className="py-16 lg:py-20 bg-[#002A1A] relative overflow-hidden"
+      className="py-16 lg:py-20 bg-[#003027] relative overflow-hidden"
     >
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=800&width=1600')] bg-no-repeat bg-cover opacity-5"></div>
+      <div className="absolute inset-0 overflow-visible">
+        {/* Círculo superior izquierdo */}
+        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* Círculo inferior derecho */}
+        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
       </div>
       <div className="container relative z-10 px-4 sm:px-6">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-20 items-center">
@@ -36,7 +39,7 @@ export default function FaqSection() {
                 className="bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] group px-6"
                 onClick={toggleModal}
               >
-                Ver Preguntas Frecuentes
+                Ver preguntas frecuentes
                 <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>

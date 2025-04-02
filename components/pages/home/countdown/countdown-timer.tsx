@@ -8,10 +8,10 @@ interface CountdownTimerProps {
 
 export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    dias: 0,
+    horas: 0,
+    minutos: 0,
+    segundos: 0,
   })
 
   useEffect(() => {
@@ -20,10 +20,10 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 
       if (difference > 0) {
         setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
+          dias: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          horas: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutos: Math.floor((difference / 1000 / 60) % 60),
+          segundos: Math.floor((difference / 1000) % 60),
         })
       }
     }
