@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Section1() {
   return (
-    <div className="flex flex-col gap-10 w-full max-w-[1425px] mx-auto py-8 lg:flex-row items-center justify-center">
+    <div className="flex flex-col gap-10 w-full max-w-[1425px] mx-auto pt-20 lg:flex-row items-center justify-center">
       <div className="flex w-full flex-col gap-6 items-center lg:items-start px-6 sm:px-10">
         <div className="flex flex-col items-center lg:items-start gap-4">
           <div className=" text-[#00ff66]  text-[22px] sm:text-4xl">
@@ -15,8 +15,9 @@ export default function Section1() {
             Consulta la lista de conferencias y actividades destacadas de MAGNO 3.0.
           </div>
         </div>
-        <a href="https://drive.google.com/drive/folders/1r4HfcKnKyTIBDj2shOFVkpQVdYBjfO0y" 
+        <a href="https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/pdf/Agenda-Magno%203.0.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwZGYvQWdlbmRhLU1hZ25vIDMuMC5wZGYiLCJpYXQiOjE3NDM1Njg1NTQsImV4cCI6MTc3NTEwNDU1NH0.zZJF01T32JXi3g3zjQ8KPPy0ga1eqq4J-kOOquf-y3g" 
           target="_blank"
+          download="Agenda-Magno-3.0.pdf"
           className="flex justify-center items-center  w-[260px] h-[40px] sm:w-[300px] sm:h-[50px] text:lg sm:text-xl font-semibold  rounded-full text-[#01332b] bg-[#15d094]">
           Descarga el programa
         </a>

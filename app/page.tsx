@@ -22,26 +22,26 @@ export default function Home() {
         {/* Hero Banner with Slider */}
         <HeroSection />
 
-        {/* Countdown Timer Section */}
-        <CountdownSection />
-
         {/* Event Registration CTA with Event Info */}
         <RegistrationSection />
 
-        {/* Event Summary with Map */}
-        <EventSection />
+        {/* Speakers Section */}
+        <SpeakersSection />
 
         {/* Agenda Section */}
         <AgendaSection />
 
-        {/* Speakers Section */}
-        <SpeakersSection />
+        {/* Event Summary with Map */}
+        <EventSection />
 
         {/* Products Section */}
         <ProductsSection />
 
         {/* FAQ Section */}
         <FaqSection />
+
+        {/* Countdown Timer Section */}
+        <CountdownSection />
       </main>
 
       {/* Footer */}

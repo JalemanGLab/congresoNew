@@ -36,7 +36,7 @@ export default function FaqSection() {
                 className="bg-[#00FF66] hover:bg-[#00DD55] text-[#001208] group px-6"
                 onClick={toggleModal}
               >
-                Ver Preguntas Frecuentes
+                Ver preguntas frecuentes
                 <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>

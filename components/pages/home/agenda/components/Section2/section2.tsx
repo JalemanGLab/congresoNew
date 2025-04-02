@@ -159,10 +159,10 @@ export default function Section2() {
                   activeDentalTab === "dental_morning" ? "bg-[#0c231b]" : ""
                 )}
               >
-                <div className="text-center text-white/80 text-[11px] leading-none">
+                <div className="text-center text-white/80 text-[13px] leading-none">
                   Mañana
                 </div>
-                <div className="text-center text-white text-[12px] font-medium uppercase leading-tight">
+                <div className="text-center text-white text-[14px] font-medium uppercase leading-tight">
                   Salón Dental
                 </div>
               </div>
@@ -173,10 +173,10 @@ export default function Section2() {
                   activeDentalTab === "dental_afternoon" ? "bg-[#0c231b]" : ""
                 )}
               >
-                <div className="text-center text-white/80 text-[11px] leading-none">
+                <div className="text-center text-white/80 text-[13px] leading-none">
                   Tarde
                 </div>
-                <div className="text-center text-white text-[12px] font-medium uppercase leading-tight">
+                <div className="text-center text-white text-[14px] font-medium uppercase leading-tight">
                   Salón Dental
                 </div>
               </div>
@@ -237,10 +237,10 @@ export default function Section2() {
                   activeOrtodonciaTab === "ortodoncia_morning" ? "bg-[#0c231b]" : ""
                 )}
               >
-                <div className="text-center text-white/80 text-[11px] leading-none">
+                <div className="text-center text-white/80 text-[13px] leading-none">
                   Mañana
                 </div>
-                <div className="text-center text-white text-[11px] font-medium uppercase leading-tight">
+                <div className="text-center text-white text-[13px] font-medium uppercase leading-tight">
                   Salon Ortodoncia
                 </div>
               </div>
@@ -254,7 +254,7 @@ export default function Section2() {
                 <div className="text-center text-white/80 text-[11px] leading-none">
                   Tarde
                 </div>
-                <div className="text-center text-white text-[11px] font-medium uppercase leading-tight">
+                <div className="text-center text-white text-[13px] font-medium uppercase leading-tight">
                   Salon Ortodoncia
                 </div>
               </div>
@@ -291,7 +291,7 @@ export default function Section2() {
                     activeOrtodonciaTab === "ortodoncia_morning" ? "pl-12" : "pr-12"
                   )}>
                     <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
-                    <h3 className="text-white font-medium mb-1">{item.title}</h3>
+                    <h3 className="text-white  font-medium mb-1">{item.title}</h3>
                     {item.speaker && (
                       <p className="text-white font-light text-sm">
                         {item.speaker}
@@ -319,10 +319,10 @@ export default function Section2() {
                   activeTab === tab ? "bg-[#0c231b]" : ""
                 )}
               >
-                <div className="text-center text-white/80 text-[11px] leading-none">
+                <div className="text-center text-white/80 text-[16px] leading-none">
                   {tab.includes("morning") ? "Mañana" : "Tarde"}
                 </div>
-                <div className="text-center text-white text-[12px] font-medium uppercase leading-tight">
+                <div className="text-center text-white text-[16px] font-medium uppercase leading-9">
                   {tab.includes("dental") ? "Salón Dental" : "Salón Ortodoncia"}
                 </div>
               </div>
@@ -363,7 +363,7 @@ export default function Section2() {
 
                   {/* Contenido */}
                   <div className="text-[#00FF66] text-sm mb-2">{item.time}</div>
-                  <h3 className="text-white font-medium mb-1">{item.title}</h3>
+                  <h3 className="text-white max-w-[400px] font-medium mb-1">{item.title}</h3>
                   {item.speaker && (
                     <p className="text-white font-light text-sm">
                       {item.speaker}
