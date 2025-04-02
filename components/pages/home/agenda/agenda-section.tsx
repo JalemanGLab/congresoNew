@@ -11,13 +11,13 @@ export default function AgendaSection() {
       className="bg-[#003027] relative w-full flex flex-col items-center justify-center gap-10"
     >
       {/* Círculos con blur */}
-      <div className="absolute inset-0 overflow-visible">
+      {/* <div className="absolute inset-0 overflow-visible">
         {/* Círculo superior izquierdo */}
-        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div> */}
         {/* Círculo inferior derecho */}
-        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div> */}
         
-      </div>
+      {/* </div> */}
       <Section1 />
       <Section2 />
     </section>
