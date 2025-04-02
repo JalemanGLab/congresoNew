@@ -1,36 +1,21 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Register from "../../../custom/modals/register/Register";
 import Image from "next/image";
+import useRegistration from "./useRegistration";
 
 export default function RegistrationSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
+  const { isModalOpen, closeModal, openModal } = useRegistration();
+  
   useEffect(() => {
     if (isModalOpen) {
-      const currentScrollPosition = window.scrollY;
-      setScrollPosition(currentScrollPosition);
-      document.body.style.top = `-${currentScrollPosition}px`;
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      window.scrollTo({
-        top: scrollPosition,
-        behavior: "instant",
-      });
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
@@ -72,7 +57,7 @@ export default function RegistrationSection() {
             </div>
           </div>
           <div
-            onClick={() => setIsModalOpen(true)}
+            onClick={openModal}
             className="w-[250px] h-[45px] flex justify-center items-center rounded-full font-semibold text-base bg-[#00de4c] text-[#01332b] hover:bg-[#00c544] transition-colors cursor-pointer"
           >
             Vive la experiencia
@@ -84,11 +69,11 @@ export default function RegistrationSection() {
         <div className="fixed left-0 top-0 right-0 bottom-0 inset-0 z-50 flex items-center justify-center">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setIsModalOpen(false)}
+            onClick={closeModal}
           />
           <div className="relative flex justify-center items-center bg-gradient-to-br from-[#031a10] to-[#073723] w-full h-screen shadow-xl px-4 sm:px-6 lg:px-8">
             <button
-              onClick={() => setIsModalOpen(false)}
+              onClick={closeModal}
               className="absolute top-3 right-3 text-green-400 hover:text-green-600 transition-colors z-50 hover:bg-green-500/20 rounded-sm p-1"
             >
               <svg
@@ -106,7 +91,7 @@ export default function RegistrationSection() {
                 />
               </svg>
             </button>
-            <Register closeModalAction={() => setIsModalOpen(false)} />
+            <Register closeModalAction={closeModal} />
           </div>
         </div>
       )}
