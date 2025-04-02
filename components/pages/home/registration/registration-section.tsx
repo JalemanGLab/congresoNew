@@ -35,19 +35,18 @@ export default function RegistrationSection() {
   }, [isModalOpen]);
 
   return (
-    <section
-      id="registro"
-      className="w-full relative overflow-hidden"
-    >
-      <div 
-        className="w-full py-20 px-4 md:px-8"
-        style={{
-          backgroundImage: `url('https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/event/background_event.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJldmVudC9iYWNrZ3JvdW5kX2V2ZW50LmpwZyIsImlhdCI6MTc0MzU1OTY5MywiZXhwIjoxNzc1MDk1NjkzfQ.vfr4_18rZXVljS2aGLA3p2Dq6UckTr_oFV1iqvsvi3I')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+    <section id="registro" className="w-full relative overflow-visible">
+      {/* Círculos con blur */}
+      <div className="absolute inset-0 overflow-visible">
+        {/* Círculo superior izquierdo */}
+        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* Círculo inferior derecho */}
+        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* Círculo adicional para suavizar la transición */}
+        <div className="absolute z-10 -bottom-[200px] left-[30%] w-[300px] h-[300px] rounded-full bg-[#1BEB7E] opacity-[0.15] blur-[150px]"></div>
+      </div>
+
+      <div className="w-full py-20 px-4 md:px-8 bg-[#003027] relative">
         <div className="w-full max-w-[1430px] mx-auto flex flex-col justify-center items-center lg:flex-row gap-6 lg:gap-20 px-4 ">
           <div className="w-full h-[180px] sm:h-[250px] md:h-[300px] lg:h-[600px] lg:max-w-[500px] bg-[#003b2f] relative overflow-hidden">
             <Image
@@ -74,10 +73,12 @@ export default function RegistrationSection() {
                 </div>
               </div>
               <div className="text-white text-base font-normal md:text-lg lg:text-xl">
-                El congreso MAGNO 3.0 es el evento odontológico más esperado del año, 
-                donde la innovación, la tecnología y el conocimiento se reúnen en un solo lugar. 
-                Una experiencia inmersiva que conectará a profesionales con las últimas tendencias en odontología y ortodoncia.
-                Una oportunidad única para aprender, actualizarse y vivir la evolución de la salud dental.
+                El congreso MAGNO 3.0 es el evento odontológico más esperado del
+                año, donde la innovación, la tecnología y el conocimiento se
+                reúnen en un solo lugar. Una experiencia inmersiva que conectará
+                a profesionales con las últimas tendencias en odontología y
+                ortodoncia. Una oportunidad única para aprender, actualizarse y
+                vivir la evolución de la salud dental.
               </div>
             </div>
             <div
@@ -87,12 +88,6 @@ export default function RegistrationSection() {
               Registrarme ahora
             </div>
           </div>
-
-
-
-
-
-
         </div>
       </div>
 

@@ -3,22 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa";
+import { TbWorld } from "react-icons/tb";
 
 export default function Footer() {
   const socialLinks = [
-    { name: "Facebook", url: "https://www.facebook.com/SolventumMedical?locale=es_LA", icon: FaFacebookF },
-    { name: "Twitter", url: "https://x.com/solventum?lang=es", icon: FaXTwitter },
-    { name: "Instagram", url: "https://www.instagram.com/solventumdentallatinoamerica/", icon: FaInstagram },
-    { name: "LinkedIn", url: "https://www.linkedin.com/company/solventumhealth", icon: FaLinkedinIn },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/solventumdentallatinoamerica/",
+      icon: FaInstagram,
+    },
+    { name: "World", url: "https://www.solventum.com/", icon: TbWorld },
   ];
   return (
-    <footer className="py-16 bg-[#001208] border-t border-[#00FF66]/10">
+    <footer className="py-16 bg-[#003027] relative">
+      <div className="absolute inset-0 overflow-visible">
+        {/* Círculo superior izquierdo */}
+        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* Círculo inferior derecho */}
+        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+      </div>
       <div className="container">
         <div className="grid md:grid-cols-4 gap-12">
           <div className="space-y-6">
@@ -103,7 +107,9 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-[#00FF66] mt-0.5" />
-                <span className="text-white/60">info@congresomagno.com</span>
+                <span className="text-white/60 flex flex-wrap">
+                  registro@congresomagnocolombia.com
+                </span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-[#00FF66] mt-0.5" />
@@ -111,9 +117,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-6 w-6 text-[#00FF66] mt-0.5" />
-                <span className="text-white/60">
-                  Centro de Convenciones, Bogotá, Colombia
-                </span>
+                <span className="text-white/60">Maloka, Bogotá, Colombia</span>
               </li>
             </ul>
           </div>
