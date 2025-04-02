@@ -12,14 +12,14 @@ export default function FaqSection() {
   return (
     <section
       id="preguntas"
-      className="py-16 lg:py-20 bg-[#003027] relative overflow-hidden"
+      className="py-16 px-4 lg:py-20 bg-[#003027] relative overflow-hidden"
     >
-      <div className="absolute inset-0 overflow-visible">
+      {/* <div className="absolute inset-0 overflow-visible">
         {/* Círculo superior izquierdo */}
-        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div> */}
         {/* Círculo inferior derecho */}
-        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
-      </div>
+        {/* <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div> */}
+      {/* </div> */}
       <div className="container relative z-10 px-4 sm:px-6">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-20 items-center">
           <div className="space-y-6">

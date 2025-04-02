@@ -35,18 +35,18 @@ export default function RegistrationSection() {
   }, [isModalOpen]);
 
   return (
-    <section id="registro" className="w-full relative overflow-visible">
+    <section id="registro" className="w-full relative overflow-visible px-4">
       {/* Círculos con blur */}
-      <div className="absolute inset-0 overflow-visible">
+      {/* <div className="absolute inset-0 overflow-visible"> */}
         {/* Círculo superior izquierdo */}
-        <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* <div className="absolute z-10 -top-[150px] -left-[150px] w-[400px] h-[400px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div> */}
         {/* Círculo inferior derecho */}
-        <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div>
+        {/* <div className="absolute z-10 bottom-[100px] right-[50px] w-[200px] h-[200px] rounded-full bg-[#1BEB7E] opacity-[0.25] blur-[130px]"></div> */}
         {/* Círculo adicional para suavizar la transición */}
-        <div className="absolute z-10 -bottom-[200px] left-[30%] w-[300px] h-[300px] rounded-full bg-[#1BEB7E] opacity-[0.15] blur-[150px]"></div>
-      </div>
+        {/* <div className="absolute z-10 -bottom-[200px] left-[30%] w-[300px] h-[300px] rounded-full bg-[#1BEB7E] opacity-[0.15] blur-[150px]"></div> */}
+      {/* </div> */}
 
-      <div className="w-full py-20 px-4 md:px-8 bg-[#003027] relative">
+      <div className="w-full py-20  md:px-8 bg-[#003027] relative">
         <div className="w-full max-w-[1430px] mx-auto flex flex-col justify-center items-center lg:flex-row gap-6 lg:gap-20 px-4 ">
           <div className="w-full h-[180px] sm:h-[250px] md:h-[300px] lg:h-[600px] lg:max-w-[500px] bg-[#003b2f] relative overflow-hidden">
             <Image
@@ -57,7 +57,7 @@ export default function RegistrationSection() {
               priority
             />
           </div>
-          <div className="flex w-full lg:w-[550px] flex-col gap-6 lg:gap-20">
+          <div className="flex w-full px-3 lg:w-[550px] flex-col gap-6 lg:gap-20">
             <div className="flex flex-col gap-6 lg:gap-10">
               <div className="flex flex-col gap-2 md:gap-3">
                 <div className="text-xl font-semibold md:text-2xl lg:text-3xl text-[#05dd4d]">

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Section1() {
   return (
-    <div className="flex flex-col gap-10 bg-[#003027] w-full max-w-[1425px] mx-auto pt-20 lg:flex-row items-center justify-center">
+    <div className="flex flex-col gap-10 bg-[#003027] w-full max-w-[1425px] mx-auto pt-20 lg:flex-row items-center justify-center px-4">
       <div className="flex w-full flex-col gap-6 items-center lg:items-start px-6 sm:px-10">
         <div className="flex flex-col items-center lg:items-start gap-4">
           <div className=" text-[#00ff66]  text-[22px] sm:text-4xl">
