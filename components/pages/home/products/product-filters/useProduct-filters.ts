@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 
 const useProductFilter = (categories: string[]) => {
-    const [selectedCategory, setSelectedCategory] = useState("Todas")
+    const [selectedCategory, setSelectedCategory] = useState("")
     const [searchTerm, setSearchTerm] = useState("")
 
     // Función para manejar el cambio de categoría
@@ -12,10 +12,19 @@ const useProductFilter = (categories: string[]) => {
         // Emitir evento personalizado para que el componente de productos pueda escucharlo
         window.dispatchEvent(
             new CustomEvent("filterChange", {
-                detail: { category: category === "Todas" ? null : category, searchTerm },
+                detail: { category, searchTerm },
             }),
         )
     }
+
+    // ... existing code ...
+    const handleDownloadBrochures = () => {
+        // Enlace único a todos los brochures (reemplaza esta URL con tu enlace real)
+        const brochureLink = "https://jmpukiohbcemfjqcsikc.supabase.co/storage/v1/object/sign/pdf/Brochure.pdf?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwZGYvQnJvY2h1cmUucGRmIiwiaWF0IjoxNzQzNTcyNzcxLCJleHAiOjE3NzUxMDg3NzF9.qJe_LMPT2vp4EqWzvMEHHKehrVl2StHY0Bn9uNrpTc8";
+        
+        // Abrir el enlace en una nueva pestaña
+        window.open(brochureLink, "_blank");
+    };
 
     // Función para manejar la búsqueda en tiempo real
     useEffect(() => {
@@ -23,7 +32,7 @@ const useProductFilter = (categories: string[]) => {
         window.dispatchEvent(
             new CustomEvent("filterChange", {
                 detail: {
-                    category: selectedCategory === "Todas" ? null : selectedCategory,
+                    category: selectedCategory,
                     searchTerm
                 },
             }),
@@ -37,7 +46,7 @@ const useProductFilter = (categories: string[]) => {
 
     // Función para limpiar los filtros
     const clearFilters = () => {
-        setSelectedCategory("Todas")
+        setSelectedCategory("")
         setSearchTerm("")
     }
 
@@ -50,7 +59,9 @@ const useProductFilter = (categories: string[]) => {
         searchTerm,
         setSearchTerm,
         handleCategoryChange,
-        clearFilters
+        clearFilters,
+        setSelectedCategory,
+        handleDownloadBrochures,
     }
 }
 
