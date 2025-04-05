@@ -34,7 +34,8 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
     setShowNewPassword,
     newPassword,
     setShowConfirmPassword,
-    boletos
+    boletos,
+    myTicket
 
   } = useProfile({userRole})
 
@@ -269,7 +270,7 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                {boletos.map((boleto:any) => (
+                {myTicket.map((boleto:any) => (
                   <div key={boleto.id} className="border border-neutral-400 rounded-lg p-4 space-y-4 bg-white shadow-sm">
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                       <div>

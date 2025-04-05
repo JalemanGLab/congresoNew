@@ -163,7 +163,7 @@ const PageLogin = () => {
 
             <button
               type="button"
-              onClick={() => setViewPasswordRecovery(true)}
+              onClick={() => router.push("/recoveryPassword")}
               className="text-xs sm:text-sm text-right cursor-pointer text-neutral-400 hover:text-neutral-800"
             >
               ¿Olvidaste tu contraseña?
