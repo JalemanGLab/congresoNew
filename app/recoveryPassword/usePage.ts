@@ -28,7 +28,6 @@ const usePage = () => {
 
     try {
       const response = await recoveryService.sendRecoveryCode(email);
-      console.log(response)
       setResponseStatus(response.status);
       
       if (response.status === 201) {

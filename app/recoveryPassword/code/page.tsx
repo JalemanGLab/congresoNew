@@ -82,23 +82,17 @@ export default function CodePage() {
             {isSubmitting ? "Verificando..." : "Verificar código"}
             {!isSubmitting && <ArrowRight className="ml-2 h-4 w-4" />}
           </button>
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex flex-col items-center gap-2 w-full">
             <button
-              className="text-neutral-600 hover:text-neutral-800"
+              className="text-neutral-600 hover:text-neutral-800 flex items-center gap-2"
               onClick={() => {
                 setVerificationCode("")
-                window.location.href = "/RecoveryPassword"
+                window.location.href = "/recoveryPassword"
               }}
               disabled={isSubmitting}
             >
-              Volver a enviar código
-            </button>
-            <button
-              onClick={() => window.location.href = "/login"}
-              className="flex items-center justify-center text-neutral-600 hover:text-neutral-800 gap-2"
-            >
               <ArrowLeft className="h-4 w-4" />
-              Volver al inicio de sesión
+              Volver a enviar código
             </button>
           </div>
         </CardFooter>
