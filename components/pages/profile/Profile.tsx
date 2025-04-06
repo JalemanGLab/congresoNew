@@ -34,7 +34,8 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
     setShowNewPassword,
     newPassword,
     setShowConfirmPassword,
-    boletos
+    boletos,
+    myTicket
 
   } = useProfile({userRole})
 
@@ -269,22 +270,22 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                {boletos.map((boleto:any) => (
-                  <div key={boleto.id} className="border border-neutral-400 rounded-lg p-4 space-y-4 bg-white shadow-sm">
+                {myTicket.map((boleto:any) => (
+                  <div key={boleto?.id} className="border border-neutral-400 rounded-lg p-4 space-y-4 bg-white shadow-sm">
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                       <div>
-                        <h3 className="font-semibold text-lg text-neutral-800">{boleto.evento}</h3>
-                        <p className="text-sm text-neutral-500 font-medium">Boleto #{boleto.id}</p>
+                        <h3 className="font-semibold text-lg text-neutral-800">{boleto?.evento}</h3>
+                        <p className="text-sm text-neutral-500 font-medium">Boleto #{boleto?.id}</p>
                       </div>
                       <Badge
-                        variant={boleto.estado === "Confirmado" ? "default" : "secondary"}
+                        variant={boleto?.estado === "Confirmado" ? "default" : "secondary"}
                         className={
-                          boleto.estado === "Confirmado"
+                          boleto?.estado === "Confirmado"
                             ? "bg-green-100 text-green-800 hover:bg-green-200 whitespace-nowrap"
                             : "bg-yellow-100 text-yellow-800 hover:bg-yellow-200 whitespace-nowrap"
                         }
                       >
-                        {boleto.estado}
+                        {boleto?.estado}
                       </Badge>
                     </div>
 
@@ -293,15 +294,15 @@ export default function PerfilUsuario({ userRole }: PerfilUsuarioProps) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       <div className="flex items-center gap-2 bg-neutral-50 p-2 rounded-md">
                         <CalendarDays className="h-4 w-4 text-blue-600 flex-shrink-0" />
-                        <span className="text-sm font-medium text-neutral-700">{boleto.fecha}</span>
+                        <span className="text-sm font-medium text-neutral-700">{boleto?.fecha}</span>
                       </div>
                       <div className="flex items-center gap-2 bg-neutral-50 p-2 rounded-md">
                         <Clock className="h-4 w-4 text-purple-600 flex-shrink-0" />
-                        <span className="text-sm font-medium text-neutral-700">{boleto.hora}</span>
+                        <span className="text-sm font-medium text-neutral-700">{boleto?.hora}</span>
                       </div>
                       <div className="flex items-center gap-2 bg-neutral-50 p-2 rounded-md">
                         <MapPin className="h-4 w-4 text-red-600 flex-shrink-0" />
-                        <span className="text-sm font-medium text-neutral-700">{boleto.lugar}</span>
+                        <span className="text-sm font-medium text-neutral-700">{boleto?.lugar}</span>
                       </div>
                     </div>
 

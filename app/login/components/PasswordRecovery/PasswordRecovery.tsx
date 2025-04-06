@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import { use, useState } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { ArrowRight, Eye, EyeOff } from "lucide-react"

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { PasswordChangeForm, PerfilUsuarioProps, PersonalInfoForm, TabType } from "./DTOProfile"
 import { toast } from "sonner"
-import { AuthResponse, authService } from "@/services/authService"
+import { authService } from "@/services/authService"
+import { myTicketService } from "@/services/myTicket"
 
 const useProfile = ({userRole}:PerfilUsuarioProps) => {
     const [activeTab, setActiveTab] = useState<TabType>("informacion")
     const [data, setData] = useState<any>()
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [myTicket, setMyTicket] = useState<any>()
 
     // Formulario de información personal
     const {
@@ -34,6 +36,22 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
         getData()
     },[])
 
+    useEffect(() => {
+        const fetchMyTicket = async () => {
+            try {
+                const response = await myTicketService(data.identification);
+                setMyTicket(response);
+                console.log(response);
+            } catch (error) {
+                console.error("Error al obtener el boleto:", error);
+            }
+        };
+
+        if (data?.identification) {
+            fetchMyTicket();
+        }
+    }, [data?.identification]);
+    
     // Formulario de cambio de contraseña
     const {
         register: registerPassword,
@@ -128,7 +146,8 @@ const useProfile = ({userRole}:PerfilUsuarioProps) => {
         setShowNewPassword,
         newPassword,
         setShowConfirmPassword,
-        boletos
+        boletos,
+        myTicket
     }
 }
 
